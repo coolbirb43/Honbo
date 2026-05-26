@@ -102,11 +102,18 @@ a:hover {
 }
 
 .nav__logo {
-  font-family: var(--font-script);
-  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  color: var(--honbo-navy);
-  letter-spacing: 0.02em;
+  line-height: 0;
+}
+
+.nav__logo img {
+  display: block;
+  height: 52px;
+  width: auto;
+  max-width: min(180px, 42vw);
+  object-fit: contain;
 }
 
 .nav__menu {

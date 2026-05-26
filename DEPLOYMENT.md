@@ -34,7 +34,7 @@ Open: https://github.com/coolbirb43/Honbo/settings/pages
 2. **Branch:** `main` only · **Folder:** `/docs` (not `/` and not `v1`)  
 3. Custom domain: `honbo.com` → **Enforce HTTPS**  
 
-Until you switch off the old `v1` branch source, the live site can stay on the previous layout even though `main` already has the new files.
+Only **`main`** exists on GitHub now. If Pages was still pointed at a deleted branch (`v1`, etc.), open Settings → Pages and set **`main`** + **`/docs`** (or **GitHub Actions**) — then save to trigger a new deploy.
 
 ---
 

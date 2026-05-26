@@ -1,0 +1,10 @@
+# Menu master PDF exceeds GitHub's 100MB file limit — keep locally in assets/
+assets/HONBONEWMENU_15x30_MASTTERFILE_3.pdf
+
+# Generated PDF previews (optional local files)
+assets/menu-page-*.png
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log

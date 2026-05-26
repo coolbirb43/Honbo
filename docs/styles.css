@@ -346,56 +346,33 @@ a {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-  width: 28px;
-  height: 44px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--honbo-white);
   text-decoration: none;
+  opacity: 0.85;
+  transition: opacity var(--transition);
 }
 
-.hero-parallax__scroll span {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  width: 4px;
-  height: 8px;
-  margin-left: -2px;
-  background: var(--honbo-white);
-  border-radius: 2px;
-  animation: scroll-hint 2s ease infinite;
+.hero-parallax__scroll:hover {
+  opacity: 1;
 }
 
-@keyframes scroll-hint {
+.hero-parallax__arrow {
+  animation: arrow-bounce 2s ease-in-out infinite;
+}
+
+@keyframes arrow-bounce {
   0%,
   100% {
-    opacity: 1;
     transform: translateY(0);
+    opacity: 0.85;
   }
   50% {
-    opacity: 0.3;
     transform: translateY(10px);
+    opacity: 1;
   }
-}
-
-/* Intro */
-.intro {
-  padding: var(--space-xl) clamp(1rem, 5vw, 3rem);
-  background: var(--honbo-cream);
-  text-align: center;
-}
-
-.intro__title {
-  font-family: var(--font-script);
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  font-weight: 400;
-  margin: 0 0 var(--space-xs);
-}
-
-.intro__subtitle {
-  font-family: var(--font-subtitle);
-  font-size: clamp(0.95rem, 2.5vw, 1.25rem);
-  margin: 0;
-  opacity: 0.9;
 }
 
 /* Marquee — portfolio-style ticker */
@@ -458,10 +435,14 @@ a {
 }
 
 /* Location panels — photo backgrounds */
+.locations {
+  overflow: hidden;
+}
+
 .location-panel {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: min(90vh, 780px);
+  min-height: min(85vh, 720px);
 }
 
 .location-panel--reverse .location-panel__media {
@@ -475,19 +456,19 @@ a {
 .location-panel__media {
   position: relative;
   overflow: hidden;
-  min-height: 320px;
+  min-height: 360px;
 }
 
 .location-panel__bg {
   position: absolute;
-  inset: -10%;
-  will-change: transform;
+  inset: 0;
 }
 
 .location-panel__bg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
 }
 
 .location-panel__body {
@@ -617,29 +598,19 @@ a {
   transform: scale(1.04);
 }
 
-/* Best Sellers — pinned horizontal scroll (portfolio-style) */
-.bestsellers-pin {
-  position: relative;
+/* Best Sellers — infinite horizontal scroll */
+.bestsellers {
+  padding: var(--space-xl) 0;
   background: var(--honbo-white);
-}
-
-.bestsellers-pin__sticky {
-  position: sticky;
-  top: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: calc(var(--header-h) + 1rem) 0 var(--space-lg);
   overflow: hidden;
 }
 
-.bestsellers-pin__header {
-  padding: 0 clamp(1rem, 5vw, 3rem) var(--space-md);
+.bestsellers__header {
   text-align: center;
+  padding: 0 clamp(1rem, 5vw, 3rem) var(--space-lg);
 }
 
-.bestsellers-pin__title {
+.bestsellers__title {
   font-family: var(--font-script);
   font-size: clamp(2.5rem, 8vw, 4.5rem);
   font-weight: 400;
@@ -647,35 +618,45 @@ a {
   color: var(--honbo-navy);
 }
 
-.bestsellers-pin__subtitle {
+.bestsellers__subtitle {
   font-family: var(--font-subtitle);
   font-size: clamp(1rem, 2.5vw, 1.2rem);
   margin: var(--space-xs) 0 0;
 }
 
-.bestsellers-pin__hint {
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0.5;
-  margin: var(--space-sm) 0 0;
-}
-
-.bestsellers-pin__viewport {
+.bestsellers__marquee {
   overflow: hidden;
   width: 100%;
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 }
 
-.bestsellers-pin__track {
+.bestsellers__track {
   display: flex;
-  gap: clamp(1rem, 3vw, 2rem);
-  padding: 0 clamp(1rem, 5vw, 3rem);
-  will-change: transform;
-  transition: transform 0.05s linear;
+  width: max-content;
+  animation: bestsellers-scroll 45s linear infinite;
+}
+
+.bestsellers__marquee:hover .bestsellers__track {
+  animation-play-state: paused;
+}
+
+.bestsellers__set {
+  display: flex;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  padding-right: clamp(1rem, 3vw, 1.5rem);
+}
+
+@keyframes bestsellers-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .menu-card {
-  flex: 0 0 min(78vw, 300px);
+  flex: 0 0 min(78vw, 280px);
   background: var(--honbo-cream);
   border-radius: var(--radius);
   padding: var(--space-md);
@@ -732,51 +713,12 @@ a {
   font-weight: 700;
 }
 
-.bestsellers-pin__footnote {
+.bestsellers__footnote {
   text-align: center;
   font-size: 0.85rem;
   opacity: 0.6;
   padding: var(--space-md) clamp(1rem, 5vw, 3rem) 0;
   letter-spacing: 0.04em;
-}
-
-/* Mobile: native horizontal scroll for best sellers */
-@media (max-width: 900px) {
-  .bestsellers-pin__sticky {
-    position: relative;
-    min-height: auto;
-  }
-
-  .bestsellers-pin__viewport {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding: clamp(1rem, 5vw, 3rem);
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .bestsellers-pin__viewport::-webkit-scrollbar {
-    display: none;
-  }
-
-  .bestsellers-pin__track {
-    transform: none !important;
-    transition: none;
-  }
-
-  .menu-card {
-    scroll-snap-align: start;
-  }
-
-  .bestsellers-pin__hint {
-    display: block;
-  }
-}
-
-@media (min-width: 901px) {
-  .bestsellers-pin__hint {
-    display: none;
-  }
 }
 
 /* Origin */
@@ -1002,6 +944,7 @@ a {
   .location-panel,
   .location-panel--reverse {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .location-panel--reverse .location-panel__media,
@@ -1010,8 +953,20 @@ a {
   }
 
   .location-panel__media {
-    min-height: 50vw;
-    max-height: 360px;
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    min-height: 62vw;
+    aspect-ratio: 4 / 3;
+  }
+
+  .location-panel__bg,
+  .location-panel__bg img {
+    border-radius: 0;
+  }
+
+  .location-panel__body {
+    padding: var(--space-lg) clamp(1rem, 5vw, 1.5rem);
   }
 
   .origin__grid {
@@ -1025,7 +980,8 @@ a {
     scroll-behavior: auto;
   }
 
-  .marquee__track {
+  .marquee__track,
+  .bestsellers__track {
     animation: none;
   }
 
@@ -1038,11 +994,8 @@ a {
     animation: none !important;
   }
 
-  .hero-parallax__scroll span {
+  .hero-parallax__arrow {
     animation: none;
   }
 
-  .bestsellers-pin__track {
-    transform: none !important;
-  }
 }

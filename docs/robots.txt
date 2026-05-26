@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://coolbirb43.github.io/Honbo/
+Sitemap: https://honbo.com/

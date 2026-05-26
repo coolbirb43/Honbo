@@ -1,116 +1,71 @@
-# Deploy Honbo site — GitHub Pages + GoDaddy domain
+# Deploy Honbo site — GitHub Pages + GoDaddy (honbo.com)
 
-## Part 1 — GitHub Pages (hosting)
+## Part 1 — GitHub Pages
 
-### 1. Push your code
+### 1. Build and push
 
 ```bash
 cd "honbo website"
 python scripts/build.py
 git add docs/
-git commit -m "Build production site"
+git commit -m "Update site"
 git push origin v3-vsco-scroll
 ```
 
-### 2. Turn on GitHub Pages
+### 2. Enable Pages
 
-1. Open https://github.com/coolbirb43/Honbo  
-2. **Settings** → **Pages**  
-3. **Source:** Deploy from a branch  
-4. **Branch:** `v3-vsco-scroll` (or `main` if you merge there)  
-5. **Folder:** `/docs`  
-6. Click **Save**  
-7. Wait 1–3 minutes. Your site will be at:
+1. https://github.com/coolbirb43/Honbo → **Settings** → **Pages**
+2. **Branch:** `v3-vsco-scroll` · **Folder:** `/docs` → **Save**
+3. Temporary URL: https://coolbirb43.github.io/Honbo/
 
-   **https://coolbirb43.github.io/Honbo/**
-
-### 3. Optional — use `main` as production
-
-```bash
-git checkout main
-git merge v3-vsco-scroll
-git push origin main
-```
-
-Then set Pages branch to `main` / folder `/docs`.
+`docs/CNAME` is already set to **honbo.com**.
 
 ---
 
-## Part 2 — Connect your GoDaddy domain
+## Part 2 — GoDaddy DNS for honbo.com
 
-Replace `yourdomain.com` with your real domain (e.g. `honbo.hk`).
+### 1. GitHub custom domain
 
-### 1. Add custom domain in GitHub
+1. **Settings** → **Pages** → **Custom domain:** `honbo.com` → **Save**
+2. When DNS verifies, enable **Enforce HTTPS**
 
-1. Repo → **Settings** → **Pages**  
-2. Under **Custom domain**, enter: `www.yourdomain.com` (recommended) or `yourdomain.com`  
-3. Click **Save**  
-4. When DNS is correct, enable **Enforce HTTPS**
+### 2. GoDaddy DNS records
 
-### 2. Create `docs/CNAME` (recommended)
+GoDaddy → **My Products** → **honbo.com** → **DNS** → **Manage DNS**
 
-Create a file `docs/CNAME` containing only:
-
-```
-www.yourdomain.com
-```
-
-Commit and push. GitHub uses this to keep the domain after each deploy.
-
-### 3. Configure DNS in GoDaddy
-
-Log in to [GoDaddy](https://www.godaddy.com/) → **My Products** → your domain → **DNS** / **Manage DNS**.
-
-#### Option A — `www.yourdomain.com` (easiest)
+#### Root domain `honbo.com` (required)
 
 | Type | Name | Value | TTL |
 |------|------|-------|-----|
-| CNAME | www | `coolbirb43.github.io` | 1 hour |
+| A | @ | `185.199.108.153` | 1 Hour |
+| A | @ | `185.199.109.153` | 1 Hour |
+| A | @ | `185.199.110.153` | 1 Hour |
+| A | @ | `185.199.111.153` | 1 Hour |
 
-#### Option B — root domain `yourdomain.com` (no www)
+#### Optional — `www.honbo.com`
 
-GitHub Pages apex (root) uses **A records**, not CNAME:
+| Type | Name | Value | TTL |
+|------|------|-------|-----|
+| CNAME | www | `coolbirb43.github.io` | 1 Hour |
 
-| Type | Name | Value |
-|------|------|--------|
-| A | @ | `185.199.108.153` |
-| A | @ | `185.199.109.153` |
-| A | @ | `185.199.110.153` |
-| A | @ | `185.199.111.153` |
+In GitHub Pages, you can set the primary domain to `honbo.com` and use GoDaddy **Forwarding** so `www.honbo.com` redirects to `honbo.com` (or the reverse).
 
-Optional: redirect `www` → root or root → `www` in GoDaddy **Forwarding**.
+### 3. Wait and verify
 
-### 4. Wait for DNS
+- DNS can take **15 minutes – 48 hours**
+- Check: https://www.whatsmydns.net/#A/honbo.com
+- GitHub Pages shows a green check when ready
 
-- Usually **15 minutes – 48 hours**  
-- Check: https://www.whatsmydns.net/  
-- In GitHub Pages settings, a green check means DNS is verified  
+### 4. HTTPS
 
-### 5. HTTPS
-
-After DNS verifies, turn on **Enforce HTTPS** in GitHub Pages. GoDaddy does not issue the certificate; GitHub does (free).
+Turn on **Enforce HTTPS** in GitHub Pages after the domain is verified.
 
 ---
 
-## Part 3 — After launch checklist
+## Checklist
 
-- [ ] Run `python scripts/build.py` before each deploy  
-- [ ] Test on phone: menu, carousels, maps, mailto link  
-- [ ] Confirm `hello@honbo.hk` is the email you want for Inquire  
-- [ ] Pages branch = `/docs`  
-
----
-
-## Security note (Inspect Element)
-
-Any website sent to a browser can be viewed in DevTools (HTML, CSS, JS, images). **This cannot be fully prevented** for a static site.
-
-What we do:
-
-- Production uses **minified** CSS/JS (harder to read, smaller downloads)  
-- No API keys or secrets in the repo  
-- Copyright notice in the footer  
-
-What does **not** work reliably: disabling right-click, “hiding” source, or blocking Inspect Element — and those hurt real visitors.
-
-To protect brand assets long term, register **copyright** / trademark for Honbo artwork and logos in Hong Kong.
+- [ ] `python scripts/build.py` run before each deploy
+- [ ] Pages branch = `v3-vsco-scroll`, folder = `/docs`
+- [ ] Custom domain = `honbo.com`
+- [ ] Four A records added in GoDaddy
+- [ ] Site loads at https://honbo.com

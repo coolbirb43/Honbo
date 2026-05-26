@@ -1,22 +1,5 @@
-# Menu master PDF exceeds GitHub's 100MB file limit
-assets/HONBONEWMENU_15x30_MASTTERFILE_3.pdf
-archive/
-
-# Local source photos at repo root (deployed copies live in docs/assets/photos/)
-assets/*.jpg
-assets/*.JPG
-assets/*.png
-assets/*.PNG
-assets/*.pdf
-
-# Generated PDF previews
-assets/menu-page-*.png
-
-# OS / editor
 .DS_Store
 Thumbs.db
 *.log
-
-# Python
 __pycache__/
 *.pyc

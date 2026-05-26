@@ -10,61 +10,39 @@
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var parallaxEls = document.querySelectorAll("[data-parallax-speed]");
   var scaleEls = document.querySelectorAll("[data-scroll-scale]");
+  var loopTracks = document.querySelectorAll("[data-loop-speed]");
   var headerOffset = 72;
   var ticking = false;
-  var carousels = [];
+  var lastScrollY = window.scrollY;
 
-  function initScrollCarousels() {
-    if (prefersReduced) return;
+  function initLoopTracks() {
+    loopTracks.forEach(function (track) {
+      var inner = track.querySelector(".loop-track__inner");
+      if (!inner) return;
 
-    document.querySelectorAll("[data-scroll-carousel]").forEach(function (section) {
-      var track = section.querySelector(".scroll-carousel__track, .marquee__track");
-      if (!track) return;
-
-      var sets = track.querySelectorAll(".scroll-carousel__set, .marquee__set");
-      if (sets.length < 2) return;
-
-      var isMarquee = section.classList.contains("scroll-carousel--marquee");
-
-      carousels.push({
-        section: section,
-        track: track,
-        firstSet: sets[0],
-        isMarquee: isMarquee,
-        setWidth: 0,
-        measure: function () {
-          this.setWidth = this.firstSet.offsetWidth;
-          if (!this.setWidth) return;
-
-          var loops = this.isMarquee ? 2.5 : 3;
-          var scrollLength = this.setWidth * loops;
-
-          if (this.isMarquee) {
-            this.section.style.height = 52 + scrollLength * 0.65 + "px";
-          } else {
-            this.section.style.height = window.innerHeight + scrollLength + "px";
-          }
-        },
-        update: function () {
-          if (!this.setWidth) return;
-
-          var rect = this.section.getBoundingClientRect();
-          var scrolled = Math.max(0, -rect.top);
-          var offset = scrolled % this.setWidth;
-
-          this.track.style.transform = "translate3d(" + -offset + "px, 0, 0)";
-        },
-      });
-    });
-
-    carousels.forEach(function (c) {
-      c.measure();
+      var baseSpeed = parseFloat(track.getAttribute("data-loop-speed")) || 30;
+      inner.style.animationDuration = baseSpeed + "s";
+      inner.style.animationName = "loop-scroll";
+      inner.style.animationTimingFunction = "linear";
+      inner.style.animationIterationCount = "infinite";
     });
   }
 
-  function updateCarousels() {
-    carousels.forEach(function (c) {
-      c.update();
+  function updateLoopSpeedOnScroll() {
+    var scrollDelta = Math.abs(window.scrollY - lastScrollY);
+    lastScrollY = window.scrollY;
+
+    if (scrollDelta < 1) return;
+
+    loopTracks.forEach(function (track) {
+      var inner = track.querySelector(".loop-track__inner");
+      if (!inner) return;
+
+      var baseSpeed = parseFloat(track.getAttribute("data-loop-speed")) || 30;
+      var boost = Math.min(scrollDelta * 0.35, baseSpeed * 0.75);
+      var newDuration = Math.max(6, baseSpeed - boost);
+
+      inner.style.animationDuration = newDuration + "s";
     });
   }
 
@@ -100,11 +78,16 @@
       header.classList.toggle("is-scrolled", window.scrollY > 60);
     }
 
-    if (!prefersReduced) {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(updateMotion);
-      }
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(function () {
+        if (!prefersReduced) {
+          updateParallax();
+          updateScrollScale();
+          updateLoopSpeedOnScroll();
+        }
+        ticking = false;
+      });
     }
   }
 
@@ -134,13 +117,6 @@
     });
   }
 
-  function updateMotion() {
-    updateParallax();
-    updateScrollScale();
-    updateCarousels();
-    ticking = false;
-  }
-
   if (toggle && menu) {
     toggle.addEventListener("click", function () {
       var open = toggle.getAttribute("aria-expanded") === "true";
@@ -159,27 +135,10 @@
   }
 
   bindSmoothNav();
-  initScrollCarousels();
+  initLoopTracks();
 
   window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener(
-    "resize",
-    function () {
-      carousels.forEach(function (c) {
-        c.measure();
-      });
-      onScroll();
-    },
-    { passive: true }
-  );
-
-  window.addEventListener("load", function () {
-    carousels.forEach(function (c) {
-      c.measure();
-    });
-    onScroll();
-  });
-
+  window.addEventListener("load", initLoopTracks);
   onScroll();
 
   var reveals = document.querySelectorAll(".reveal");

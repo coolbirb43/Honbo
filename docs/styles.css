@@ -376,40 +376,82 @@ a {
   }
 }
 
-/* Scroll-driven horizontal carousels */
-.scroll-carousel {
-  position: relative;
-}
-
-.scroll-carousel__sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.scroll-carousel__sticky--marquee {
-  height: auto;
-  min-height: 52px;
-  justify-content: center;
-  padding: 0.85rem 0;
-}
-
-.scroll-carousel--marquee {
+/* Infinite loop carousels */
+.marquee-bar {
   background: var(--honbo-navy);
+  color: var(--honbo-white);
+  overflow: hidden;
+  border-block: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.scroll-carousel__header {
-  text-align: center;
-  padding: 0 clamp(1rem, 5vw, 3rem) var(--space-md);
+.loop-track {
+  overflow: hidden;
+  width: 100%;
+}
+
+.loop-track__inner {
+  display: flex;
+  width: max-content;
+  animation: loop-scroll linear infinite;
+  will-change: transform;
+}
+
+.loop-track:hover .loop-track__inner {
+  animation-play-state: paused;
+}
+
+.loop-track__set {
+  display: flex;
   flex-shrink: 0;
 }
 
-.scroll-carousel__label {
+@keyframes loop-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Marquee ticker */
+.loop-track--marquee {
+  padding: 0.9rem 0;
+}
+
+.loop-track--marquee .loop-track__set {
+  gap: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.loop-track--marquee .loop-track__set span {
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  white-space: nowrap;
+  opacity: 0.95;
+}
+
+/* Gallery + Best Sellers sections */
+.gallery-section {
+  padding: var(--space-lg) 0 var(--space-xl);
+  background: var(--honbo-cream);
+  overflow: hidden;
+}
+
+.bestsellers-section {
+  padding: var(--space-xl) 0;
+  background: var(--honbo-white);
+  overflow: hidden;
+}
+
+.section-block__header {
+  text-align: center;
+  padding: 0 clamp(1rem, 5vw, 3rem) var(--space-md);
+}
+
+.section-block__label {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -418,7 +460,7 @@ a {
   opacity: 0.65;
 }
 
-.scroll-carousel__title {
+.section-block__title {
   font-family: var(--font-script);
   font-size: clamp(2.5rem, 8vw, 4.5rem);
   font-weight: 400;
@@ -426,93 +468,21 @@ a {
   color: var(--honbo-navy);
 }
 
-.scroll-carousel__subtitle {
+.section-block__subtitle {
   font-family: var(--font-subtitle);
   font-size: clamp(1rem, 2.5vw, 1.2rem);
   margin: var(--space-xs) 0 0;
 }
 
-.scroll-carousel__viewport {
-  overflow: hidden;
-  width: 100%;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  min-height: 0;
-}
-
-.scroll-carousel__track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-}
-
-.scroll-carousel__set {
-  display: flex;
+.loop-track--gallery .loop-track__set,
+.loop-track--bestsellers .loop-track__set {
   gap: clamp(1rem, 3vw, 1.5rem);
   padding-right: clamp(1rem, 3vw, 1.5rem);
 }
 
-.scroll-carousel__footnote {
-  text-align: center;
-  font-size: 0.85rem;
-  opacity: 0.6;
-  padding: var(--space-md) clamp(1rem, 5vw, 3rem) 0;
-  letter-spacing: 0.04em;
-  flex-shrink: 0;
-}
-
-/* Marquee bar */
-.marquee {
-  overflow: hidden;
-  width: 100%;
-  color: var(--honbo-white);
-}
-
-.marquee__track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-}
-
-.marquee__set {
-  display: flex;
-  gap: 2.5rem;
-  padding-right: 2.5rem;
-}
-
-.marquee__set span {
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-size: clamp(0.75rem, 2vw, 0.9rem);
-  white-space: nowrap;
-  opacity: 0.9;
-}
-
-.scroll-carousel--marquee .scroll-carousel__sticky {
-  position: sticky;
-  top: 0;
-  height: 52px;
-  min-height: 52px;
-}
-
-.scroll-carousel--gallery {
-  background: var(--honbo-cream);
-}
-
-.scroll-carousel--gallery .scroll-carousel__viewport {
-  align-items: stretch;
-  padding-block: var(--space-sm);
-}
-
-.scroll-carousel--bestsellers {
-  background: var(--honbo-white);
-}
-
-.scroll-carousel--bestsellers .scroll-carousel__viewport,
-.scroll-carousel--gallery .scroll-carousel__viewport {
-  mask-image: linear-gradient(90deg, transparent, #000 2%, #000 98%, transparent);
+.loop-track--gallery,
+.loop-track--bestsellers {
+  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
 }
 
 .gallery-card {
@@ -527,6 +497,14 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.bestsellers-section__footnote {
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.6;
+  padding: var(--space-md) clamp(1rem, 5vw, 3rem) 0;
+  letter-spacing: 0.04em;
 }
 
 /* Section intros */
@@ -598,11 +576,15 @@ a {
   justify-content: center;
   padding: clamp(2rem, 6vw, 4rem);
   background: var(--honbo-white);
-  box-shadow: -20px 0 48px rgba(26, 54, 68, 0.12);
+  box-shadow:
+    -28px 0 56px -4px rgba(26, 54, 68, 0.28),
+    -12px 0 32px rgba(26, 54, 68, 0.12);
 }
 
 .location-panel--reverse .location-panel__body {
-  box-shadow: 20px 0 48px rgba(26, 54, 68, 0.12);
+  box-shadow:
+    28px 0 56px -4px rgba(26, 54, 68, 0.28),
+    12px 0 32px rgba(26, 54, 68, 0.12);
 }
 
 .location-panel__label {
@@ -972,22 +954,15 @@ a {
 
   .location-panel__body {
     padding: var(--space-lg) clamp(1rem, 5vw, 1.5rem);
-    box-shadow: 0 -16px 40px rgba(26, 54, 68, 0.1);
+    box-shadow:
+      0 -24px 48px -8px rgba(26, 54, 68, 0.3),
+      0 -8px 24px rgba(26, 54, 68, 0.15);
   }
 
   .location-panel--reverse .location-panel__body {
-    box-shadow: 0 -16px 40px rgba(26, 54, 68, 0.1);
-  }
-
-  .scroll-carousel__sticky {
-    top: var(--header-h);
-    height: calc(100svh - var(--header-h));
-  }
-
-  .scroll-carousel--marquee .scroll-carousel__sticky {
-    height: 52px;
-    min-height: 52px;
-    top: 0;
+    box-shadow:
+      0 -24px 48px -8px rgba(26, 54, 68, 0.3),
+      0 -8px 24px rgba(26, 54, 68, 0.15);
   }
 
   .gallery-card {
@@ -997,11 +972,8 @@ a {
     aspect-ratio: 3 / 4;
   }
 
-  .scroll-carousel--gallery .scroll-carousel__viewport {
-    padding-block: 0;
-  }
-
-  .scroll-carousel__set {
+  .loop-track--gallery .loop-track__set,
+  .loop-track--bestsellers .loop-track__set {
     gap: 0;
     padding-right: 0;
   }
@@ -1017,8 +989,8 @@ a {
     scroll-behavior: auto;
   }
 
-  .scroll-carousel__track {
-    transform: none !important;
+  .loop-track__inner {
+    animation-duration: 60s !important;
   }
 
   .reveal,
@@ -1027,11 +999,9 @@ a {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
-    animation: none !important;
   }
 
   .hero-parallax__arrow {
     animation: none;
   }
-
 }

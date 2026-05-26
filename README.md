@@ -2,7 +2,19 @@
 
 Hong Kong smash burger restaurant site (static HTML/CSS/JS).
 
-**Live site (after GitHub Pages is enabled):** https://coolbirb43.github.io/Honbo/
+**Live site:** https://coolbirb43.github.io/Honbo/
+
+## Branches
+
+| Branch | Description |
+|--------|-------------|
+| `v1` | First version — original layout (frozen) |
+| `v2-redesign` | Updated version — [Burger & Beyond](https://burgerandbeyond.co.uk)-inspired parallax layout, Honbo branding |
+| `main` | Currently matches **v1** |
+
+To preview v2 locally: `git checkout v2-redesign`
+
+To deploy v2 on GitHub Pages: **Settings → Pages → Branch:** `v2-redesign` · **Folder:** `/docs`
 
 ## GitHub Pages setup
 

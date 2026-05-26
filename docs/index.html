@@ -17,136 +17,77 @@
   <header class="site-header" id="top">
     <nav class="nav" aria-label="Main">
       <a class="nav__logo" href="#top">
-        <img src="assets/honbo-logo-blue.png" alt="Honbo 漢堡" width="160" height="56" />
+        <img class="nav__logo-img nav__logo-img--white" src="assets/honbo-logo-white.png" alt="" aria-hidden="true" width="160" height="56" />
+        <img class="nav__logo-img nav__logo-img--blue" src="assets/honbo-logo-blue.png" alt="Honbo 漢堡" width="160" height="56" />
       </a>
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
         <span class="nav__toggle-bar"></span>
         <span class="sr-only">Menu</span>
       </button>
       <ul class="nav__menu" id="nav-menu">
-        <li><a href="#origin">Our Story 故事</a></li>
-        <li><a href="#burgers">Burgers 漢堡</a></li>
-        <li><a href="#catering">Catering 到會</a></li>
         <li><a href="#locations">Locations 分店</a></li>
+        <li><a href="#burgers">Burgers 漢堡</a></li>
+        <li><a href="#origin">Our Story 故事</a></li>
+        <li><a href="#catering">Catering 到會</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero__content reveal">
-        <p class="hero__eyebrow">Est. 2017 · 灣仔太陽街</p>
-        <h1 class="hero__title" id="hero-title">
-          <span class="hero__title-script">Honbo</span>
-          <span class="hero__title-zh">漢堡</span>
+    <section class="hero-parallax" aria-labelledby="hero-title">
+      <div class="hero-parallax__bg" aria-hidden="true"></div>
+      <div class="hero-parallax__layer hero-parallax__layer--burger" data-parallax-speed="0.22">
+        <img src="assets/Honbo.PNG" alt="" aria-hidden="true" />
+      </div>
+      <div class="hero-parallax__content reveal">
+        <p class="hero-parallax__eyebrow">Est. 2017 · 灣仔太陽街</p>
+        <h1 class="hero-parallax__title" id="hero-title">
+          <span class="hero-parallax__script">Honbo</span>
+          <span class="hero-parallax__zh">漢堡</span>
         </h1>
-        <p class="hero__tagline">Fresh beef. Smashed daily.<br />新鮮牛肉，即叫即壓。</p>
-        <div class="hero__cta">
-          <a class="btn btn--primary" href="#locations">Find us 搵我哋</a>
-          <a class="btn btn--outline" href="#catering">Catering 到會</a>
-        </div>
+        <p class="hero-parallax__tagline">Hong Kong's best smash burgers<br />香港最好食嘅壓扁漢堡</p>
+        <a class="btn btn--light" href="#locations">Find us 搵我哋</a>
       </div>
-      <figure class="hero__visual reveal reveal--delay">
-        <img src="assets/Honbo.PNG" alt="Honbo signature double smash cheeseburger illustration" width="520" height="520" />
-        <figcaption class="stamp" aria-hidden="true">
-          <span class="stamp__inner">Fresh Beef<br />SMASHED Burger</span>
-        </figcaption>
-      </figure>
+      <a class="hero-parallax__scroll" href="#intro" aria-label="Scroll down">
+        <span></span>
+      </a>
     </section>
 
-    <section class="origin" id="origin" aria-labelledby="origin-heading">
-      <div class="section-head reveal">
-        <h2 class="section-head__title" id="origin-heading">Our Origin</h2>
-        <p class="section-head__subtitle">點解叫 Honbo？</p>
-      </div>
-      <div class="origin__grid">
-        <article class="origin__col reveal">
-          <p>Born in 2017 on Sun Street, Wan Chai, Honbo is a home-grown Hong Kong burger joint that celebrates the simple things done right. We are a community-driven restaurant that focuses on honest, high-quality ingredients.</p>
-        </article>
-        <article class="origin__col origin__col--zh reveal reveal--delay">
-          <p>2017 年喺灣仔太陽街開業，Honbo（漢堡）係土生土長嘅香港漢堡店，專注把簡單嘅嘢做好。我哋重視社區同誠實食材，唔玩花巧，只係做好一個經典漢堡。</p>
-        </article>
-        <article class="origin__col reveal reveal--delay-2">
-          <p>We work closely with local farmers and artisans to source the best produce — from our signature potato milk buns to our custom blend of double-gold medal winning beef.</p>
-        </article>
-      </div>
-      <p class="origin__note reveal">「Honbo」即係廣東話「漢堡」—— 一個好本地、好直接嘅名字。</p>
-    </section>
-
-    <section class="burgers" id="burgers" aria-labelledby="burgers-heading">
-      <div class="section-head reveal">
-        <h2 class="section-head__title" id="burgers-heading">Burgers</h2>
-        <p class="section-head__subtitle">招牌漢堡 · No-frills, all flavour</p>
-      </div>
-      <div class="burgers__grid">
-        <article class="burger-card reveal">
-          <img src="assets/Honbo15.PNG" alt="Honbo 1.5 smash burger" loading="lazy" />
-          <div class="burger-card__body">
-            <h3 class="burger-card__name">Honbo 1.5 <span>漢堡 1.5</span></h3>
-            <p>Thin patties, house sauce, American cheese — our signature smash style.</p>
-            <span class="price-badge">118</span>
-          </div>
-        </article>
-        <article class="burger-card reveal reveal--delay">
-          <img src="assets/Gold Standard.PNG" alt="Double cheeseburger" loading="lazy" />
-          <div class="burger-card__body">
-            <h3 class="burger-card__name">Double Cheeseburger <span>雙層芝士堡</span></h3>
-            <p>Thick patties, classic style — 4 oz &amp; 6 oz options for the hungry.</p>
-            <span class="price-badge">158</span>
-          </div>
-        </article>
-        <article class="burger-card reveal reveal--delay-2">
-          <img src="assets/TeriyakiChickenBurger.PNG" alt="Teriyaki burger" loading="lazy" />
-          <div class="burger-card__body">
-            <h3 class="burger-card__name">Teriyaki Burger <span>照燒漢堡</span></h3>
-            <p>Local twist on a diner classic — sweet, savoury, still smashed to order.</p>
-            <span class="price-badge">118</span>
-          </div>
-        </article>
-      </div>
-      <p class="burgers__footnote reveal">Prices in HKD · 價錢以港元為準 · Full menu in-store</p>
-    </section>
-
-    <section class="catering" id="catering" aria-labelledby="catering-heading">
-      <div class="catering__inner">
-        <div class="catering__copy reveal">
-          <div class="section-head section-head--left">
-            <h2 class="section-head__title" id="catering-heading">Catering</h2>
-            <p class="section-head__subtitle">到會 · 派對 · 公司活動</p>
-          </div>
-          <p>Bring Honbo to your next gathering. We cater office lunches, birthday parties, and private events across Hong Kong with our smash burgers, hand-cut fries, onion rings, and classic shakes — all packed fresh and ready to serve.</p>
-          <p class="catering__zh">想喺公司、生日會或者私人活動食到我哋嘅漢堡？Honbo 提供到會服務，包括招牌壓扁漢堡、手切薯條、洋葱圈同奶昔，即日製作，送到你指定地點。</p>
-          <ul class="catering__list">
-            <li>Minimum order applies · 設最低訂購量</li>
-            <li>48-hour advance booking recommended · 建議提前 48 小時預訂</li>
-            <li>Custom burger counts &amp; add-ons available · 可自訂份量同加配</li>
-          </ul>
-          <a class="btn btn--primary" href="tel:+85225678970">Call to enquire 電話查詢 →</a>
-        </div>
-        <figure class="catering__visual reveal reveal--delay">
-          <img src="assets/Cheeseburger.PNG" alt="Honbo cheeseburger for catering" loading="lazy" />
-        </figure>
+    <section class="intro" id="intro">
+      <div class="intro__inner reveal">
+        <h2 class="intro__title">Fresh beef. Smashed daily.</h2>
+        <p class="intro__subtitle">新鮮牛肉，即叫即壓 · Signature potato milk buns, house-ground beef</p>
       </div>
     </section>
 
     <section class="locations" id="locations" aria-labelledby="locations-heading">
-      <div class="section-head reveal">
-        <h2 class="section-head__title" id="locations-heading">Locations</h2>
-        <p class="section-head__subtitle">香港分店 · Hong Kong</p>
+      <div class="section-intro reveal">
+        <h2 class="section-intro__title" id="locations-heading">Where to find us</h2>
+        <p class="section-intro__subtitle">香港分店 · Eat in &amp; takeaway</p>
       </div>
-      <div class="locations__grid">
-        <article class="location-card reveal">
-          <div class="location-card__header">
-            <h3>Wan Chai <span>灣仔</span></h3>
-            <p class="location-card__badge">Flagship 總店</p>
+
+      <article class="location-panel">
+        <div class="location-panel__media">
+          <div class="location-panel__parallax" data-parallax-speed="0.18">
+            <img src="assets/Honbo15.PNG" alt="Honbo Wan Chai smash burger" loading="lazy" />
           </div>
+        </div>
+        <div class="location-panel__body reveal">
+          <p class="location-panel__label">Flagship 總店</p>
+          <h3 class="location-panel__name">Wan Chai <span>灣仔</span></h3>
+          <p class="location-panel__service">EAT IN &amp; TAKEAWAY · 堂食及外賣</p>
           <address>
             Shop B, G/F, 6–7 Sun Street<br />
             灣仔太陽街 6–7 號地下 B 舖
           </address>
-          <p class="location-card__hours">Mon–Sun 12:00 – 22:00</p>
-          <a class="location-card__phone" href="tel:+85225678970">+852 2567 8970</a>
-          <div class="location-card__map">
+          <p class="location-panel__hours">Mon–Sun · 12:00 – 22:00</p>
+          <div class="location-panel__actions">
+            <a class="btn btn--primary" href="tel:+85225678970">Call 致電</a>
+            <a class="btn btn--outline" href="#map-wanchai">Map 地圖</a>
+          </div>
+          <div class="location-panel__map" id="map-wanchai">
             <iframe
               title="Honbo Wan Chai on Google Maps"
               loading="lazy"
@@ -155,20 +96,29 @@
               allowfullscreen
             ></iframe>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <article class="location-card reveal reveal--delay">
-          <div class="location-card__header">
-            <h3>Central <span>中環</span></h3>
-            <p class="location-card__badge">Permanent store</p>
+      <article class="location-panel location-panel--reverse">
+        <div class="location-panel__media">
+          <div class="location-panel__parallax" data-parallax-speed="0.18">
+            <img src="assets/Gold Standard.PNG" alt="Honbo Central double cheeseburger" loading="lazy" />
           </div>
+        </div>
+        <div class="location-panel__body reveal">
+          <p class="location-panel__label">Central 中環</p>
+          <h3 class="location-panel__name">Lyndhurst Terrace <span>擺花街</span></h3>
+          <p class="location-panel__service">EAT IN &amp; TAKEAWAY · 堂食及外賣</p>
           <address>
             Shop 2, G/F, 8 Lyndhurst Terrace<br />
             中環擺花街 8 號地下 2 號舖
           </address>
-          <p class="location-card__hours">Mon–Sun 12:30 – 22:00</p>
-          <a class="location-card__phone" href="tel:+85266818029">+852 6681 8029</a>
-          <div class="location-card__map">
+          <p class="location-panel__hours">Mon–Sun · 12:30 – 22:00</p>
+          <div class="location-panel__actions">
+            <a class="btn btn--primary" href="tel:+85266818029">Call 致電</a>
+            <a class="btn btn--outline" href="#map-central">Map 地圖</a>
+          </div>
+          <div class="location-panel__map" id="map-central">
             <iframe
               title="Honbo Central on Google Maps"
               loading="lazy"
@@ -177,18 +127,109 @@
               allowfullscreen
             ></iframe>
           </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="gallery-parallax" aria-hidden="true">
+      <div class="gallery-parallax__track">
+        <div class="gallery-parallax__item" data-parallax-speed="0.12">
+          <img src="assets/Honbo20.PNG" alt="" loading="lazy" />
+        </div>
+        <div class="gallery-parallax__item" data-parallax-speed="-0.08">
+          <img src="assets/Hamburger.PNG" alt="" loading="lazy" />
+        </div>
+        <div class="gallery-parallax__item" data-parallax-speed="0.1">
+          <img src="assets/Cheeseburger.PNG" alt="" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section class="burgers" id="burgers" aria-labelledby="burgers-heading">
+      <div class="section-intro reveal">
+        <h2 class="section-intro__title" id="burgers-heading">Burgers</h2>
+        <p class="section-intro__subtitle">招牌漢堡 · No-frills, all flavour</p>
+      </div>
+      <div class="burgers__scroll">
+        <article class="burger-card reveal">
+          <div class="burger-card__img-wrap">
+            <img src="assets/Honbo15.PNG" alt="Honbo 1.5 smash burger" loading="lazy" />
+          </div>
+          <div class="burger-card__info">
+            <h3>Honbo 1.5 <span>漢堡 1.5</span></h3>
+            <p>Thin patties, house sauce, American cheese.</p>
+            <span class="price-badge">118</span>
+          </div>
         </article>
+        <article class="burger-card reveal reveal--delay">
+          <div class="burger-card__img-wrap">
+            <img src="assets/Gold Standard.PNG" alt="Double cheeseburger" loading="lazy" />
+          </div>
+          <div class="burger-card__info">
+            <h3>Double Cheeseburger <span>雙層芝士堡</span></h3>
+            <p>Thick patties, classic style — 4 oz &amp; 6 oz.</p>
+            <span class="price-badge">158</span>
+          </div>
+        </article>
+        <article class="burger-card reveal reveal--delay-2">
+          <div class="burger-card__img-wrap">
+            <img src="assets/TeriyakiChickenBurger.PNG" alt="Teriyaki burger" loading="lazy" />
+          </div>
+          <div class="burger-card__info">
+            <h3>Teriyaki Burger <span>照燒漢堡</span></h3>
+            <p>Sweet, savoury, smashed to order.</p>
+            <span class="price-badge">118</span>
+          </div>
+        </article>
+      </div>
+      <p class="burgers__footnote reveal">Prices in HKD · 價錢以港元為準</p>
+    </section>
+
+    <section class="origin" id="origin" aria-labelledby="origin-heading">
+      <div class="origin__parallax-bg" data-parallax-speed="0.08" aria-hidden="true"></div>
+      <div class="origin__inner">
+        <div class="section-intro section-intro--light reveal">
+          <h2 class="section-intro__title" id="origin-heading">About Us</h2>
+          <p class="section-intro__subtitle">我哋嘅故事 · Our Origin</p>
+        </div>
+        <div class="origin__grid">
+          <article class="origin__col reveal">
+            <p>Born in 2017 on Sun Street, Wan Chai, Honbo is a home-grown Hong Kong burger joint that celebrates the simple things done right. We are a community-driven restaurant that focuses on honest, high-quality ingredients.</p>
+          </article>
+          <article class="origin__col origin__col--zh reveal reveal--delay">
+            <p>2017 年喺灣仔太陽街開業，Honbo（漢堡）係土生土長嘅香港漢堡店，專注把簡單嘅嘢做好。我哋重視社區同誠實食材，唔玩花巧，只係做好一個經典漢堡。</p>
+          </article>
+          <article class="origin__col reveal reveal--delay-2">
+            <p>From our signature potato milk buns to our custom blend of double-gold medal winning beef — everything is handmade, smashed fresh, and served with pride.</p>
+          </article>
+        </div>
+        <p class="origin__note reveal">「Honbo」即係廣東話「漢堡」—— 一個好本地、好直接嘅名字。</p>
+      </div>
+    </section>
+
+    <section class="catering" id="catering" aria-labelledby="catering-heading">
+      <div class="catering__parallax" data-parallax-speed="0.15" aria-hidden="true">
+        <img src="assets/Cheeseburger.PNG" alt="" />
+      </div>
+      <div class="catering__overlay"></div>
+      <div class="catering__content reveal">
+        <h2 class="catering__title" id="catering-heading">Catering</h2>
+        <p class="catering__subtitle">到會 · 派對 · 公司活動</p>
+        <p>Bring Honbo to your next gathering — smash burgers, hand-cut fries, onion rings, and classic shakes, packed fresh across Hong Kong.</p>
+        <p class="catering__zh">想喺公司、生日會或者私人活動食到我哋嘅漢堡？Honbo 提供到會服務，即日製作，送到你指定地點。</p>
+        <ul class="catering__list">
+          <li>Minimum order applies · 設最低訂購量</li>
+          <li>48-hour advance booking · 建議提前 48 小時預訂</li>
+        </ul>
+        <a class="btn btn--light" href="tel:+85225678970">Call to enquire 電話查詢</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="site-footer__brand">
-      <span class="site-footer__logo">Honbo</span>
-      <span class="site-footer__zh">漢堡</span>
-    </div>
+    <img class="site-footer__logo" src="assets/honbo-logo-white.png" alt="Honbo 漢堡" width="140" height="48" />
     <p class="site-footer__tagline">Potato bun. Handmade daily. · 薯仔包每日手做</p>
-    <p class="site-footer__copy">&copy; <span id="year"></span> Honbo Hong Kong. All rights reserved.</p>
+    <p class="site-footer__copy">&copy; <span id="year"></span> Honbo Hong Kong</p>
   </footer>
 
   <script src="script.js"></script>

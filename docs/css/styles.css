@@ -18,6 +18,10 @@
   --radius: 12px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --transition: 0.4s var(--ease-out);
+  --hero-logo-size: clamp(13.75rem, 52vmin, 36rem);
+  --hero-title-size: clamp(3.5rem, 12vmin, 10rem);
+  --hero-zh-size: clamp(1.25rem, 3.5vmin, 2.35rem);
+  --hero-content-max: min(42rem, 92vw);
 }
 
 *,
@@ -295,11 +299,16 @@ body.is-menu-open .site-header.is-scrolled {
 .hero-parallax {
   position: relative;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  min-height: 100dvh;
   min-height: 100svh;
   min-height: 100vh;
-  padding: calc(var(--header-h) + 2rem) clamp(1rem, 5vw, 3rem) 4rem;
+  padding:
+    calc(var(--header-h) + clamp(1rem, 3vh, 2rem))
+    clamp(1.25rem, 5vw, 4rem)
+    clamp(3.5rem, 9vh, 5.5rem);
   overflow: hidden;
   text-align: center;
   color: var(--honbo-white);
@@ -333,7 +342,9 @@ body.is-menu-open .site-header.is-scrolled {
 .hero-parallax__content {
   position: relative;
   z-index: 2;
-  max-width: 720px;
+  width: 100%;
+  max-width: var(--hero-content-max);
+  margin-inline: auto;
 }
 
 .hero-parallax__eyebrow {
@@ -352,18 +363,23 @@ body.is-menu-open .site-header.is-scrolled {
 
 .hero-parallax__title-stack {
   position: relative;
-  display: inline-block;
-  padding: 0.5rem 1rem 1.5rem;
+  display: inline-grid;
+  place-items: center;
+  justify-items: center;
+  width: min(100%, var(--hero-logo-size));
+  margin-inline: auto;
+  padding: clamp(0.5rem, 2vmin, 1rem) clamp(1rem, 3vw, 1.5rem) clamp(1rem, 4vmin, 2rem);
 }
 
 .hero-parallax__icon {
   position: absolute;
   left: 50%;
-  top: 42%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(220px, 72vw, 520px);
+  width: var(--hero-logo-size);
   height: auto;
-  max-height: min(70vw, 480px);
+  max-height: min(52vmin, 58vh);
+  aspect-ratio: 1;
   object-fit: contain;
   opacity: 0.42;
   z-index: 0;
@@ -376,8 +392,9 @@ body.is-menu-open .site-header.is-scrolled {
   z-index: 1;
   display: block;
   font-family: var(--font-script);
-  font-size: clamp(3.5rem, 14vw, 8rem);
+  font-size: var(--hero-title-size);
   font-weight: 400;
+  line-height: 0.95;
   text-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
 }
 
@@ -386,7 +403,7 @@ body.is-menu-open .site-header.is-scrolled {
   z-index: 1;
   display: block;
   font-family: var(--font-zh);
-  font-size: clamp(1.25rem, 4vw, 2rem);
+  font-size: var(--hero-zh-size);
   font-weight: 700;
   letter-spacing: 0.25em;
   margin-top: 0.35rem;
@@ -394,14 +411,15 @@ body.is-menu-open .site-header.is-scrolled {
 
 .hero-parallax__tagline {
   font-family: var(--font-subtitle);
-  font-size: clamp(1rem, 3vw, 1.5rem);
-  margin: var(--space-md) 0 var(--space-lg);
+  font-size: clamp(1rem, min(3vw, 2.8vmin), 1.65rem);
+  margin: var(--space-md) auto var(--space-lg);
+  max-width: 36ch;
   line-height: 1.65;
 }
 
 .hero-parallax__scroll {
   position: absolute;
-  bottom: 1.5rem;
+  bottom: clamp(1rem, 3vh, 2rem);
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -988,6 +1006,24 @@ body.is-menu-open .site-header.is-scrolled {
 @media (min-width: 769px) {
   .site-nav {
     padding-right: clamp(1rem, 4vw, 2rem);
+  }
+}
+
+/* Large / 2K+ — scale hero without drifting off-center */
+@media (min-width: 1920px) {
+  :root {
+    --hero-content-max: min(46rem, 88vw);
+    --hero-logo-size: clamp(16rem, 48vmin, 40rem);
+    --hero-title-size: clamp(4rem, 10vmin, 11rem);
+    --hero-zh-size: clamp(1.35rem, 3vmin, 2.5rem);
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --hero-content-max: min(50rem, 82vw);
+    --hero-logo-size: clamp(18rem, 44vmin, 42rem);
+    --hero-title-size: clamp(4.5rem, 9vmin, 12rem);
   }
 }
 

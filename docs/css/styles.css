@@ -482,6 +482,15 @@ body.is-menu-open .site-header.is-scrolled {
   user-select: none;
 }
 
+.horizontal-carousel--infinite {
+  scroll-snap-type: none;
+}
+
+.horizontal-carousel--infinite.is-looping {
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
 .horizontal-carousel__track {
   display: flex;
   width: max-content;
@@ -965,6 +974,14 @@ body.is-menu-open .site-header.is-scrolled {
   font-size: 0.8rem;
   opacity: 0.6;
   margin: var(--space-sm) 0 0;
+}
+
+.site-footer__legal {
+  font-size: 0.7rem;
+  opacity: 0.45;
+  margin: var(--space-xs) 0 0;
+  max-width: 28rem;
+  margin-inline: auto;
 }
 
 /* Responsive */

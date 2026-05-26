@@ -1,45 +1,47 @@
 # Honbo 漢堡 — Website
 
-Hong Kong smash burger restaurant site (static HTML/CSS/JS).
+## Resources used
 
-**Live site:** https://coolbirb43.github.io/Honbo/
+| Resource | Use |
+|----------|-----|
+| [Google Fonts](https://fonts.google.com/) | Lobster, Pacifico, Barlow Condensed, Noto Sans TC |
+| [GitHub Pages](https://pages.github.com/) | Free static site hosting |
+| [Google Maps embed](https://www.google.com/maps) | Wan Chai & Central location maps |
+| HTML5 / CSS3 / JavaScript | Static site (no framework) |
+| Python 3 (`scripts/build.py`) | Optional minify step before deploy |
+
+## Project layout
+
+```
+docs/                 ← Live site (GitHub Pages publishes this folder)
+  index.html
+  css/                styles.css (edit) · styles.min.css (deployed)
+  js/                 app.js (edit) · app.min.js (deployed)
+  assets/
+    brand/            Logos, hero icon
+    menu/             Illustrated burger PNGs
+    photos/           Compressed JPG backgrounds
+  .nojekyll
+  robots.txt
+
+scripts/build.py      Regenerate *.min.css / *.min.js after edits
+
+archive/              Local-only originals (not deployed)
+DEPLOYMENT.md         GoDaddy domain + GitHub Pages setup
+```
+
+## Before you deploy
+
+```bash
+python scripts/build.py
+```
+
+Then commit and push. The live site loads `*.min.css` and `*.min.js`.
 
 ## Branches
 
-| Branch | Description |
-|--------|-------------|
-| `v1` | First version — original layout (frozen) |
-| `v2-redesign` | Updated version — [Burger & Beyond](https://burgerandbeyond.co.uk)-inspired parallax layout, Honbo branding |
-| `main` | Currently matches **v1** |
-
-To preview v2 locally: `git checkout v2-redesign`
-
-To deploy v2 on GitHub Pages: **Settings → Pages → Branch:** `v2-redesign` · **Folder:** `/docs`
-
-## GitHub Pages setup
-
-1. Open your repo: https://github.com/coolbirb43/Honbo  
-2. Go to **Settings** → **Pages** (left sidebar).  
-3. Under **Build and deployment** → **Source**, choose **Deploy from a branch**.  
-4. **Branch:** `main` · **Folder:** `/docs` → click **Save**.  
-5. Wait 1–3 minutes. GitHub will show the live URL at the top of the Pages settings page.
-
-Your site will be at **https://coolbirb43.github.io/Honbo/**
-
-> GitHub Pages only allows **root** or **docs** as the publish folder — not `src`. The site files live in `docs/`.
-
-## View locally
-
-```bash
-cd docs
-python -m http.server 8765
-```
-
-Then visit http://localhost:8765
-
-## Structure
-
-- `docs/` — `index.html`, `styles.css`, `script.js`, `assets/` (images)
-- `assets/` (repo root) — `plan.txt` and local-only files (e.g. menu PDF)
-
-The full menu PDF (`HONBONEWMENU_15x30_MASTTERFILE_3.pdf`) is kept locally only — it exceeds GitHub’s 100MB file size limit.
+| Branch | Notes |
+|--------|--------|
+| `v3-vsco-scroll` | Current redesign |
+| `v2-backup-pre-v3` | Snapshot before animation experiments |
+| `v1` | Original layout |

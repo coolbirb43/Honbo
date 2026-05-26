@@ -4,12 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Honbo 漢堡 — Hong Kong's homegrown smash burger joint. American-style burgers, honest ingredients, born in Wan Chai 2017." />
+  <meta name="theme-color" content="#1a3644" />
+  <meta name="robots" content="index, follow" />
   <title>Honbo 漢堡 | Hong Kong Smash Burgers</title>
-  <link rel="icon" href="assets/honbo-logo-blue.png" type="image/png" />
+  <link rel="icon" href="assets/brand/honbo-logo-blue.png" type="image/png" />
+  <link rel="preload" href="assets/photos/hero.jpg" as="image" fetchpriority="high" />
+  <link rel="preload" href="assets/brand/honbo-logo-white.png" as="image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=12" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;700&display=swap" /></noscript>
+  <link rel="stylesheet" href="css/styles.min.css?v=1" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -17,8 +22,8 @@
   <header class="site-header" id="top">
     <nav class="nav" aria-label="Main">
       <a class="nav__logo" href="#top">
-        <img class="nav__logo-img nav__logo-img--white" src="assets/honbo-logo-white.png" alt="" aria-hidden="true" width="160" height="56" />
-        <img class="nav__logo-img nav__logo-img--blue" src="assets/honbo-logo-blue.png" alt="Honbo 漢堡" width="160" height="56" />
+        <img class="nav__logo-img nav__logo-img--white" src="assets/brand/honbo-logo-white.png" alt="" aria-hidden="true" width="160" height="56" decoding="async" />
+        <img class="nav__logo-img nav__logo-img--blue" src="assets/brand/honbo-logo-blue.png" alt="Honbo 漢堡" width="160" height="56" decoding="async" />
       </a>
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
         <span class="nav__toggle-bar"></span>
@@ -41,14 +46,14 @@
   <main id="main">
     <section class="hero-parallax" aria-labelledby="hero-title">
       <div class="hero-parallax__bg" aria-hidden="true">
-        <img src="assets/photos/hero.jpg" alt="" />
+        <img src="assets/photos/hero.jpg" alt="" width="1920" height="1080" fetchpriority="high" decoding="async" />
       </div>
       <div class="hero-parallax__overlay" aria-hidden="true"></div>
       <div class="hero-parallax__content">
         <p class="hero-parallax__eyebrow">Est. 2017 · 灣仔太陽街</p>
         <h1 class="hero-parallax__title" id="hero-title">
           <span class="hero-parallax__title-stack">
-            <img class="hero-parallax__icon" src="assets/honboicontransparent.png" alt="" width="480" height="480" aria-hidden="true" />
+            <img class="hero-parallax__icon" src="assets/brand/honboicontransparent.png" alt="" width="480" height="480" aria-hidden="true" decoding="async" />
             <span class="hero-parallax__script">Honbo</span>
             <span class="hero-parallax__zh">漢堡</span>
           </span>
@@ -72,7 +77,7 @@
             <span>Hand-ground daily · 即日手打 ·</span>
             <span>Wan Chai · Central · 灣仔 · 中環 ·</span>
           </div>
-          <div class="loop-track__set">
+          <div class="loop-track__set" aria-hidden="true">
             <span>Fresh beef · Smashed daily · 新鮮牛肉即壓 ·</span>
             <span>Potato milk bun · 薯仔包 ·</span>
             <span>Hand-ground daily · 即日手打 ·</span>
@@ -91,7 +96,7 @@
       <article class="location-panel">
         <div class="location-panel__media">
           <div class="location-panel__bg">
-            <img src="assets/photos/location-wanchai.jpg" alt="Honbo Wan Chai burgers and fries" loading="lazy" />
+            <img src="assets/photos/location-wanchai.jpg" alt="Honbo Wan Chai burgers and fries" width="800" height="600" loading="lazy" decoding="async" />
           </div>
         </div>
         <div class="location-panel__body">
@@ -122,7 +127,7 @@
       <article class="location-panel location-panel--reverse">
         <div class="location-panel__media">
           <div class="location-panel__bg">
-            <img src="assets/photos/location-central.jpg" alt="Honbo Central burger close-up" loading="lazy" />
+            <img src="assets/photos/location-central.jpg" alt="Honbo Central burger close-up" width="800" height="600" loading="lazy" decoding="async" />
           </div>
         </div>
         <div class="location-panel__body">
@@ -156,21 +161,14 @@
         <p class="section-block__label">In the kitchen · 廚房日常</p>
         <p class="carousel-hint">Swipe or scroll sideways · 左右滑動瀏覽</p>
       </div>
-      <div class="horizontal-carousel loop-track--gallery" tabindex="0">
+      <div class="horizontal-carousel loop-track--gallery horizontal-carousel--infinite" tabindex="0">
         <div class="horizontal-carousel__track">
           <div class="loop-track__set">
-            <figure class="gallery-card"><img src="assets/photos/group-flatlay.jpg" alt="Honbo burgers and fries flat lay" loading="lazy" /></figure>
-            <figure class="gallery-card"><img src="assets/photos/spread.jpg" alt="Honbo burger spread" loading="lazy" /></figure>
-            <figure class="gallery-card"><img src="assets/photos/gallery-1.jpg" alt="Honbo smash burgers" loading="lazy" /></figure>
-            <figure class="gallery-card"><img src="assets/photos/gallery-2.jpg" alt="Honbo food spread" loading="lazy" /></figure>
-            <figure class="gallery-card"><img src="assets/photos/gallery-3.jpg" alt="Honbo burgers and sides" loading="lazy" /></figure>
-          </div>
-          <div class="loop-track__set" aria-hidden="true">
-            <figure class="gallery-card"><img src="assets/photos/group-flatlay.jpg" alt="" loading="lazy" /></figure>
-            <figure class="gallery-card"><img src="assets/photos/spread.jpg" alt="" loading="lazy" /></figure>
-            <figure class="gallery-card"><img src="assets/photos/gallery-1.jpg" alt="" loading="lazy" /></figure>
-            <figure class="gallery-card"><img src="assets/photos/gallery-2.jpg" alt="" loading="lazy" /></figure>
-            <figure class="gallery-card"><img src="assets/photos/gallery-3.jpg" alt="" loading="lazy" /></figure>
+            <figure class="gallery-card"><img src="assets/photos/group-flatlay.jpg" alt="Honbo burgers and fries flat lay" width="800" height="600" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-card"><img src="assets/photos/spread.jpg" alt="Honbo burger spread" width="800" height="600" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-card"><img src="assets/photos/gallery-1.jpg" alt="Honbo smash burgers" width="800" height="600" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-card"><img src="assets/photos/gallery-2.jpg" alt="Honbo food spread" width="800" height="600" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery-card"><img src="assets/photos/gallery-3.jpg" alt="Honbo burgers and sides" width="800" height="600" loading="lazy" decoding="async" /></figure>
           </div>
         </div>
       </div>
@@ -182,65 +180,35 @@
         <p class="section-block__subtitle">招牌漢堡 · Illustrated menu favourites</p>
         <p class="carousel-hint">Swipe or scroll sideways · 左右滑動瀏覽</p>
       </div>
-      <div class="horizontal-carousel loop-track--bestsellers" tabindex="0">
+      <div class="horizontal-carousel loop-track--bestsellers horizontal-carousel--infinite" tabindex="0" aria-label="Best sellers menu carousel">
         <div class="horizontal-carousel__track">
           <div class="loop-track__set">
             <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/Honbo.PNG" alt="Honbo signature burger" loading="lazy" /></div>
+              <div class="menu-card__art"><img src="assets/menu/Honbo.PNG" alt="Honbo signature burger" width="400" height="400" loading="lazy" decoding="async" /></div>
               <div class="menu-card__info"><h3>Honbo <span>漢堡</span></h3><p>Our signature smash — thin patties, house sauce, American cheese.</p><span class="price-badge">98</span></div>
             </article>
             <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/Honbo15.PNG" alt="Honbo 1.5" loading="lazy" /></div>
+              <div class="menu-card__art"><img src="assets/menu/Honbo15.PNG" alt="Honbo 1.5" width="400" height="400" loading="lazy" decoding="async" /></div>
               <div class="menu-card__info"><h3>Honbo 1.5 <span>漢堡 1.5</span></h3><p>Extra patty, same signature style — the crowd favourite.</p><span class="price-badge">118</span></div>
             </article>
             <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/Honbo20.PNG" alt="Honbo 2.0" loading="lazy" /></div>
+              <div class="menu-card__art"><img src="assets/menu/Honbo20.PNG" alt="Honbo 2.0" width="400" height="400" loading="lazy" decoding="async" /></div>
               <div class="menu-card__info"><h3>Honbo 2.0 <span>漢堡 2.0</span></h3><p>Four crispy-edged patties, cheese, pickles, onion, house sauce.</p><span class="price-badge">158</span></div>
             </article>
             <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/Gold Standard.PNG" alt="Double cheeseburger" loading="lazy" /></div>
+              <div class="menu-card__art"><img src="assets/menu/Gold Standard.PNG" alt="Double cheeseburger" width="400" height="400" loading="lazy" decoding="async" /></div>
               <div class="menu-card__info"><h3>Double Cheeseburger <span>雙層芝士堡</span></h3><p>Thick patties, classic style — 4 oz &amp; 6 oz options.</p><span class="price-badge">158</span></div>
             </article>
             <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/Cheeseburger.PNG" alt="Cheeseburger" loading="lazy" /></div>
+              <div class="menu-card__art"><img src="assets/menu/Cheeseburger.PNG" alt="Cheeseburger" width="400" height="400" loading="lazy" decoding="async" /></div>
               <div class="menu-card__info"><h3>Cheeseburger <span>芝士堡</span></h3><p>Traditional thick patty, American cheese, done right.</p><span class="price-badge">108</span></div>
             </article>
             <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/TeriyakiChickenBurger.PNG" alt="Teriyaki burger" loading="lazy" /></div>
+              <div class="menu-card__art"><img src="assets/menu/TeriyakiChickenBurger.PNG" alt="Teriyaki burger" width="400" height="400" loading="lazy" decoding="async" /></div>
               <div class="menu-card__info"><h3>Teriyaki Burger <span>照燒漢堡</span></h3><p>Sweet, savoury, smashed to order — local twist.</p><span class="price-badge">118</span></div>
             </article>
             <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/Hamburger.PNG" alt="Hamburger" loading="lazy" /></div>
-              <div class="menu-card__info"><h3>Hamburger <span>純肉漢堡</span></h3><p>No cheese, all beef — for the purist.</p><span class="price-badge">98</span></div>
-            </article>
-          </div>
-          <div class="loop-track__set" aria-hidden="true">
-            <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/Honbo.PNG" alt="" loading="lazy" /></div>
-              <div class="menu-card__info"><h3>Honbo <span>漢堡</span></h3><p>Our signature smash — thin patties, house sauce, American cheese.</p><span class="price-badge">98</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/Honbo15.PNG" alt="" loading="lazy" /></div>
-              <div class="menu-card__info"><h3>Honbo 1.5 <span>漢堡 1.5</span></h3><p>Extra patty, same signature style — the crowd favourite.</p><span class="price-badge">118</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/Honbo20.PNG" alt="" loading="lazy" /></div>
-              <div class="menu-card__info"><h3>Honbo 2.0 <span>漢堡 2.0</span></h3><p>Four crispy-edged patties, cheese, pickles, onion, house sauce.</p><span class="price-badge">158</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/Gold Standard.PNG" alt="" loading="lazy" /></div>
-              <div class="menu-card__info"><h3>Double Cheeseburger <span>雙層芝士堡</span></h3><p>Thick patties, classic style — 4 oz &amp; 6 oz options.</p><span class="price-badge">158</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/Cheeseburger.PNG" alt="" loading="lazy" /></div>
-              <div class="menu-card__info"><h3>Cheeseburger <span>芝士堡</span></h3><p>Traditional thick patty, American cheese, done right.</p><span class="price-badge">108</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/TeriyakiChickenBurger.PNG" alt="" loading="lazy" /></div>
-              <div class="menu-card__info"><h3>Teriyaki Burger <span>照燒漢堡</span></h3><p>Sweet, savoury, smashed to order — local twist.</p><span class="price-badge">118</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><img src="assets/Hamburger.PNG" alt="" loading="lazy" /></div>
+              <div class="menu-card__art"><img src="assets/menu/Hamburger.PNG" alt="Hamburger" width="400" height="400" loading="lazy" decoding="async" /></div>
               <div class="menu-card__info"><h3>Hamburger <span>純肉漢堡</span></h3><p>No cheese, all beef — for the purist.</p><span class="price-badge">98</span></div>
             </article>
           </div>
@@ -273,7 +241,7 @@
 
     <section class="catering" id="catering" aria-labelledby="catering-heading">
       <div class="catering__bg" aria-hidden="true">
-        <img src="assets/photos/catering.jpg" alt="" />
+        <img src="assets/photos/catering.jpg" alt="" width="1200" height="800" loading="lazy" decoding="async" />
       </div>
       <div class="catering__overlay"></div>
       <div class="catering__content">
@@ -293,11 +261,12 @@
   </main>
 
   <footer class="site-footer">
-    <img class="site-footer__logo" src="assets/honbo-logo-white.png" alt="Honbo 漢堡" width="140" height="48" />
+    <img class="site-footer__logo" src="assets/brand/honbo-logo-white.png" alt="Honbo 漢堡" width="140" height="48" loading="lazy" decoding="async" />
     <p class="site-footer__tagline">Potato bun. Handmade daily. · 薯仔包每日手做</p>
-    <p class="site-footer__copy">&copy; <span id="year"></span> Honbo Hong Kong</p>
+    <p class="site-footer__copy">&copy; <span id="year"></span> Honbo Hong Kong. All rights reserved.</p>
+    <p class="site-footer__legal">Content and design &copy; Honbo. Unauthorised copying is prohibited.</p>
   </footer>
 
-  <script src="script.js?v=12"></script>
+  <script src="js/app.min.js?v=1" defer></script>
 </body>
 </html>

@@ -149,6 +149,93 @@
         viewport.classList.remove("is-dragging");
       });
     });
+
+    document
+      .querySelectorAll(".horizontal-carousel--infinite")
+      .forEach(function (viewport) {
+        var track = viewport.querySelector(".horizontal-carousel__track");
+        var firstSet = track && track.querySelector(".loop-track__set");
+        if (!track || !firstSet) return;
+
+        track.querySelectorAll(".loop-track__set").forEach(function (set, index) {
+          if (index > 0) set.remove();
+        });
+
+        var clone = firstSet.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        clone.querySelectorAll("img[alt]").forEach(function (img) {
+          img.setAttribute("alt", "");
+        });
+        track.appendChild(clone);
+
+        var setWidth = 0;
+        var looping = false;
+        var wrapTimer = null;
+        var WRAP_DELAY_MS = 220;
+
+        function measure() {
+          var sets = track.querySelectorAll(".loop-track__set");
+          if (sets.length >= 2) {
+            setWidth = sets[1].offsetLeft;
+          } else {
+            setWidth = firstSet.offsetWidth;
+          }
+        }
+
+        function performWrap() {
+          if (looping || setWidth < 1) return;
+
+          var left = viewport.scrollLeft;
+          if (left < setWidth - 8) return;
+
+          looping = true;
+          viewport.classList.add("is-looping");
+
+          var next = left;
+          while (next >= setWidth) {
+            next -= setWidth;
+          }
+
+          viewport.scrollLeft = next;
+
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              viewport.classList.remove("is-looping");
+              looping = false;
+            });
+          });
+        }
+
+        function scheduleWrap() {
+          clearTimeout(wrapTimer);
+          wrapTimer = window.setTimeout(performWrap, WRAP_DELAY_MS);
+        }
+
+        function cancelWrap() {
+          clearTimeout(wrapTimer);
+        }
+
+        measure();
+
+        viewport.addEventListener("scroll", scheduleWrap, { passive: true });
+
+        if ("onscrollend" in window) {
+          viewport.addEventListener("scrollend", performWrap, { passive: true });
+        }
+
+        viewport.addEventListener("pointerdown", cancelWrap, { passive: true });
+        viewport.addEventListener("pointerup", scheduleWrap, { passive: true });
+        viewport.addEventListener("pointercancel", scheduleWrap, { passive: true });
+
+        window.addEventListener(
+          "resize",
+          function () {
+            measure();
+          },
+          { passive: true }
+        );
+        window.addEventListener("load", measure);
+      });
   }
 
   function closeMobileMenu() {

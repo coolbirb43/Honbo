@@ -10,8 +10,6 @@
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var parallaxEls = document.querySelectorAll("[data-parallax-speed]");
   var scaleEls = document.querySelectorAll("[data-scroll-scale]");
-  var bestsellersPin = document.querySelector(".bestsellers-pin");
-  var bestsellersTrack = document.getElementById("bestsellers-track");
   var ticking = false;
 
   function onScroll() {
@@ -53,44 +51,9 @@
     });
   }
 
-  function updateBestsellersScroll() {
-    if (!bestsellersPin || !bestsellersTrack || prefersReduced) return;
-    if (window.innerWidth < 901) {
-      bestsellersTrack.style.transform = "";
-      return;
-    }
-
-    var rect = bestsellersPin.getBoundingClientRect();
-    var pinHeight = bestsellersPin.offsetHeight;
-    var scrollRange = pinHeight - window.innerHeight;
-
-    if (scrollRange <= 0) return;
-
-    var progress = Math.min(1, Math.max(0, -rect.top / scrollRange));
-    var trackWidth = bestsellersTrack.scrollWidth;
-    var viewportWidth = bestsellersTrack.parentElement.offsetWidth;
-    var maxTranslate = Math.max(0, trackWidth - viewportWidth + 48);
-
-    bestsellersTrack.style.transform = "translate3d(" + -progress * maxTranslate + "px, 0, 0)";
-  }
-
-  function setBestsellersPinHeight() {
-    if (!bestsellersPin || !bestsellersTrack || prefersReduced) return;
-    if (window.innerWidth < 901) {
-      bestsellersPin.style.height = "";
-      return;
-    }
-
-    var trackWidth = bestsellersTrack.scrollWidth;
-    var viewportWidth = window.innerWidth;
-    var extra = Math.max(0, trackWidth - viewportWidth);
-    bestsellersPin.style.height = window.innerHeight + extra * 1.35 + "px";
-  }
-
   function updateMotion() {
     updateParallax();
     updateScrollScale();
-    updateBestsellersScroll();
     ticking = false;
   }
 
@@ -112,16 +75,6 @@
   }
 
   window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener(
-    "resize",
-    function () {
-      setBestsellersPinHeight();
-      onScroll();
-    },
-    { passive: true }
-  );
-
-  setBestsellersPinHeight();
   onScroll();
 
   var reveals = document.querySelectorAll(".reveal");

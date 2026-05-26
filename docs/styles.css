@@ -27,7 +27,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scroll-padding-top: var(--header-h);
 }
 
@@ -93,6 +93,7 @@ a {
   right: 0;
   z-index: 200;
   height: var(--header-h);
+  overflow: visible;
   transition: background var(--transition), box-shadow var(--transition);
 }
 
@@ -149,6 +150,11 @@ a {
 .site-header.is-scrolled .nav__logo-img--blue {
   opacity: 1;
   position: static;
+}
+
+.nav__menu-panel {
+  display: flex;
+  align-items: center;
 }
 
 .nav__menu {
@@ -317,7 +323,30 @@ a {
   line-height: 1;
 }
 
+.hero-parallax__title-stack {
+  position: relative;
+  display: inline-block;
+  padding: 0.5rem 1rem 1.5rem;
+}
+
+.hero-parallax__icon {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  width: clamp(220px, 72vw, 520px);
+  height: auto;
+  max-height: min(70vw, 480px);
+  object-fit: contain;
+  opacity: 0.42;
+  z-index: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.2));
+}
+
 .hero-parallax__script {
+  position: relative;
+  z-index: 1;
   display: block;
   font-family: var(--font-script);
   font-size: clamp(3.5rem, 14vw, 8rem);
@@ -326,6 +355,8 @@ a {
 }
 
 .hero-parallax__zh {
+  position: relative;
+  z-index: 1;
   display: block;
   font-family: var(--font-zh);
   font-size: clamp(1.25rem, 4vw, 2rem);
@@ -400,16 +431,41 @@ a {
   animation-duration: 22s;
 }
 
-.loop-track--gallery .loop-track__inner {
-  animation-duration: 38s;
-}
-
-.loop-track--bestsellers .loop-track__inner {
-  animation-duration: 42s;
-}
-
-.loop-track:hover .loop-track__inner {
+.loop-track--marquee:hover .loop-track__inner {
   animation-play-state: paused;
+}
+
+/* Horizontal carousels — scroll separately from the page */
+.horizontal-carousel {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: var(--honbo-navy) transparent;
+  cursor: grab;
+  padding-bottom: var(--space-sm);
+}
+
+.horizontal-carousel.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.horizontal-carousel__track {
+  display: flex;
+  width: max-content;
+}
+
+.carousel-hint {
+  margin: var(--space-xs) 0 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.5;
 }
 
 .loop-track__set {
@@ -449,13 +505,13 @@ a {
 .gallery-section {
   padding: var(--space-lg) 0 var(--space-xl);
   background: var(--honbo-cream);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .bestsellers-section {
   padding: var(--space-xl) 0;
   background: var(--honbo-white);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .section-block__header {
@@ -494,7 +550,8 @@ a {
 
 .loop-track--gallery,
 .loop-track--bestsellers {
-  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 2%, #000 98%, transparent);
+  padding-left: clamp(1rem, 5vw, 3rem);
 }
 
 .gallery-card {
@@ -503,6 +560,7 @@ a {
   overflow: hidden;
   border-radius: var(--radius);
   aspect-ratio: 4 / 3;
+  scroll-snap-align: start;
 }
 
 .gallery-card img {
@@ -669,6 +727,7 @@ a {
   padding: var(--space-md);
   border: 1px solid rgba(26, 54, 68, 0.06);
   text-align: center;
+  scroll-snap-align: start;
 }
 
 .menu-card__art {
@@ -806,6 +865,14 @@ a {
   position: relative;
   z-index: 2;
   max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.catering__content > p,
+.catering__content > ul {
+  width: 100%;
 }
 
 .catering__title {
@@ -829,14 +896,21 @@ a {
 
 .catering__list {
   text-align: left;
-  display: inline-block;
-  margin: var(--space-md) auto;
+  display: block;
+  margin: var(--space-md) 0 0;
   padding-left: 1.2rem;
 }
 
 .catering__list li {
   margin-bottom: var(--space-xs);
   font-size: 0.95rem;
+}
+
+.catering__cta {
+  margin-top: var(--space-lg);
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 /* Footer */
@@ -905,39 +979,39 @@ a {
 @media (max-width: 768px) {
   .nav__toggle {
     display: flex;
+    position: relative;
+    z-index: 10002;
+  }
+
+  .nav__menu-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--honbo-navy);
+    transform: translateX(100%);
+    transition: transform var(--transition);
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .nav__menu-panel.is-open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .nav__menu {
-    position: fixed;
-    top: var(--header-h);
-    left: 0;
-    right: 0;
-    bottom: 0;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: var(--space-lg);
-    background: var(--honbo-navy);
-    transform: translateX(100%);
-    transition: transform var(--transition);
-    z-index: 199;
-  }
-
-  .nav__menu.is-open {
-    transform: translateX(0);
   }
 
   .nav__menu a {
     font-size: 1.1rem;
     color: var(--honbo-white) !important;
-  }
-
-  .site-header.is-scrolled .nav__menu {
-    background: var(--honbo-white);
-  }
-
-  .site-header.is-scrolled .nav__menu a {
-    color: var(--honbo-navy) !important;
   }
 
   .location-panel,
@@ -1001,7 +1075,7 @@ a {
     scroll-behavior: auto;
   }
 
-  .loop-track__inner {
+  .loop-track--marquee .loop-track__inner {
     animation-duration: 60s !important;
   }
 

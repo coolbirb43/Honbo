@@ -6,70 +6,141 @@
 
   var header = document.querySelector(".site-header");
   var toggle = document.querySelector(".nav__toggle");
-  var menu = document.querySelector(".nav__menu");
+  var menu = document.getElementById("nav-menu");
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var parallaxEls = document.querySelectorAll("[data-parallax-speed]");
   var scaleEls = document.querySelectorAll("[data-scroll-scale]");
-  var loopTracks = document.querySelectorAll("[data-loop-speed]");
-  var headerOffset = 72;
+  var smoothScrollActive = false;
   var ticking = false;
-  var lastScrollY = window.scrollY;
 
-  function initLoopTracks() {
-    loopTracks.forEach(function (track) {
+  function getHeaderOffset() {
+    if (!header) return 72;
+    var h = header.offsetHeight;
+    document.documentElement.style.setProperty("--header-h", h + "px");
+    return h;
+  }
+
+  function initAutoLoops() {
+    document.querySelectorAll("[data-loop-speed]").forEach(function (track) {
       var inner = track.querySelector(".loop-track__inner");
       if (!inner) return;
-
-      var baseSpeed = parseFloat(track.getAttribute("data-loop-speed")) || 30;
-      inner.style.animationDuration = baseSpeed + "s";
-      inner.style.animationName = "loop-scroll";
-      inner.style.animationTimingFunction = "linear";
-      inner.style.animationIterationCount = "infinite";
+      var seconds = parseFloat(track.getAttribute("data-loop-speed")) || 22;
+      inner.style.animation = "loop-scroll " + seconds + "s linear infinite";
     });
   }
 
-  function updateLoopSpeedOnScroll() {
-    var scrollDelta = Math.abs(window.scrollY - lastScrollY);
-    lastScrollY = window.scrollY;
+  function initHorizontalCarousels() {
+    document.querySelectorAll(".horizontal-carousel").forEach(function (viewport) {
+      var maxScroll = function () {
+        return viewport.scrollWidth - viewport.clientWidth;
+      };
 
-    if (scrollDelta < 1) return;
+      var drag = { active: false, startX: 0, startScroll: 0 };
 
-    loopTracks.forEach(function (track) {
-      var inner = track.querySelector(".loop-track__inner");
-      if (!inner) return;
-
-      var baseSpeed = parseFloat(track.getAttribute("data-loop-speed")) || 30;
-      var boost = Math.min(scrollDelta * 0.35, baseSpeed * 0.75);
-      var newDuration = Math.max(6, baseSpeed - boost);
-
-      inner.style.animationDuration = newDuration + "s";
-    });
-  }
-
-  function smoothScrollTo(target) {
-    var top =
-      target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
-  }
-
-  function bindSmoothNav() {
-    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-      link.addEventListener("click", function (e) {
-        var hash = link.getAttribute("href");
-        if (!hash || hash === "#") return;
-
-        if (hash === "#top") {
-          e.preventDefault();
-          window.scrollTo({ top: 0, behavior: "smooth" });
-          return;
-        }
-
-        var target = document.querySelector(hash);
-        if (!target) return;
-
-        e.preventDefault();
-        smoothScrollTo(target);
+      viewport.addEventListener("mousedown", function (e) {
+        if (e.button !== 0 || maxScroll() <= 0) return;
+        drag.active = true;
+        drag.startX = e.pageX;
+        drag.startScroll = viewport.scrollLeft;
+        viewport.classList.add("is-dragging");
       });
+
+      window.addEventListener("mousemove", function (e) {
+        if (!drag.active) return;
+        e.preventDefault();
+        viewport.scrollLeft = drag.startScroll - (e.pageX - drag.startX);
+      });
+
+      window.addEventListener("mouseup", function () {
+        if (!drag.active) return;
+        drag.active = false;
+        viewport.classList.remove("is-dragging");
+      });
+    });
+  }
+
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function smoothScrollToY(targetY) {
+    var startY = window.pageYOffset;
+    var distance = targetY - startY;
+
+    if (Math.abs(distance) < 2) return;
+
+    if (prefersReduced || smoothScrollActive) {
+      window.scrollTo(0, targetY);
+      return;
+    }
+
+    smoothScrollActive = true;
+    var duration = Math.min(1000, Math.max(450, Math.abs(distance) * 0.55));
+    var startTime = null;
+
+    function step(time) {
+      if (!startTime) startTime = time;
+      var elapsed = time - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+
+      window.scrollTo(0, startY + distance * easeInOutCubic(progress));
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        smoothScrollActive = false;
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  function closeMobileMenu() {
+    if (!toggle || !menu) return;
+    toggle.setAttribute("aria-expanded", "false");
+    menu.classList.remove("is-open");
+    document.body.classList.remove("is-menu-open");
+  }
+
+  function scrollToTarget(target) {
+    var offset = getHeaderOffset();
+    var top =
+      target.getBoundingClientRect().top + window.pageYOffset - offset;
+    smoothScrollToY(Math.max(0, top));
+  }
+
+  function bindAnchorLinks() {
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener(
+        "click",
+        function (e) {
+          var hash = link.getAttribute("href");
+          if (!hash || hash === "#") return;
+
+          if (hash === "#top") {
+            e.preventDefault();
+            closeMobileMenu();
+            var topDelay = window.innerWidth <= 768 ? 320 : 0;
+            setTimeout(function () {
+              smoothScrollToY(0);
+            }, topDelay);
+            return;
+          }
+
+          var id = hash.slice(1);
+          var target = document.getElementById(id);
+          if (!target) return;
+
+          e.preventDefault();
+          closeMobileMenu();
+
+          var delay = window.innerWidth <= 768 ? 320 : 50;
+          setTimeout(function () {
+            scrollToTarget(target);
+          }, delay);
+        },
+        false
+      );
     });
   }
 
@@ -78,20 +149,17 @@
       header.classList.toggle("is-scrolled", window.scrollY > 60);
     }
 
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(function () {
-        if (!prefersReduced) {
-          updateParallax();
-          updateScrollScale();
-          updateLoopSpeedOnScroll();
-        }
-        ticking = false;
-      });
-    }
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      updateParallax();
+      updateScrollScale();
+      ticking = false;
+    });
   }
 
   function updateParallax() {
+    if (prefersReduced) return;
     var viewportCenter = window.innerHeight * 0.5;
 
     parallaxEls.forEach(function (el) {
@@ -104,6 +172,7 @@
   }
 
   function updateScrollScale() {
+    if (prefersReduced) return;
     scaleEls.forEach(function (el) {
       var maxScale = parseFloat(el.getAttribute("data-scroll-scale")) || 1.1;
       var rect = el.getBoundingClientRect();
@@ -124,21 +193,23 @@
       menu.classList.toggle("is-open", !open);
       document.body.classList.toggle("is-menu-open", !open);
     });
-
-    menu.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        toggle.setAttribute("aria-expanded", "false");
-        menu.classList.remove("is-open");
-        document.body.classList.remove("is-menu-open");
-      });
-    });
   }
 
-  bindSmoothNav();
-  initLoopTracks();
+  bindAnchorLinks();
+  initAutoLoops();
+  initHorizontalCarousels();
+  getHeaderOffset();
 
   window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("load", initLoopTracks);
+  window.addEventListener(
+    "resize",
+    function () {
+      getHeaderOffset();
+      onScroll();
+    },
+    { passive: true }
+  );
+
   onScroll();
 
   var reveals = document.querySelectorAll(".reveal");

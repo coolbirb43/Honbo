@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=8" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -26,12 +26,14 @@
         <span class="nav__toggle-bar"></span>
         <span class="sr-only">Menu</span>
       </button>
-      <ul class="nav__menu" id="nav-menu">
-        <li><a href="#locations">Locations 分店</a></li>
-        <li><a href="#bestsellers">Best Sellers 招牌</a></li>
-        <li><a href="#origin">Our Story 故事</a></li>
-        <li><a href="#catering">Catering 到會</a></li>
-      </ul>
+      <div class="nav__menu-panel" id="nav-menu">
+        <ul class="nav__menu">
+          <li><a href="#locations">Locations 分店</a></li>
+          <li><a href="#bestsellers">Best Sellers 招牌</a></li>
+          <li><a href="#origin">Our Story 故事</a></li>
+          <li><a href="#catering">Catering 到會</a></li>
+        </ul>
+      </div>
     </nav>
   </header>
 
@@ -44,8 +46,11 @@
       <div class="hero-parallax__content reveal">
         <p class="hero-parallax__eyebrow">Est. 2017 · 灣仔太陽街</p>
         <h1 class="hero-parallax__title" id="hero-title">
-          <span class="hero-parallax__script">Honbo</span>
-          <span class="hero-parallax__zh">漢堡</span>
+          <span class="hero-parallax__title-stack">
+            <img class="hero-parallax__icon" src="assets/honboicontransparent.png" alt="" width="480" height="480" aria-hidden="true" />
+            <span class="hero-parallax__script">Honbo</span>
+            <span class="hero-parallax__zh">漢堡</span>
+          </span>
         </h1>
         <p class="hero-parallax__tagline">Hong Kong's best smash burgers<br />新鮮牛肉，即叫即壓 · 香港最好食嘅壓扁漢堡</p>
         <a class="btn btn--light" href="#locations">Find us 搵我哋</a>
@@ -148,9 +153,10 @@
     <section class="gallery-section" id="gallery" aria-label="Food gallery">
       <div class="section-block__header reveal">
         <p class="section-block__label">In the kitchen · 廚房日常</p>
+        <p class="carousel-hint">Swipe or scroll sideways · 左右滑動瀏覽</p>
       </div>
-      <div class="loop-track loop-track--gallery" data-loop-speed="38">
-        <div class="loop-track__inner">
+      <div class="horizontal-carousel loop-track--gallery" tabindex="0">
+        <div class="horizontal-carousel__track">
           <div class="loop-track__set">
             <figure class="gallery-card"><img src="assets/photos/group-flatlay.jpg" alt="Honbo burgers and fries flat lay" loading="lazy" /></figure>
             <figure class="gallery-card"><img src="assets/photos/spread.jpg" alt="Honbo burger spread" loading="lazy" /></figure>
@@ -173,9 +179,10 @@
       <div class="section-block__header reveal">
         <h2 class="section-block__title" id="bestsellers-heading">Best Sellers</h2>
         <p class="section-block__subtitle">招牌漢堡 · Illustrated menu favourites</p>
+        <p class="carousel-hint">Swipe or scroll sideways · 左右滑動瀏覽</p>
       </div>
-      <div class="loop-track loop-track--bestsellers" data-loop-speed="42">
-        <div class="loop-track__inner">
+      <div class="horizontal-carousel loop-track--bestsellers" tabindex="0">
+        <div class="horizontal-carousel__track">
           <div class="loop-track__set">
             <article class="menu-card">
               <div class="menu-card__art"><img src="assets/Honbo.PNG" alt="Honbo signature burger" loading="lazy" /></div>
@@ -277,7 +284,9 @@
           <li>Minimum order applies · 設最低訂購量</li>
           <li>48-hour advance booking · 建議提前 48 小時預訂</li>
         </ul>
-        <a class="btn btn--light" href="mailto:hello@honbo.hk?subject=Honbo%20Inquiry&amp;body=Hello%20Honbo%2C%0A%0AI%20would%20like%20to%20inquire%20about%3A%0A%0A">Inquire 查詢</a>
+        <div class="catering__cta">
+          <a class="btn btn--light" href="mailto:hello@honbo.hk?subject=Honbo%20Inquiry&amp;body=Hello%20Honbo%2C%0A%0AI%20would%20like%20to%20inquire%20about%3A%0A%0A">Inquire 查詢</a>
+        </div>
       </div>
     </section>
   </main>
@@ -288,6 +297,6 @@
     <p class="site-footer__copy">&copy; <span id="year"></span> Honbo Hong Kong</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=8"></script>
 </body>
 </html>

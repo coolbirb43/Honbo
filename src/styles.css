@@ -534,9 +534,9 @@ a:hover {
 
 .locations__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-md);
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
 }
 

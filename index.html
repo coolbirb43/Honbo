@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=8" />
+  <link rel="stylesheet" href="styles.css?v=9" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -26,14 +26,12 @@
         <span class="nav__toggle-bar"></span>
         <span class="sr-only">Menu</span>
       </button>
-      <div class="nav__menu-panel" id="nav-menu">
-        <ul class="nav__menu">
-          <li><a href="#locations">Locations 分店</a></li>
-          <li><a href="#bestsellers">Best Sellers 招牌</a></li>
-          <li><a href="#origin">Our Story 故事</a></li>
-          <li><a href="#catering">Catering 到會</a></li>
-        </ul>
-      </div>
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="#locations">Locations 分店</a></li>
+        <li><a href="#bestsellers">Best Sellers 招牌</a></li>
+        <li><a href="#origin">Our Story 故事</a></li>
+        <li><a href="#catering">Catering 到會</a></li>
+      </ul>
     </nav>
   </header>
 
@@ -43,7 +41,7 @@
         <img src="assets/photos/hero.jpg" alt="" />
       </div>
       <div class="hero-parallax__overlay" aria-hidden="true"></div>
-      <div class="hero-parallax__content reveal">
+      <div class="hero-parallax__content scrub" data-scrub="hero">
         <p class="hero-parallax__eyebrow">Est. 2017 · 灣仔太陽街</p>
         <h1 class="hero-parallax__title" id="hero-title">
           <span class="hero-parallax__title-stack">
@@ -82,18 +80,18 @@
     </div>
 
     <section class="locations" id="locations" aria-labelledby="locations-heading">
-      <div class="section-intro reveal">
+      <div class="section-intro scrub" data-scrub="fade-up">
         <h2 class="section-intro__title" id="locations-heading">Where to find us</h2>
         <p class="section-intro__subtitle">香港分店 · Eat in &amp; takeaway</p>
       </div>
 
       <article class="location-panel">
-        <div class="location-panel__media">
+        <div class="location-panel__media scrub" data-scrub="scale-in">
           <div class="location-panel__bg">
             <img src="assets/photos/location-wanchai.jpg" alt="Honbo Wan Chai burgers and fries" loading="lazy" />
           </div>
         </div>
-        <div class="location-panel__body reveal">
+        <div class="location-panel__body scrub" data-scrub="slide-right">
           <p class="location-panel__label">Flagship 總店</p>
           <h3 class="location-panel__name">Wan Chai <span>灣仔</span></h3>
           <p class="location-panel__service">EAT IN &amp; TAKEAWAY · 堂食及外賣</p>
@@ -119,12 +117,12 @@
       </article>
 
       <article class="location-panel location-panel--reverse">
-        <div class="location-panel__media">
+        <div class="location-panel__media scrub" data-scrub="scale-in">
           <div class="location-panel__bg">
             <img src="assets/photos/location-central.jpg" alt="Honbo Central burger close-up" loading="lazy" />
           </div>
         </div>
-        <div class="location-panel__body reveal">
+        <div class="location-panel__body scrub" data-scrub="slide-left">
           <p class="location-panel__label">Central 中環</p>
           <h3 class="location-panel__name">Lyndhurst Terrace <span>擺花街</span></h3>
           <p class="location-panel__service">EAT IN &amp; TAKEAWAY · 堂食及外賣</p>
@@ -151,7 +149,7 @@
     </section>
 
     <section class="gallery-section" id="gallery" aria-label="Food gallery">
-      <div class="section-block__header reveal">
+      <div class="section-block__header scrub" data-scrub="fade-up">
         <p class="section-block__label">In the kitchen · 廚房日常</p>
         <p class="carousel-hint">Swipe or scroll sideways · 左右滑動瀏覽</p>
       </div>
@@ -176,7 +174,7 @@
     </section>
 
     <section class="bestsellers-section" id="bestsellers" aria-labelledby="bestsellers-heading">
-      <div class="section-block__header reveal">
+      <div class="section-block__header scrub" data-scrub="fade-up">
         <h2 class="section-block__title" id="bestsellers-heading">Best Sellers</h2>
         <p class="section-block__subtitle">招牌漢堡 · Illustrated menu favourites</p>
         <p class="carousel-hint">Swipe or scroll sideways · 左右滑動瀏覽</p>
@@ -251,22 +249,22 @@
     <section class="origin" id="origin" aria-labelledby="origin-heading">
       <div class="origin__parallax-bg" data-parallax-speed="0.06" aria-hidden="true"></div>
       <div class="origin__inner">
-        <div class="section-intro section-intro--light reveal">
+        <div class="section-intro section-intro--light scrub" data-scrub="fade-up">
           <h2 class="section-intro__title" id="origin-heading">About Us</h2>
           <p class="section-intro__subtitle">我哋嘅故事 · Our Origin</p>
         </div>
         <div class="origin__grid">
-          <article class="origin__col reveal">
+          <article class="origin__col scrub" data-scrub="fade-up">
             <p>Born in 2017 on Sun Street, Wan Chai, Honbo is a home-grown Hong Kong burger joint that celebrates the simple things done right. We are a community-driven restaurant that focuses on honest, high-quality ingredients.</p>
           </article>
-          <article class="origin__col origin__col--zh reveal reveal--delay">
+          <article class="origin__col origin__col--zh scrub" data-scrub="fade-up" data-scrub-start="0.72">
             <p>2017 年喺灣仔太陽街開業，Honbo（漢堡）係土生土長嘅香港漢堡店，專注把簡單嘅嘢做好。我哋重視社區同誠實食材，唔玩花巧，只係做好一個經典漢堡。</p>
           </article>
-          <article class="origin__col reveal reveal--delay-2">
+          <article class="origin__col scrub" data-scrub="fade-up" data-scrub-start="0.55">
             <p>From our signature potato milk buns to our custom blend of double-gold medal winning beef — everything is handmade, smashed fresh, and served with pride.</p>
           </article>
         </div>
-        <p class="origin__note reveal">「Honbo」即係廣東話「漢堡」—— 一個好本地、好直接嘅名字。</p>
+        <p class="origin__note scrub" data-scrub="fade-up">「Honbo」即係廣東話「漢堡」—— 一個好本地、好直接嘅名字。</p>
       </div>
     </section>
 
@@ -275,7 +273,7 @@
         <img src="assets/photos/catering.jpg" alt="" />
       </div>
       <div class="catering__overlay"></div>
-      <div class="catering__content reveal">
+      <div class="catering__content scrub" data-scrub="scale-in">
         <h2 class="catering__title" id="catering-heading">Catering</h2>
         <p class="catering__subtitle">到會 · 派對 · 公司活動</p>
         <p>Bring Honbo to your next gathering — smash burgers, hand-cut fries, onion rings, and classic shakes, packed fresh across Hong Kong.</p>
@@ -297,6 +295,6 @@
     <p class="site-footer__copy">&copy; <span id="year"></span> Honbo Hong Kong</p>
   </footer>
 
-  <script src="script.js?v=8"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>

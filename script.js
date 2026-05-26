@@ -10,14 +10,81 @@
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var parallaxEls = document.querySelectorAll("[data-parallax-speed]");
   var scaleEls = document.querySelectorAll("[data-scroll-scale]");
+  var scrubEls = document.querySelectorAll(".scrub[data-scrub]");
   var smoothScrollActive = false;
   var ticking = false;
+
+  function clamp(n, min, max) {
+    return Math.min(max, Math.max(min, n));
+  }
+
+  function easeOutQuart(t) {
+    return 1 - Math.pow(1 - t, 4);
+  }
 
   function getHeaderOffset() {
     if (!header) return 72;
     var h = header.offsetHeight;
     document.documentElement.style.setProperty("--header-h", h + "px");
     return h;
+  }
+
+  function getScrubProgress(el) {
+    var rect = el.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var start = vh * parseFloat(el.getAttribute("data-scrub-start") || "0.9");
+    var end = vh * parseFloat(el.getAttribute("data-scrub-end") || "0.22");
+    var range = start - end;
+    if (range <= 0) return rect.top < end ? 1 : 0;
+    return clamp((start - rect.top) / range, 0, 1);
+  }
+
+  function applyScrub(el, progress) {
+    var type = el.getAttribute("data-scrub") || "fade-up";
+    var t = easeOutQuart(progress);
+
+    if (type === "hero") {
+      var heroProgress = clamp(1 - window.scrollY / (window.innerHeight * 0.85), 0, 1);
+      t = easeOutQuart(heroProgress);
+      el.style.opacity = String(t);
+      el.style.transform =
+        "translate3d(0, " + 32 * (1 - t) + "px, 0) scale(" + (0.94 + 0.06 * t) + ")";
+      return;
+    }
+
+    switch (type) {
+      case "fade-up":
+        el.style.opacity = String(t);
+        el.style.transform = "translate3d(0, " + 48 * (1 - t) + "px, 0)";
+        break;
+      case "slide-right":
+        el.style.opacity = String(t);
+        el.style.transform = "translate3d(" + -56 * (1 - t) + "px, " + 24 * (1 - t) + "px, 0)";
+        break;
+      case "slide-left":
+        el.style.opacity = String(t);
+        el.style.transform = "translate3d(" + 56 * (1 - t) + "px, " + 24 * (1 - t) + "px, 0)";
+        break;
+      case "scale-in":
+        el.style.opacity = String(t);
+        el.style.transform = "scale(" + (0.86 + 0.14 * t) + ")";
+        break;
+      case "clip-up":
+        el.style.opacity = String(t);
+        el.style.clipPath = "inset(" + (100 - t * 100) + "% 0 0 0)";
+        el.style.transform = "translate3d(0, " + 20 * (1 - t) + "px, 0)";
+        break;
+      default:
+        el.style.opacity = String(t);
+        el.style.transform = "translate3d(0, " + 40 * (1 - t) + "px, 0)";
+    }
+  }
+
+  function updateScrollScrub() {
+    if (prefersReduced) return;
+    scrubEls.forEach(function (el) {
+      applyScrub(el, getScrubProgress(el));
+    });
   }
 
   function initAutoLoops() {
@@ -63,32 +130,48 @@
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   }
 
-  function smoothScrollToY(targetY) {
+  function runScrollFrame() {
+    if (header) {
+      header.classList.toggle("is-scrolled", window.scrollY > 60);
+    }
+    updateParallax();
+    updateScrollScale();
+    updateScrollScrub();
+  }
+
+  function smoothScrollToY(targetY, onStep) {
     var startY = window.pageYOffset;
     var distance = targetY - startY;
 
     if (Math.abs(distance) < 2) return;
 
-    if (prefersReduced || smoothScrollActive) {
+    if (prefersReduced) {
       window.scrollTo(0, targetY);
+      runScrollFrame();
       return;
     }
 
+    if (smoothScrollActive) return;
     smoothScrollActive = true;
-    var duration = Math.min(1000, Math.max(450, Math.abs(distance) * 0.55));
+
+    var duration = Math.min(2800, Math.max(650, Math.abs(distance) * 0.9));
     var startTime = null;
 
     function step(time) {
       if (!startTime) startTime = time;
       var elapsed = time - startTime;
       var progress = Math.min(elapsed / duration, 1);
+      var eased = easeInOutCubic(progress);
 
-      window.scrollTo(0, startY + distance * easeInOutCubic(progress));
+      window.scrollTo(0, startY + distance * eased);
+      runScrollFrame();
+      if (typeof onStep === "function") onStep();
 
       if (progress < 1) {
         requestAnimationFrame(step);
       } else {
         smoothScrollActive = false;
+        runScrollFrame();
       }
     }
 
@@ -102,6 +185,13 @@
     document.body.classList.remove("is-menu-open");
   }
 
+  function openMobileMenu() {
+    if (!toggle || !menu) return;
+    toggle.setAttribute("aria-expanded", "true");
+    menu.classList.add("is-open");
+    document.body.classList.add("is-menu-open");
+  }
+
   function scrollToTarget(target) {
     var offset = getHeaderOffset();
     var top =
@@ -111,49 +201,40 @@
 
   function bindAnchorLinks() {
     document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-      link.addEventListener(
-        "click",
-        function (e) {
-          var hash = link.getAttribute("href");
-          if (!hash || hash === "#") return;
+      link.addEventListener("click", function (e) {
+        var hash = link.getAttribute("href");
+        if (!hash || hash === "#") return;
 
-          if (hash === "#top") {
-            e.preventDefault();
-            closeMobileMenu();
-            var topDelay = window.innerWidth <= 768 ? 320 : 0;
-            setTimeout(function () {
-              smoothScrollToY(0);
-            }, topDelay);
-            return;
-          }
-
-          var id = hash.slice(1);
-          var target = document.getElementById(id);
-          if (!target) return;
-
+        if (hash === "#top") {
           e.preventDefault();
           closeMobileMenu();
-
-          var delay = window.innerWidth <= 768 ? 320 : 50;
           setTimeout(function () {
-            scrollToTarget(target);
-          }, delay);
-        },
-        false
-      );
+            smoothScrollToY(0);
+          }, window.innerWidth <= 768 ? 280 : 0);
+          return;
+        }
+
+        var id = hash.slice(1);
+        var target = document.getElementById(id);
+        if (!target) return;
+
+        e.preventDefault();
+        closeMobileMenu();
+
+        var delay = window.innerWidth <= 768 ? 280 : 40;
+        setTimeout(function () {
+          scrollToTarget(target);
+        }, delay);
+      });
     });
   }
 
   function onScroll() {
-    if (header) {
-      header.classList.toggle("is-scrolled", window.scrollY > 60);
-    }
-
+    if (smoothScrollActive) return;
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(function () {
-      updateParallax();
-      updateScrollScale();
+      runScrollFrame();
       ticking = false;
     });
   }
@@ -187,11 +268,20 @@
   }
 
   if (toggle && menu) {
-    toggle.addEventListener("click", function () {
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
       var open = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!open));
-      menu.classList.toggle("is-open", !open);
-      document.body.classList.toggle("is-menu-open", !open);
+      if (open) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!menu.classList.contains("is-open")) return;
+      if (menu.contains(e.target) || toggle.contains(e.target)) return;
+      closeMobileMenu();
     });
   }
 
@@ -200,40 +290,23 @@
   initHorizontalCarousels();
   getHeaderOffset();
 
+  if (prefersReduced) {
+    scrubEls.forEach(function (el) {
+      el.style.opacity = "1";
+      el.style.transform = "none";
+    });
+  }
+
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener(
     "resize",
     function () {
       getHeaderOffset();
-      onScroll();
+      runScrollFrame();
     },
     { passive: true }
   );
 
-  onScroll();
-
-  var reveals = document.querySelectorAll(".reveal");
-  if (reveals.length) {
-    if (prefersReduced) {
-      reveals.forEach(function (el) {
-        el.classList.add("is-visible");
-      });
-    } else {
-      var observer = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { root: null, rootMargin: "0px 0px -5% 0px", threshold: 0.08 }
-      );
-
-      reveals.forEach(function (el) {
-        observer.observe(el);
-      });
-    }
-  }
+  window.addEventListener("load", runScrollFrame);
+  runScrollFrame();
 })();

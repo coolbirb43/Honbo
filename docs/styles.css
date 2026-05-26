@@ -27,8 +27,12 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scroll-padding-top: var(--header-h);
+}
+
+body.is-scroll-animating {
+  overflow-anchor: none;
 }
 
 section[id],

@@ -9,12 +9,107 @@
   var menu = document.getElementById("nav-menu");
   var heroBg = document.querySelector(".hero-parallax__bg");
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var scrollAnimId = null;
+  var isScrollAnimating = false;
 
   function getHeaderOffset() {
     if (!header) return 72;
     var h = header.offsetHeight;
     document.documentElement.style.setProperty("--header-h", h + "px");
     return h;
+  }
+
+  function getTargetTop(target) {
+    return Math.max(
+      0,
+      target.getBoundingClientRect().top +
+        window.pageYOffset -
+        getHeaderOffset()
+    );
+  }
+
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function updateHeader() {
+    if (header) {
+      header.classList.toggle("is-scrolled", window.scrollY > 60);
+    }
+  }
+
+  function updateHeroParallax() {
+    if (prefersReduced || !heroBg) return;
+    var y = window.scrollY;
+    var vh = window.innerHeight;
+    var shift = y * 0.32;
+    var scale = 1 + Math.min(y / vh, 1) * 0.12;
+    heroBg.style.transform =
+      "translate3d(0, " + shift + "px, 0) scale(" + scale + ")";
+  }
+
+  function runScrollEffects() {
+    updateHeader();
+    updateHeroParallax();
+  }
+
+  function cancelScrollAnimation() {
+    if (scrollAnimId !== null) {
+      cancelAnimationFrame(scrollAnimId);
+      scrollAnimId = null;
+    }
+    isScrollAnimating = false;
+    document.body.classList.remove("is-scroll-animating");
+  }
+
+  /**
+   * Animated scroll through the page — you see content pass by with parallax
+   * updating until you land on the target section.
+   */
+  function animatedScrollTo(target) {
+    if (!target) return;
+
+    var targetY = getTargetTop(target);
+    var startY = window.pageYOffset;
+    var distance = targetY - startY;
+
+    if (Math.abs(distance) < 2) {
+      runScrollEffects();
+      return;
+    }
+
+    if (prefersReduced) {
+      window.scrollTo(0, targetY);
+      runScrollEffects();
+      return;
+    }
+
+    cancelScrollAnimation();
+    isScrollAnimating = true;
+    document.body.classList.add("is-scroll-animating");
+
+    var duration = Math.min(3200, Math.max(1000, Math.abs(distance) * 1.15));
+    var startTime = null;
+
+    function step(time) {
+      if (!startTime) startTime = time;
+      var elapsed = time - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = easeInOutCubic(progress);
+
+      window.scrollTo(0, startY + distance * eased);
+      runScrollEffects();
+
+      if (progress < 1) {
+        scrollAnimId = requestAnimationFrame(step);
+      } else {
+        window.scrollTo(0, targetY);
+        runScrollEffects();
+        cancelScrollAnimation();
+      }
+    }
+
+    scrollAnimId = requestAnimationFrame(step);
   }
 
   function initAutoLoops() {
@@ -70,36 +165,23 @@
     document.body.classList.add("is-menu-open");
   }
 
-  /** Smooth scroll to a section (navbar, logo, hero CTA). */
-  function scrollToSection(target) {
-    if (!target) return;
-
-    var behavior = prefersReduced ? "auto" : "smooth";
-
-    if (typeof target.scrollIntoView === "function") {
-      target.scrollIntoView({ behavior: behavior, block: "start" });
-      return;
-    }
-
-    var top =
-      target.getBoundingClientRect().top +
-      window.pageYOffset -
-      getHeaderOffset();
-    window.scrollTo({ top: Math.max(0, top), behavior: behavior });
-  }
-
   function bindNavScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(function (link) {
       link.addEventListener("click", function (e) {
         var hash = link.getAttribute("href");
         if (!hash || hash === "#") return;
 
+        var delay =
+          menu && menu.classList.contains("is-open") && window.innerWidth <= 768
+            ? 260
+            : 0;
+
         if (hash === "#top") {
           e.preventDefault();
           closeMobileMenu();
           window.setTimeout(function () {
-            scrollToSection(document.getElementById("top") || document.body);
-          }, menu && menu.classList.contains("is-open") ? 250 : 0);
+            animatedScrollTo(document.getElementById("top") || document.body);
+          }, delay);
           return;
         }
 
@@ -109,35 +191,16 @@
         e.preventDefault();
         closeMobileMenu();
 
-        window.setTimeout(
-          function () {
-            scrollToSection(target);
-          },
-          menu && window.innerWidth <= 768 ? 250 : 0
-        );
+        window.setTimeout(function () {
+          animatedScrollTo(target);
+        }, delay);
       });
     });
   }
 
-  function updateHeader() {
-    if (header) {
-      header.classList.toggle("is-scrolled", window.scrollY > 60);
-    }
-  }
-
-  /** Subtle hero parallax while the page scrolls (including nav jumps). */
-  function updateHeroParallax() {
-    if (prefersReduced || !heroBg) return;
-    var y = window.scrollY;
-    var shift = y * 0.28;
-    var scale = 1 + Math.min(y / window.innerHeight, 1) * 0.1;
-    heroBg.style.transform =
-      "translate3d(0, " + shift + "px, 0) scale(" + scale + ")";
-  }
-
   function onScroll() {
-    updateHeader();
-    updateHeroParallax();
+    if (isScrollAnimating) return;
+    runScrollEffects();
   }
 
   if (toggle && menu) {
@@ -164,6 +227,6 @@
 
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", getHeaderOffset, { passive: true });
-  window.addEventListener("load", onScroll);
-  onScroll();
+  window.addEventListener("load", runScrollEffects);
+  runScrollEffects();
 })();

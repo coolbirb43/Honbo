@@ -392,8 +392,20 @@ a {
 .loop-track__inner {
   display: flex;
   width: max-content;
-  animation: loop-scroll linear infinite;
+  animation: loop-scroll 30s linear infinite;
   will-change: transform;
+}
+
+.loop-track--marquee .loop-track__inner {
+  animation-duration: 22s;
+}
+
+.loop-track--gallery .loop-track__inner {
+  animation-duration: 38s;
+}
+
+.loop-track--bestsellers .loop-track__inner {
+  animation-duration: 42s;
 }
 
 .loop-track:hover .loop-track__inner {

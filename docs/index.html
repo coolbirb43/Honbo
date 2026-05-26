@@ -28,7 +28,7 @@
       </button>
       <ul class="nav__menu" id="nav-menu">
         <li><a href="#locations">Locations 分店</a></li>
-        <li><a href="#burgers">Burgers 漢堡</a></li>
+        <li><a href="#bestsellers">Best Sellers 招牌</a></li>
         <li><a href="#origin">Our Story 故事</a></li>
         <li><a href="#catering">Catering 到會</a></li>
       </ul>
@@ -37,10 +37,10 @@
 
   <main id="main">
     <section class="hero-parallax" aria-labelledby="hero-title">
-      <div class="hero-parallax__bg" aria-hidden="true"></div>
-      <div class="hero-parallax__layer hero-parallax__layer--burger" data-parallax-speed="0.22">
-        <img src="assets/Honbo.PNG" alt="" aria-hidden="true" />
+      <div class="hero-parallax__bg" data-scroll-scale="1.12" aria-hidden="true">
+        <img src="assets/photos/hero.jpg" alt="" />
       </div>
+      <div class="hero-parallax__overlay" aria-hidden="true"></div>
       <div class="hero-parallax__content reveal">
         <p class="hero-parallax__eyebrow">Est. 2017 · 灣仔太陽街</p>
         <h1 class="hero-parallax__title" id="hero-title">
@@ -62,6 +62,19 @@
       </div>
     </section>
 
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Smash burgers · 壓扁漢堡 ·</span>
+        <span>Potato milk bun · 薯仔包 ·</span>
+        <span>Hand-ground daily · 即日手打 ·</span>
+        <span>Wan Chai · Central · 灣仔 · 中環 ·</span>
+        <span>Smash burgers · 壓扁漢堡 ·</span>
+        <span>Potato milk bun · 薯仔包 ·</span>
+        <span>Hand-ground daily · 即日手打 ·</span>
+        <span>Wan Chai · Central · 灣仔 · 中環 ·</span>
+      </div>
+    </div>
+
     <section class="locations" id="locations" aria-labelledby="locations-heading">
       <div class="section-intro reveal">
         <h2 class="section-intro__title" id="locations-heading">Where to find us</h2>
@@ -70,8 +83,8 @@
 
       <article class="location-panel">
         <div class="location-panel__media">
-          <div class="location-panel__parallax" data-parallax-speed="0.18">
-            <img src="assets/Honbo15.PNG" alt="Honbo Wan Chai smash burger" loading="lazy" />
+          <div class="location-panel__bg" data-scroll-scale="1.08">
+            <img src="assets/photos/location-wanchai.jpg" alt="" loading="lazy" />
           </div>
         </div>
         <div class="location-panel__body reveal">
@@ -101,8 +114,8 @@
 
       <article class="location-panel location-panel--reverse">
         <div class="location-panel__media">
-          <div class="location-panel__parallax" data-parallax-speed="0.18">
-            <img src="assets/Gold Standard.PNG" alt="Honbo Central double cheeseburger" loading="lazy" />
+          <div class="location-panel__bg" data-scroll-scale="1.08">
+            <img src="assets/photos/location-central.jpg" alt="" loading="lazy" />
           </div>
         </div>
         <div class="location-panel__body reveal">
@@ -131,62 +144,116 @@
       </article>
     </section>
 
-    <section class="gallery-parallax" aria-hidden="true">
-      <div class="gallery-parallax__track">
-        <div class="gallery-parallax__item" data-parallax-speed="0.12">
-          <img src="assets/Honbo20.PNG" alt="" loading="lazy" />
-        </div>
-        <div class="gallery-parallax__item" data-parallax-speed="-0.08">
-          <img src="assets/Hamburger.PNG" alt="" loading="lazy" />
-        </div>
-        <div class="gallery-parallax__item" data-parallax-speed="0.1">
-          <img src="assets/Cheeseburger.PNG" alt="" loading="lazy" />
-        </div>
+    <section class="gallery-scroll" aria-label="Food gallery">
+      <div class="gallery-scroll__intro reveal">
+        <p class="gallery-scroll__label">In the kitchen · 廚房日常</p>
+      </div>
+      <div class="gallery-scroll__track" id="gallery-track">
+        <figure class="gallery-scroll__item" data-scroll-scale="1.06">
+          <img src="assets/photos/group-flatlay.jpg" alt="Honbo burgers and fries flat lay" loading="lazy" />
+        </figure>
+        <figure class="gallery-scroll__item" data-scroll-scale="1.06">
+          <img src="assets/photos/spread.jpg" alt="Honbo burger spread" loading="lazy" />
+        </figure>
+        <figure class="gallery-scroll__item" data-scroll-scale="1.06">
+          <img src="assets/photos/gallery-1.jpg" alt="Honbo smash burgers" loading="lazy" />
+        </figure>
+        <figure class="gallery-scroll__item" data-scroll-scale="1.06">
+          <img src="assets/photos/gallery-2.jpg" alt="Honbo food spread" loading="lazy" />
+        </figure>
+        <figure class="gallery-scroll__item" data-scroll-scale="1.06">
+          <img src="assets/photos/gallery-3.jpg" alt="Honbo burgers and sides" loading="lazy" />
+        </figure>
       </div>
     </section>
 
-    <section class="burgers" id="burgers" aria-labelledby="burgers-heading">
-      <div class="section-intro reveal">
-        <h2 class="section-intro__title" id="burgers-heading">Burgers</h2>
-        <p class="section-intro__subtitle">招牌漢堡 · No-frills, all flavour</p>
+    <section class="bestsellers-pin" id="bestsellers" aria-labelledby="bestsellers-heading">
+      <div class="bestsellers-pin__sticky">
+        <div class="bestsellers-pin__header reveal">
+          <h2 class="bestsellers-pin__title" id="bestsellers-heading">Best Sellers</h2>
+          <p class="bestsellers-pin__subtitle">招牌漢堡 · Illustrated menu favourites</p>
+          <p class="bestsellers-pin__hint" aria-hidden="true">Scroll to explore →</p>
+        </div>
+        <div class="bestsellers-pin__viewport">
+          <div class="bestsellers-pin__track" id="bestsellers-track">
+            <article class="menu-card">
+              <div class="menu-card__art">
+                <img src="assets/Honbo.PNG" alt="Honbo signature burger illustration" loading="lazy" />
+              </div>
+              <div class="menu-card__info">
+                <h3>Honbo <span>漢堡</span></h3>
+                <p>Our signature smash — thin patties, house sauce, American cheese.</p>
+                <span class="price-badge">98</span>
+              </div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-card__art">
+                <img src="assets/Honbo15.PNG" alt="Honbo 1.5 illustration" loading="lazy" />
+              </div>
+              <div class="menu-card__info">
+                <h3>Honbo 1.5 <span>漢堡 1.5</span></h3>
+                <p>Extra patty, same signature style — the crowd favourite.</p>
+                <span class="price-badge">118</span>
+              </div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-card__art">
+                <img src="assets/Honbo20.PNG" alt="Honbo 2.0 illustration" loading="lazy" />
+              </div>
+              <div class="menu-card__info">
+                <h3>Honbo 2.0 <span>漢堡 2.0</span></h3>
+                <p>Four crispy-edged patties, cheese, pickles, onion, house sauce.</p>
+                <span class="price-badge">158</span>
+              </div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-card__art">
+                <img src="assets/Gold Standard.PNG" alt="Double cheeseburger illustration" loading="lazy" />
+              </div>
+              <div class="menu-card__info">
+                <h3>Double Cheeseburger <span>雙層芝士堡</span></h3>
+                <p>Thick patties, classic style — 4 oz &amp; 6 oz options.</p>
+                <span class="price-badge">158</span>
+              </div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-card__art">
+                <img src="assets/Cheeseburger.PNG" alt="Cheeseburger illustration" loading="lazy" />
+              </div>
+              <div class="menu-card__info">
+                <h3>Cheeseburger <span>芝士堡</span></h3>
+                <p>Traditional thick patty, American cheese, done right.</p>
+                <span class="price-badge">108</span>
+              </div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-card__art">
+                <img src="assets/TeriyakiChickenBurger.PNG" alt="Teriyaki burger illustration" loading="lazy" />
+              </div>
+              <div class="menu-card__info">
+                <h3>Teriyaki Burger <span>照燒漢堡</span></h3>
+                <p>Sweet, savoury, smashed to order — local twist.</p>
+                <span class="price-badge">118</span>
+              </div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-card__art">
+                <img src="assets/Hamburger.PNG" alt="Hamburger illustration" loading="lazy" />
+              </div>
+              <div class="menu-card__info">
+                <h3>Hamburger <span>純肉漢堡</span></h3>
+                <p>No cheese, all beef — for the purist.</p>
+                <span class="price-badge">98</span>
+              </div>
+            </article>
+          </div>
+        </div>
+        <p class="bestsellers-pin__footnote">Prices in HKD · 價錢以港元為準 · Full menu in-store</p>
       </div>
-      <div class="burgers__scroll">
-        <article class="burger-card reveal">
-          <div class="burger-card__img-wrap">
-            <img src="assets/Honbo15.PNG" alt="Honbo 1.5 smash burger" loading="lazy" />
-          </div>
-          <div class="burger-card__info">
-            <h3>Honbo 1.5 <span>漢堡 1.5</span></h3>
-            <p>Thin patties, house sauce, American cheese.</p>
-            <span class="price-badge">118</span>
-          </div>
-        </article>
-        <article class="burger-card reveal reveal--delay">
-          <div class="burger-card__img-wrap">
-            <img src="assets/Gold Standard.PNG" alt="Double cheeseburger" loading="lazy" />
-          </div>
-          <div class="burger-card__info">
-            <h3>Double Cheeseburger <span>雙層芝士堡</span></h3>
-            <p>Thick patties, classic style — 4 oz &amp; 6 oz.</p>
-            <span class="price-badge">158</span>
-          </div>
-        </article>
-        <article class="burger-card reveal reveal--delay-2">
-          <div class="burger-card__img-wrap">
-            <img src="assets/TeriyakiChickenBurger.PNG" alt="Teriyaki burger" loading="lazy" />
-          </div>
-          <div class="burger-card__info">
-            <h3>Teriyaki Burger <span>照燒漢堡</span></h3>
-            <p>Sweet, savoury, smashed to order.</p>
-            <span class="price-badge">118</span>
-          </div>
-        </article>
-      </div>
-      <p class="burgers__footnote reveal">Prices in HKD · 價錢以港元為準</p>
     </section>
 
     <section class="origin" id="origin" aria-labelledby="origin-heading">
-      <div class="origin__parallax-bg" data-parallax-speed="0.08" aria-hidden="true"></div>
+      <div class="origin__parallax-bg" data-parallax-speed="0.06" aria-hidden="true"></div>
       <div class="origin__inner">
         <div class="section-intro section-intro--light reveal">
           <h2 class="section-intro__title" id="origin-heading">About Us</h2>
@@ -208,8 +275,8 @@
     </section>
 
     <section class="catering" id="catering" aria-labelledby="catering-heading">
-      <div class="catering__parallax" data-parallax-speed="0.15" aria-hidden="true">
-        <img src="assets/Cheeseburger.PNG" alt="" />
+      <div class="catering__bg" data-scroll-scale="1.1" aria-hidden="true">
+        <img src="assets/photos/catering.jpg" alt="" />
       </div>
       <div class="catering__overlay"></div>
       <div class="catering__content reveal">

@@ -1,4 +1,4 @@
-/* Honbo v2 — Burger & Beyond layout, Honbo brand identity */
+/* Honbo v2 — editorial scroll, photo backgrounds, illustrated best sellers */
 :root {
   --honbo-navy: #1a3644;
   --honbo-navy-dark: #122630;
@@ -16,7 +16,8 @@
   --space-lg: 2.5rem;
   --space-xl: clamp(3rem, 8vw, 5rem);
   --radius: 12px;
-  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition: 0.4s var(--ease-out);
 }
 
 *,
@@ -38,6 +39,10 @@ body {
   background: var(--honbo-white);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+body.is-menu-open {
+  overflow: hidden;
 }
 
 img {
@@ -79,7 +84,7 @@ a {
   top: var(--space-sm);
 }
 
-/* Header — transparent over hero, solid on scroll */
+/* Header */
 .site-header {
   position: fixed;
   top: 0;
@@ -167,10 +172,6 @@ a {
   color: var(--honbo-navy);
 }
 
-.nav__menu a:hover {
-  opacity: 0.75;
-}
-
 .nav__toggle {
   display: none;
   flex-direction: column;
@@ -220,7 +221,6 @@ a {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  border-radius: 0;
   border: 2px solid var(--honbo-navy);
   transition: var(--transition);
   cursor: pointer;
@@ -257,7 +257,7 @@ a {
   border-color: var(--honbo-cheese);
 }
 
-/* Hero parallax */
+/* Hero — real food photo background */
 .hero-parallax {
   position: relative;
   display: flex;
@@ -273,28 +273,27 @@ a {
 
 .hero-parallax__bg {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(160deg, var(--honbo-navy-dark) 0%, var(--honbo-navy) 45%, #234a5c 100%);
+  inset: -8%;
   z-index: 0;
-}
-
-.hero-parallax__layer {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  pointer-events: none;
   will-change: transform;
 }
 
-.hero-parallax__layer img {
-  width: min(85vw, 560px);
-  max-height: 70vh;
-  object-fit: contain;
-  opacity: 0.35;
-  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.3));
+.hero-parallax__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-parallax__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 38, 48, 0.55) 0%,
+    rgba(18, 38, 48, 0.35) 45%,
+    rgba(18, 38, 48, 0.75) 100%
+  );
 }
 
 .hero-parallax__content {
@@ -309,7 +308,7 @@ a {
   text-transform: uppercase;
   font-size: 0.8rem;
   margin: 0 0 var(--space-sm);
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .hero-parallax__title {
@@ -322,6 +321,7 @@ a {
   font-family: var(--font-script);
   font-size: clamp(3.5rem, 14vw, 8rem);
   font-weight: 400;
+  text-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
 }
 
 .hero-parallax__zh {
@@ -377,7 +377,7 @@ a {
   }
 }
 
-/* Intro strip */
+/* Intro */
 .intro {
   padding: var(--space-xl) clamp(1rem, 5vw, 3rem);
   background: var(--honbo-cream);
@@ -389,15 +389,48 @@ a {
   font-size: clamp(2rem, 6vw, 3.5rem);
   font-weight: 400;
   margin: 0 0 var(--space-xs);
-  color: var(--honbo-navy);
 }
 
 .intro__subtitle {
   font-family: var(--font-subtitle);
   font-size: clamp(0.95rem, 2.5vw, 1.25rem);
   margin: 0;
-  color: var(--honbo-navy);
   opacity: 0.9;
+}
+
+/* Marquee — portfolio-style ticker */
+.marquee {
+  overflow: hidden;
+  background: var(--honbo-navy);
+  color: var(--honbo-white);
+  padding: 0.85rem 0;
+  border-block: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  gap: 2.5rem;
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
+.marquee__track span {
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  white-space: nowrap;
+  opacity: 0.9;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* Section intros */
@@ -416,7 +449,6 @@ a {
   font-size: clamp(2.25rem, 7vw, 4rem);
   font-weight: 400;
   margin: 0;
-  text-transform: capitalize;
 }
 
 .section-intro__subtitle {
@@ -425,7 +457,7 @@ a {
   margin: var(--space-xs) 0 0;
 }
 
-/* Location panels — B&B style split sections */
+/* Location panels — photo backgrounds */
 .location-panel {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -443,23 +475,19 @@ a {
 .location-panel__media {
   position: relative;
   overflow: hidden;
-  background: var(--honbo-navy-dark);
   min-height: 320px;
 }
 
-.location-panel__parallax {
+.location-panel__bg {
   position: absolute;
-  inset: -15% 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  inset: -10%;
   will-change: transform;
 }
 
-.location-panel__parallax img {
-  width: min(90%, 420px);
-  object-fit: contain;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.35));
+.location-panel__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .location-panel__body {
@@ -533,89 +561,163 @@ a {
   border: 0;
 }
 
-/* Gallery parallax band */
-.gallery-parallax {
-  padding: var(--space-xl) 0;
+/* Horizontal food gallery scroll */
+.gallery-scroll {
+  padding: var(--space-lg) 0 var(--space-xl);
   background: var(--honbo-cream);
   overflow: hidden;
 }
 
-.gallery-parallax__track {
-  display: flex;
-  gap: clamp(1rem, 3vw, 2rem);
-  padding: 0 clamp(1rem, 4vw, 2rem);
-  justify-content: center;
-  flex-wrap: wrap;
+.gallery-scroll__intro {
+  padding: 0 clamp(1rem, 5vw, 3rem) var(--space-md);
 }
 
-.gallery-parallax__item {
-  flex: 1 1 240px;
-  max-width: 340px;
+.gallery-scroll__label {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  margin: 0;
+  opacity: 0.65;
+}
+
+.gallery-scroll__track {
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  padding: 0 clamp(1rem, 5vw, 3rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: clamp(1rem, 5vw, 3rem);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.gallery-scroll__track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-scroll__item {
+  flex: 0 0 min(88vw, 520px);
+  margin: 0;
+  scroll-snap-align: start;
+  overflow: hidden;
+  border-radius: var(--radius);
+  aspect-ratio: 4 / 3;
   will-change: transform;
 }
 
-.gallery-parallax__item img {
+.gallery-scroll__item img {
   width: 100%;
-  max-height: 280px;
-  object-fit: contain;
-  filter: drop-shadow(0 12px 24px rgba(26, 54, 68, 0.12));
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out);
 }
 
-/* Burgers horizontal scroll */
-.burgers {
-  padding-bottom: var(--space-xl);
+.gallery-scroll__item:hover img {
+  transform: scale(1.04);
+}
+
+/* Best Sellers — pinned horizontal scroll (portfolio-style) */
+.bestsellers-pin {
+  position: relative;
   background: var(--honbo-white);
 }
 
-.burgers__scroll {
+.bestsellers-pin__sticky {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
   display: flex;
-  gap: var(--space-md);
-  padding: 0 clamp(1rem, 4vw, 2rem) var(--space-md);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding: clamp(1rem, 4vw, 2rem);
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--header-h) + 1rem) 0 var(--space-lg);
+  overflow: hidden;
 }
 
-.burger-card {
-  flex: 0 0 min(85vw, 320px);
-  scroll-snap-align: start;
+.bestsellers-pin__header {
+  padding: 0 clamp(1rem, 5vw, 3rem) var(--space-md);
   text-align: center;
+}
+
+.bestsellers-pin__title {
+  font-family: var(--font-script);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 400;
+  margin: 0;
+  color: var(--honbo-navy);
+}
+
+.bestsellers-pin__subtitle {
+  font-family: var(--font-subtitle);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin: var(--space-xs) 0 0;
+}
+
+.bestsellers-pin__hint {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: var(--space-sm) 0 0;
+}
+
+.bestsellers-pin__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.bestsellers-pin__track {
+  display: flex;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: 0 clamp(1rem, 5vw, 3rem);
+  will-change: transform;
+  transition: transform 0.05s linear;
+}
+
+.menu-card {
+  flex: 0 0 min(78vw, 300px);
   background: var(--honbo-cream);
   border-radius: var(--radius);
   padding: var(--space-md);
   border: 1px solid rgba(26, 54, 68, 0.06);
+  text-align: center;
 }
 
-.burger-card__img-wrap {
+.menu-card__art {
   margin-bottom: var(--space-sm);
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.burger-card__img-wrap img {
-  max-height: 200px;
+.menu-card__art img {
+  max-height: 180px;
+  width: auto;
   margin: 0 auto;
   object-fit: contain;
+  filter: drop-shadow(0 8px 20px rgba(26, 54, 68, 0.12));
 }
 
-.burger-card__info h3 {
+.menu-card__info h3 {
   font-family: var(--font-script);
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 400;
   margin: 0 0 var(--space-xs);
 }
 
-.burger-card__info h3 span {
+.menu-card__info h3 span {
   display: block;
   font-family: var(--font-zh);
   font-size: 0.85rem;
   font-weight: 500;
 }
 
-.burger-card__info p {
-  font-size: 0.95rem;
+.menu-card__info p {
+  font-size: 0.9rem;
   margin: 0 0 var(--space-sm);
   opacity: 0.85;
+  line-height: 1.45;
 }
 
 .price-badge {
@@ -630,29 +732,54 @@ a {
   font-weight: 700;
 }
 
-.burgers__footnote {
+.bestsellers-pin__footnote {
   text-align: center;
   font-size: 0.85rem;
-  opacity: 0.65;
+  opacity: 0.6;
+  padding: var(--space-md) clamp(1rem, 5vw, 3rem) 0;
   letter-spacing: 0.04em;
-  padding: 0 var(--space-md);
 }
 
-@media (min-width: 960px) {
-  .burgers__scroll {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    overflow: visible;
-    max-width: 1200px;
-    margin: 0 auto;
+/* Mobile: native horizontal scroll for best sellers */
+@media (max-width: 900px) {
+  .bestsellers-pin__sticky {
+    position: relative;
+    min-height: auto;
   }
 
-  .burger-card {
-    flex: none;
+  .bestsellers-pin__viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: clamp(1rem, 5vw, 3rem);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .bestsellers-pin__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bestsellers-pin__track {
+    transform: none !important;
+    transition: none;
+  }
+
+  .menu-card {
+    scroll-snap-align: start;
+  }
+
+  .bestsellers-pin__hint {
+    display: block;
   }
 }
 
-/* Origin parallax section */
+@media (min-width: 901px) {
+  .bestsellers-pin__hint {
+    display: none;
+  }
+}
+
+/* Origin */
 .origin {
   position: relative;
   padding: var(--space-xl) clamp(1rem, 5vw, 3rem);
@@ -701,7 +828,7 @@ a {
   opacity: 0.95;
 }
 
-/* Catering parallax */
+/* Catering — photo background */
 .catering {
   position: relative;
   min-height: min(85vh, 640px);
@@ -714,26 +841,23 @@ a {
   text-align: center;
 }
 
-.catering__parallax {
+.catering__bg {
   position: absolute;
-  inset: -10% 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  inset: -12%;
   z-index: 0;
   will-change: transform;
 }
 
-.catering__parallax img {
-  width: min(70vw, 480px);
-  opacity: 0.25;
-  filter: blur(1px);
+.catering__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .catering__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(18, 38, 48, 0.88);
+  background: rgba(18, 38, 48, 0.82);
   z-index: 1;
 }
 
@@ -801,11 +925,11 @@ a {
   margin: var(--space-sm) 0 0;
 }
 
-/* Scroll reveal */
+/* Scroll reveals — editorial stagger */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.75s ease, transform 0.75s ease;
+  transform: translateY(40px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
 }
 
 .reveal.is-visible {
@@ -814,11 +938,26 @@ a {
 }
 
 .reveal--delay {
-  transition-delay: 0.12s;
+  transition-delay: 0.15s;
 }
 
 .reveal--delay-2 {
-  transition-delay: 0.24s;
+  transition-delay: 0.3s;
+}
+
+/* Split text slide (portfolio-style) */
+.reveal-split {
+  overflow: hidden;
+}
+
+.reveal-split .reveal-split__inner {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 0.9s var(--ease-out);
+}
+
+.reveal-split.is-visible .reveal-split__inner {
+  transform: translateY(0);
 }
 
 /* Responsive */
@@ -871,7 +1010,8 @@ a {
   }
 
   .location-panel__media {
-    min-height: 260px;
+    min-height: 50vw;
+    max-height: 360px;
   }
 
   .origin__grid {
@@ -885,8 +1025,13 @@ a {
     scroll-behavior: auto;
   }
 
+  .marquee__track {
+    animation: none;
+  }
+
   .reveal,
-  [data-parallax-speed] {
+  [data-parallax-speed],
+  [data-scroll-scale] {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
@@ -895,5 +1040,9 @@ a {
 
   .hero-parallax__scroll span {
     animation: none;
+  }
+
+  .bestsellers-pin__track {
+    transform: none !important;
   }
 }

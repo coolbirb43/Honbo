@@ -57,16 +57,24 @@
       </a>
     </section>
 
-    <div class="marquee" id="intro" aria-hidden="true">
-      <div class="marquee__track">
-        <span>Fresh beef · Smashed daily · 新鮮牛肉即壓 ·</span>
-        <span>Potato milk bun · 薯仔包 ·</span>
-        <span>Hand-ground daily · 即日手打 ·</span>
-        <span>Wan Chai · Central · 灣仔 · 中環 ·</span>
-        <span>Fresh beef · Smashed daily · 新鮮牛肉即壓 ·</span>
-        <span>Potato milk bun · 薯仔包 ·</span>
-        <span>Hand-ground daily · 即日手打 ·</span>
-        <span>Wan Chai · Central · 灣仔 · 中環 ·</span>
+    <div class="scroll-carousel scroll-carousel--marquee" id="intro" data-scroll-carousel>
+      <div class="scroll-carousel__sticky scroll-carousel__sticky--marquee">
+        <div class="marquee" aria-hidden="true">
+          <div class="marquee__track">
+            <div class="marquee__set">
+              <span>Fresh beef · Smashed daily · 新鮮牛肉即壓 ·</span>
+              <span>Potato milk bun · 薯仔包 ·</span>
+              <span>Hand-ground daily · 即日手打 ·</span>
+              <span>Wan Chai · Central · 灣仔 · 中環 ·</span>
+            </div>
+            <div class="marquee__set" aria-hidden="true">
+              <span>Fresh beef · Smashed daily · 新鮮牛肉即壓 ·</span>
+              <span>Potato milk bun · 薯仔包 ·</span>
+              <span>Hand-ground daily · 即日手打 ·</span>
+              <span>Wan Chai · Central · 灣仔 · 中環 ·</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -139,37 +147,41 @@
       </article>
     </section>
 
-    <section class="gallery-scroll" aria-label="Food gallery">
-      <div class="gallery-scroll__intro reveal">
-        <p class="gallery-scroll__label">In the kitchen · 廚房日常</p>
-      </div>
-      <div class="gallery-scroll__track" id="gallery-track">
-        <figure class="gallery-scroll__item" data-scroll-scale="1.06">
-          <img src="assets/photos/group-flatlay.jpg" alt="Honbo burgers and fries flat lay" loading="lazy" />
-        </figure>
-        <figure class="gallery-scroll__item" data-scroll-scale="1.06">
-          <img src="assets/photos/spread.jpg" alt="Honbo burger spread" loading="lazy" />
-        </figure>
-        <figure class="gallery-scroll__item" data-scroll-scale="1.06">
-          <img src="assets/photos/gallery-1.jpg" alt="Honbo smash burgers" loading="lazy" />
-        </figure>
-        <figure class="gallery-scroll__item" data-scroll-scale="1.06">
-          <img src="assets/photos/gallery-2.jpg" alt="Honbo food spread" loading="lazy" />
-        </figure>
-        <figure class="gallery-scroll__item" data-scroll-scale="1.06">
-          <img src="assets/photos/gallery-3.jpg" alt="Honbo burgers and sides" loading="lazy" />
-        </figure>
+    <section class="scroll-carousel scroll-carousel--gallery" id="gallery" data-scroll-carousel aria-label="Food gallery">
+      <div class="scroll-carousel__sticky">
+        <div class="scroll-carousel__header reveal">
+          <p class="scroll-carousel__label">In the kitchen · 廚房日常</p>
+        </div>
+        <div class="scroll-carousel__viewport">
+          <div class="scroll-carousel__track">
+            <div class="scroll-carousel__set">
+              <figure class="gallery-card"><img src="assets/photos/group-flatlay.jpg" alt="Honbo burgers and fries flat lay" loading="lazy" /></figure>
+              <figure class="gallery-card"><img src="assets/photos/spread.jpg" alt="Honbo burger spread" loading="lazy" /></figure>
+              <figure class="gallery-card"><img src="assets/photos/gallery-1.jpg" alt="Honbo smash burgers" loading="lazy" /></figure>
+              <figure class="gallery-card"><img src="assets/photos/gallery-2.jpg" alt="Honbo food spread" loading="lazy" /></figure>
+              <figure class="gallery-card"><img src="assets/photos/gallery-3.jpg" alt="Honbo burgers and sides" loading="lazy" /></figure>
+            </div>
+            <div class="scroll-carousel__set" aria-hidden="true">
+              <figure class="gallery-card"><img src="assets/photos/group-flatlay.jpg" alt="" loading="lazy" /></figure>
+              <figure class="gallery-card"><img src="assets/photos/spread.jpg" alt="" loading="lazy" /></figure>
+              <figure class="gallery-card"><img src="assets/photos/gallery-1.jpg" alt="" loading="lazy" /></figure>
+              <figure class="gallery-card"><img src="assets/photos/gallery-2.jpg" alt="" loading="lazy" /></figure>
+              <figure class="gallery-card"><img src="assets/photos/gallery-3.jpg" alt="" loading="lazy" /></figure>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="bestsellers" id="bestsellers" aria-labelledby="bestsellers-heading">
-      <div class="bestsellers__header reveal">
-        <h2 class="bestsellers__title" id="bestsellers-heading">Best Sellers</h2>
-        <p class="bestsellers__subtitle">招牌漢堡 · Illustrated menu favourites</p>
-      </div>
-      <div class="bestsellers__marquee">
-        <div class="bestsellers__track" aria-hidden="true">
-          <div class="bestsellers__set">
+    <section class="scroll-carousel scroll-carousel--bestsellers" id="bestsellers" data-scroll-carousel aria-labelledby="bestsellers-heading">
+      <div class="scroll-carousel__sticky">
+        <div class="scroll-carousel__header reveal">
+          <h2 class="scroll-carousel__title" id="bestsellers-heading">Best Sellers</h2>
+          <p class="scroll-carousel__subtitle">招牌漢堡 · Illustrated menu favourites</p>
+        </div>
+        <div class="scroll-carousel__viewport">
+          <div class="scroll-carousel__track">
+            <div class="scroll-carousel__set">
             <article class="menu-card">
               <div class="menu-card__art"><img src="assets/Honbo.PNG" alt="Honbo signature burger" loading="lazy" /></div>
               <div class="menu-card__info"><h3>Honbo <span>漢堡</span></h3><p>Our signature smash — thin patties, house sauce, American cheese.</p><span class="price-badge">98</span></div>
@@ -199,7 +211,7 @@
               <div class="menu-card__info"><h3>Hamburger <span>純肉漢堡</span></h3><p>No cheese, all beef — for the purist.</p><span class="price-badge">98</span></div>
             </article>
           </div>
-          <div class="bestsellers__set" aria-hidden="true">
+          <div class="scroll-carousel__set" aria-hidden="true">
             <article class="menu-card">
               <div class="menu-card__art"><img src="assets/Honbo.PNG" alt="" loading="lazy" /></div>
               <div class="menu-card__info"><h3>Honbo <span>漢堡</span></h3><p>Our signature smash — thin patties, house sauce, American cheese.</p><span class="price-badge">98</span></div>
@@ -229,9 +241,10 @@
               <div class="menu-card__info"><h3>Hamburger <span>純肉漢堡</span></h3><p>No cheese, all beef — for the purist.</p><span class="price-badge">98</span></div>
             </article>
           </div>
+          </div>
         </div>
+        <p class="scroll-carousel__footnote">Prices in HKD · 價錢以港元為準 · Full menu in-store</p>
       </div>
-      <p class="bestsellers__footnote">Prices in HKD · 價錢以港元為準 · Full menu in-store</p>
     </section>
 
     <section class="origin" id="origin" aria-labelledby="origin-heading">

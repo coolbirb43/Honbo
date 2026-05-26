@@ -10,7 +10,90 @@
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var parallaxEls = document.querySelectorAll("[data-parallax-speed]");
   var scaleEls = document.querySelectorAll("[data-scroll-scale]");
+  var headerOffset = 72;
   var ticking = false;
+  var carousels = [];
+
+  function initScrollCarousels() {
+    if (prefersReduced) return;
+
+    document.querySelectorAll("[data-scroll-carousel]").forEach(function (section) {
+      var track = section.querySelector(".scroll-carousel__track, .marquee__track");
+      if (!track) return;
+
+      var sets = track.querySelectorAll(".scroll-carousel__set, .marquee__set");
+      if (sets.length < 2) return;
+
+      var isMarquee = section.classList.contains("scroll-carousel--marquee");
+
+      carousels.push({
+        section: section,
+        track: track,
+        firstSet: sets[0],
+        isMarquee: isMarquee,
+        setWidth: 0,
+        measure: function () {
+          this.setWidth = this.firstSet.offsetWidth;
+          if (!this.setWidth) return;
+
+          var loops = this.isMarquee ? 2.5 : 3;
+          var scrollLength = this.setWidth * loops;
+
+          if (this.isMarquee) {
+            this.section.style.height = 52 + scrollLength * 0.65 + "px";
+          } else {
+            this.section.style.height = window.innerHeight + scrollLength + "px";
+          }
+        },
+        update: function () {
+          if (!this.setWidth) return;
+
+          var rect = this.section.getBoundingClientRect();
+          var scrolled = Math.max(0, -rect.top);
+          var offset = scrolled % this.setWidth;
+
+          this.track.style.transform = "translate3d(" + -offset + "px, 0, 0)";
+        },
+      });
+    });
+
+    carousels.forEach(function (c) {
+      c.measure();
+    });
+  }
+
+  function updateCarousels() {
+    carousels.forEach(function (c) {
+      c.update();
+    });
+  }
+
+  function smoothScrollTo(target) {
+    var top =
+      target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+  }
+
+  function bindSmoothNav() {
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        var hash = link.getAttribute("href");
+        if (!hash || hash === "#") return;
+
+        if (hash === "#top") {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+
+        var target = document.querySelector(hash);
+        if (!target) return;
+
+        e.preventDefault();
+        smoothScrollTo(target);
+      });
+    });
+  }
 
   function onScroll() {
     if (header) {
@@ -54,6 +137,7 @@
   function updateMotion() {
     updateParallax();
     updateScrollScale();
+    updateCarousels();
     ticking = false;
   }
 
@@ -74,7 +158,28 @@
     });
   }
 
+  bindSmoothNav();
+  initScrollCarousels();
+
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener(
+    "resize",
+    function () {
+      carousels.forEach(function (c) {
+        c.measure();
+      });
+      onScroll();
+    },
+    { passive: true }
+  );
+
+  window.addEventListener("load", function () {
+    carousels.forEach(function (c) {
+      c.measure();
+    });
+    onScroll();
+  });
+
   onScroll();
 
   var reveals = document.querySelectorAll(".reveal");

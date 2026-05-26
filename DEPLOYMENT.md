@@ -18,15 +18,23 @@ Wait 1–3 minutes, then hard refresh (**Ctrl + Shift + R**).
 
 ---
 
-## GitHub Pages setup (do once)
+## GitHub Pages setup (do once — required for live site)
 
-1. https://github.com/coolbirb43/Honbo/settings/pages  
-2. **Build and deployment → Source:** choose **GitHub Actions** (recommended)  
-   - The workflow `.github/workflows/deploy-pages.yml` deploys `docs/` on every push to `main`  
-3. **OR** use **Deploy from a branch** → Branch: **`main`** → Folder: **`/docs`**  
-   - Do **not** use `v1`, `v2-redesign`, or root `/`  
-4. **Custom domain:** `honbo.com`  
-5. When DNS is verified → **Enforce HTTPS**
+Open: https://github.com/coolbirb43/Honbo/settings/pages
+
+**Option A (recommended): GitHub Actions**
+
+1. **Build and deployment → Source:** **GitHub Actions** (not “Deploy from a branch”)  
+2. After the next push to `main`, open **Actions** and confirm **Deploy site to GitHub Pages** is green  
+3. Custom domain: `honbo.com` → save → **Enforce HTTPS** when DNS is verified  
+
+**Option B: Branch deploy**
+
+1. **Source:** **Deploy from a branch**  
+2. **Branch:** `main` only · **Folder:** `/docs` (not `/` and not `v1`)  
+3. Custom domain: `honbo.com` → **Enforce HTTPS**  
+
+Until you switch off the old `v1` branch source, the live site can stay on the previous layout even though `main` already has the new files.
 
 ---
 

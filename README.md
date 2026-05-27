@@ -17,14 +17,3 @@ The site showcases brand identity, store locations, best-selling menu items, sto
 | HTML / CSS / JavaScript | Static site |
 | Python 3 (`scripts/build.py`) | Minify before deploy |
 
-## Layout
-
-```
-docs/           Published site
-  index.html
-  CNAME
-  css/
-  js/
-  assets/
-scripts/build.py
-```

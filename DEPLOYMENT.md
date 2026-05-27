@@ -18,6 +18,13 @@ Wait 1–3 minutes, then hard refresh (**Ctrl + Shift + R**).
 
 ---
 
+## Website description
+
+Honbo.com is the official website for Honbo 漢堡, a Hong Kong-born smash burger brand founded in Wan Chai in 2017.
+The site presents brand identity, location details, best-selling menu items, story content, and catering contact information for customers.
+
+---
+
 ## GitHub Pages setup (do once — required for live site)
 
 Open: https://github.com/coolbirb43/Honbo/settings/pages

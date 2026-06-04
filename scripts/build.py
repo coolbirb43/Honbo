@@ -31,6 +31,10 @@ def main() -> None:
         [sys.executable, str(ROOT / "scripts" / "optimize_images.py")],
         check=True,
     )
+    subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "generate_sitemap.py")],
+        check=True,
+    )
 
     css_src = DOCS / "css" / "styles.css"
     js_src = DOCS / "js" / "app.js"

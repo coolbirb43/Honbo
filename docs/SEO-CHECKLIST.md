@@ -1,6 +1,12 @@
 # Honbo SEO checklist (after deploy)
 
-On-page SEO is implemented in `index.html` (meta tags, structured data, sitemap). **No one can guarantee #1 on Google** — ranking also depends on Google Business Profile, reviews, backlinks, and how often people search for your exact brand name.
+On-page SEO is implemented in `index.html` (meta tags, structured data, sitemap). Regenerate the sitemap after deploy with:
+
+```bash
+python scripts/generate_sitemap.py
+```
+
+(or `python scripts/build.py`, which runs it automatically). **No one can guarantee #1 on Google** — ranking also depends on Google Business Profile, reviews, backlinks, and how often people search for your exact brand name.
 
 ## Do these next (high impact)
 

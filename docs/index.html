@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Honbo 漢堡 | Smash Burgers Hong Kong — Wan Chai &amp; Central</title>
-  <meta name="description" content="Honbo 漢堡 — Hong Kong smash burgers since 2017. Fresh-ground beef, potato milk buns, Wan Chai flagship &amp; Central. Dine in, takeaway &amp; foodpanda. Featured in Bloomberg, FT &amp; Time Out." />
+  <meta name="description" content="Honbo 漢堡 — Hong Kong smash burgers since 2017. Fresh-ground beef, potato milk buns. Wan Chai &amp; Central — dine in, takeaway, foodpanda &amp; Keeta. Featured in Bloomberg, FT &amp; Time Out." />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#1a3644" />
   <meta name="author" content="Honbo Hong Kong" />
   <meta name="geo.region" content="HK" />
   <meta name="geo.placename" content="Hong Kong" />
   <link rel="canonical" href="https://honbo.com/" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://honbo.com/sitemap.xml" />
   <link rel="alternate" hreflang="en-HK" href="https://honbo.com/" />
   <link rel="alternate" hreflang="zh-HK" href="https://honbo.com/" />
   <link rel="alternate" hreflang="x-default" href="https://honbo.com/" />
@@ -21,6 +22,8 @@
   <meta property="og:title" content="Honbo 漢堡 | Smash Burgers Hong Kong" />
   <meta property="og:description" content="Hong Kong's homegrown smash burger restaurant. Wan Chai &amp; Central. Fresh smashed patties, potato milk buns, since 2017." />
   <meta property="og:image" content="https://honbo.com/assets/photos/hero.jpg" />
+  <meta property="og:image:width" content="1920" />
+  <meta property="og:image:height" content="1080" />
   <meta property="og:image:alt" content="Honbo smash burgers and sides in Hong Kong" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Honbo 漢堡 | Smash Burgers Hong Kong" />
@@ -46,10 +49,36 @@
         "@id": "https://honbo.com/#website",
         "url": "https://honbo.com/",
         "name": "Honbo 漢堡",
-        "alternateName": ["Honbo", "Honbo Burger", "Honbo Hong Kong", "漢堡"],
+        "alternateName": ["Honbo", "Honbo Burger", "Honbo Hong Kong", "漢堡", "Honbo smash burger"],
         "description": "Hong Kong smash burger restaurant with locations in Wan Chai and Central.",
         "inLanguage": ["en-HK", "zh-HK"],
-        "publisher": { "@id": "https://honbo.com/#organization" }
+        "publisher": { "@id": "https://honbo.com/#organization" },
+        "potentialAction": {
+          "@type": "ReadAction",
+          "target": "https://honbo.com/"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://honbo.com/#webpage",
+        "url": "https://honbo.com/",
+        "name": "Honbo 漢堡 | Smash Burgers Hong Kong",
+        "description": "Official site for Honbo smash burgers in Wan Chai and Central, Hong Kong.",
+        "isPartOf": { "@id": "https://honbo.com/#website" },
+        "about": { "@id": "https://honbo.com/#organization" },
+        "primaryImageOfPage": "https://honbo.com/assets/photos/hero.jpg",
+        "inLanguage": "en-HK",
+        "breadcrumb": { "@id": "https://honbo.com/#breadcrumb" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://honbo.com/#breadcrumb",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Honbo 漢堡",
+          "item": "https://honbo.com/"
+        }]
       },
       {
         "@type": "Organization",
@@ -81,6 +110,7 @@
           "addressCountry": "HK"
         },
         "geo": { "@type": "GeoCoordinates", "latitude": 22.2772, "longitude": 114.1734 },
+        "hasMap": "https://maps.google.com/maps?q=Honbo+1-3+Moon+Street+Wan+Chai+Hong+Kong",
         "openingHoursSpecification": [{
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
@@ -106,6 +136,7 @@
           "addressCountry": "HK"
         },
         "geo": { "@type": "GeoCoordinates", "latitude": 22.2814, "longitude": 114.1552 },
+        "hasMap": "https://maps.google.com/maps?q=Honbo+8+Lyndhurst+Terrace+Central+Hong+Kong",
         "openingHoursSpecification": [{
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
@@ -131,6 +162,14 @@
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Honbo is known for smash burgers made with fresh-ground beef, house potato milk buns, and classic American-style burgers. The brand has been featured in Bloomberg, the Financial Times, and Time Out Hong Kong."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I order Honbo burgers for delivery in Hong Kong?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Order Honbo for delivery via foodpanda or Keeta for Wan Chai and Central, or visit either restaurant for eat-in and takeaway daily 12:00–22:00."
             }
           }
         ]
@@ -434,7 +473,7 @@
           <li>48-hour advance booking · 建議提前 48 小時預訂</li>
         </ul>
         <div class="catering__cta">
-          <a class="btn btn--light" href="mailto:hello@honbo.hk?subject=Honbo%20Inquiry&amp;body=Hello%20Honbo%2C%0A%0AI%20would%20like%20to%20inquire%20about%3A%0A%0A">Inquire 查詢</a>
+          <a class="btn btn--light" href="mailto:hello@honbo.com?subject=Honbo%20Inquiry&amp;body=Hello%20Honbo%2C%0A%0AI%20would%20like%20to%20inquire%20about%3A%0A%0A">Inquire 查詢</a>
         </div>
       </div>
     </section>

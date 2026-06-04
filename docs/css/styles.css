@@ -309,21 +309,29 @@ body.is-menu-open .site-header.is-scrolled {
   border-color: var(--honbo-cheese);
 }
 
-/* Hero — real food photo background */
+/* Hero — mobile-first, scaled per breakpoint (mobile · 1080p · 2K · 4K) */
 .hero-parallax {
-  --hero-content-width: min(92vw, 520px);
-  --hero-icon-size: clamp(190px, 52vw, 340px);
-  --hero-icon-scale: 1.32;
-  --hero-arrow-space: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  --hero-content-width: min(92vw, 22rem);
+  --hero-icon-size: min(94vw, 26rem);
+  --hero-tagline-size: clamp(0.98rem, 4.2vw, 1.2rem);
+  --hero-tagline-zh-size: clamp(0.72rem, 3.4vw, 0.88rem);
+  --hero-proof-size: 0.62rem;
+  --hero-logo-gap: clamp(0.65rem, 2.5vh, 1.25rem);
+  --hero-text-gap: 0.35rem;
+  --hero-footer-gap: 0.5rem;
+  --hero-arrow-space: calc(0.85rem + env(safe-area-inset-bottom, 0px));
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.65rem;
+  gap: var(--hero-logo-gap);
   min-height: 100svh;
   min-height: 100dvh;
-  padding: calc(var(--header-h) + 0.5rem) clamp(1rem, 5vw, 3rem) var(--hero-arrow-space);
+  padding:
+    calc(var(--header-h) + 0.35rem)
+    clamp(0.85rem, 4vw, 1.25rem)
+    var(--hero-arrow-space);
   overflow: hidden;
   text-align: center;
   color: var(--honbo-white);
@@ -346,6 +354,7 @@ body.is-menu-open .site-header.is-scrolled {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 42%;
 }
 
 .hero-parallax__overlay {
@@ -364,14 +373,25 @@ body.is-menu-open .site-header.is-scrolled {
 .hero-parallax__content {
   position: relative;
   z-index: 2;
-  width: var(--hero-content-width);
+  width: 100%;
+  max-width: 100%;
   margin-inline: auto;
-  margin-bottom: 0.35rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.45rem;
   text-align: center;
+}
+
+.hero-parallax__footer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--hero-footer-gap);
+  text-align: center;
+  flex-shrink: 0;
 }
 
 .hero-parallax__meta {
@@ -383,20 +403,43 @@ body.is-menu-open .site-header.is-scrolled {
   opacity: 0.92;
 }
 
+.hero-parallax__brand {
+  width: var(--hero-icon-size);
+  max-width: calc(100vw - 2rem);
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .hero-parallax__title {
   width: 100%;
   margin: 0;
+  line-height: 0;
+  text-align: center;
+}
+
+.hero-parallax__logo-frame {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-inline: auto;
+  line-height: 0;
+}
+
+.hero-parallax__logo-frame picture {
+  display: block;
+  width: 100%;
   line-height: 0;
 }
 
 .hero-parallax__icon {
   display: block;
-  width: var(--hero-icon-size);
+  width: 100%;
   height: auto;
   margin-inline: auto;
   object-fit: contain;
-  transform: scale(var(--hero-icon-scale));
-  transform-origin: center center;
+  object-position: center center;
   filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.35));
 }
 
@@ -404,36 +447,44 @@ body.is-menu-open .site-header.is-scrolled {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
-  width: 100%;
-  margin-top: 0;
+  gap: var(--hero-text-gap);
+  width: var(--hero-content-width);
+  max-width: 100%;
+  margin: 0;
+  margin-inline: auto;
 }
 
 .hero-parallax__tagline {
   margin: 0;
   font-family: var(--font-subtitle);
-  font-size: clamp(1.05rem, 3vw, 1.45rem);
+  font-size: var(--hero-tagline-size);
   line-height: 1.35;
+  max-width: 28ch;
+  text-align: center;
 }
 
 .hero-parallax__tagline-zh {
   margin: 0;
   font-family: var(--font-zh);
-  font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+  font-size: var(--hero-tagline-zh-size);
   font-weight: 700;
   line-height: 1.5;
   opacity: 0.95;
+  max-width: 36ch;
+  text-align: center;
 }
 
 .hero-parallax__proof {
   margin: 0;
   padding: 0;
-  font-size: clamp(0.68rem, 1.7vw, 0.78rem);
+  font-size: var(--hero-proof-size);
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   line-height: 1.5;
   opacity: 0.9;
+  text-align: center;
+  width: 100%;
 }
 
 .hero-parallax__proof a {
@@ -451,13 +502,14 @@ body.is-menu-open .site-header.is-scrolled {
 
 .hero-parallax__bottom {
   position: relative;
-  z-index: 3;
   width: var(--hero-content-width);
+  max-width: 100%;
+  margin: 0;
   margin-inline: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.85rem;
+  gap: var(--hero-footer-gap);
   text-align: center;
 }
 
@@ -1262,25 +1314,209 @@ body.is-menu-open .site-header.is-scrolled {
 }
 
 /* Responsive */
-@media (min-width: 769px) {
+@media (max-width: 768px) {
   .hero-parallax {
-    --hero-content-width: min(92vw, 600px);
-    --hero-icon-size: clamp(220px, 24vw, 360px);
-    --hero-icon-scale: 1.48;
+    --hero-icon-size: min(94vw, 26rem);
+    --hero-footer-gap: 0.4rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    justify-items: center;
+    align-content: stretch;
+    gap: 0;
+    padding:
+      calc(var(--header-h) + 0.35rem)
+      max(1rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px))
+      var(--hero-arrow-space);
   }
 
+  .hero-parallax__bg,
+  .hero-parallax__overlay {
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+
+  .hero-parallax__content {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    justify-self: center;
+    width: var(--hero-icon-size);
+    max-width: calc(100% - 2rem);
+  }
+
+  .hero-parallax__footer {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: stretch;
+    width: 100%;
+    z-index: 3;
+  }
+
+  .hero-parallax__overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(18, 38, 48, 0.48) 0%,
+      rgba(18, 38, 48, 0.28) 32%,
+      rgba(18, 38, 48, 0.88) 72%,
+      rgba(18, 38, 48, 0.96) 100%
+    );
+  }
+
+  .hero-parallax__bg img {
+    object-position: center 50%;
+  }
+
+  .hero-parallax__proof {
+    max-width: 18.5rem;
+    line-height: 1.45;
+  }
+
+}
+
+@media (max-width: 768px) and (max-height: 740px) {
+  .hero-parallax {
+    --hero-icon-size: min(90vw, 22rem);
+    gap: 0.3rem;
+  }
+
+}
+
+/* Desktop — logo centered in upper area; footer text unchanged at bottom */
+@media (min-width: 769px) {
+  .hero-parallax {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    justify-items: center;
+    align-content: stretch;
+    gap: 0;
+  }
+
+  .hero-parallax__bg,
+  .hero-parallax__overlay {
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+
+  .hero-parallax__content {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    justify-self: center;
+    width: var(--hero-icon-size);
+    max-width: calc(100% - 2rem);
+    flex-shrink: 0;
+  }
+
+  .hero-parallax__footer {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100%;
+    align-items: center;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+  .hero-parallax {
+    --hero-content-width: min(86vw, 32rem);
+    --hero-icon-size: clamp(18rem, 44vmin, 28rem);
+    --hero-logo-gap: clamp(0.65rem, 2vh, 1.1rem);
+    --hero-footer-gap: 0.55rem;
+    --hero-tagline-size: clamp(1.05rem, 2.6vmin, 1.45rem);
+    --hero-tagline-zh-size: clamp(0.78rem, 2vmin, 0.95rem);
+    --hero-proof-size: clamp(0.65rem, 1.4vmin, 0.78rem);
+    --hero-arrow-space: calc(clamp(0.85rem, 2.5vh, 1.5rem) + env(safe-area-inset-bottom, 0px));
+    padding:
+      calc(var(--header-h) + clamp(0.75rem, 2.5vh, 1.5rem))
+      clamp(1rem, 4vw, 2.5rem)
+      var(--hero-arrow-space);
+  }
+
+}
+
+@media (min-width: 769px) {
   .site-nav {
     padding-right: clamp(1rem, 4vw, 2rem);
   }
 }
 
-@media (max-width: 768px) {
+/* 1080p — ~1920×1080 and similar laptops */
+@media (min-width: 1200px) and (max-width: 1919px) {
   .hero-parallax {
-    --hero-content-width: min(94vw, 420px);
-    --hero-icon-size: clamp(175px, 48vw, 280px);
-    --hero-icon-scale: 1.28;
+    --hero-content-width: min(80vw, 36rem);
+    --hero-icon-size: clamp(20rem, 46vmin, 34rem);
+    --hero-logo-gap: clamp(0.7rem, 2.2vh, 1.2rem);
+    --hero-footer-gap: 0.6rem;
+    --hero-tagline-size: clamp(1.1rem, 2.4vmin, 1.65rem);
+    --hero-tagline-zh-size: clamp(0.82rem, 1.9vmin, 1rem);
+    --hero-proof-size: clamp(0.68rem, 1.3vmin, 0.82rem);
+    --hero-arrow-space: calc(clamp(1rem, 2.8vh, 1.75rem) + env(safe-area-inset-bottom, 0px));
+    padding:
+      calc(var(--header-h) + clamp(1rem, 3vh, 1.75rem))
+      clamp(1.25rem, 4vw, 3rem)
+      var(--hero-arrow-space);
   }
 
+  .hero-parallax__bg img {
+    object-position: center 42%;
+  }
+}
+
+/* 2K — ~2560×1440 */
+@media (min-width: 1920px) and (max-width: 2559px) {
+  .hero-parallax {
+    --hero-content-width: min(74vw, 40rem);
+    --hero-icon-size: clamp(22rem, 44vmin, 38rem);
+    --hero-logo-gap: clamp(0.75rem, 2.4vh, 1.25rem);
+    --hero-footer-gap: 0.65rem;
+    --hero-tagline-size: clamp(1.2rem, 2.2vmin, 1.9rem);
+    --hero-tagline-zh-size: clamp(0.88rem, 1.75vmin, 1.08rem);
+    --hero-proof-size: clamp(0.7rem, 1.2vmin, 0.88rem);
+    --hero-arrow-space: calc(clamp(1.1rem, 3vh, 2rem) + env(safe-area-inset-bottom, 0px));
+    padding:
+      calc(var(--header-h) + clamp(1.1rem, 3.2vh, 2rem))
+      clamp(1.5rem, 4vw, 3.5rem)
+      var(--hero-arrow-space);
+  }
+
+  .hero-parallax__bg img {
+    object-position: center 40%;
+  }
+}
+
+/* 4K — 2560px+ width (incl. 3840×2160) */
+@media (min-width: 2560px) {
+  .hero-parallax {
+    --hero-content-width: min(68vw, 44rem);
+    --hero-icon-size: clamp(24rem, 42vmin, 42rem);
+    --hero-logo-gap: clamp(0.85rem, 2.6vh, 1.35rem);
+    --hero-footer-gap: 0.7rem;
+    --hero-tagline-size: clamp(1.35rem, 2vmin, 2.1rem);
+    --hero-tagline-zh-size: clamp(0.92rem, 1.6vmin, 1.12rem);
+    --hero-proof-size: clamp(0.72rem, 1.1vmin, 0.92rem);
+    --hero-arrow-space: calc(clamp(1.25rem, 3.2vh, 2.25rem) + env(safe-area-inset-bottom, 0px));
+    padding:
+      calc(var(--header-h) + clamp(1.25rem, 3.5vh, 2.25rem))
+      clamp(2rem, 5vw, 4rem)
+      var(--hero-arrow-space);
+  }
+
+  .hero-parallax__bg img {
+    object-position: center 38%;
+  }
+}
+
+@media (max-height: 720px) and (min-width: 769px) {
+  .hero-parallax {
+    --hero-icon-size: clamp(16rem, 44vmin, 22rem);
+    gap: 0.45rem;
+    padding-top: calc(var(--header-h) + 0.5rem);
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 768px) {
   .nav__toggle {
     display: flex;
     position: relative;

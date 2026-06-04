@@ -30,13 +30,13 @@
   <link rel="apple-touch-icon" href="assets/brand/honbo-logo-blue.png" />
   <link rel="preload" href="assets/photos/hero.webp" as="image" type="image/webp" fetchpriority="high" />
   <link rel="preload" href="assets/brand/New_logo.webp" as="image" type="image/webp" />
-  <link rel="preload" href="css/styles.min.css?v=43" as="style" />
+  <link rel="preload" href="css/styles.min.css?v=59" as="style" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="dns-prefetch" href="https://maps.google.com" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;700&display=swap" /></noscript>
-  <link rel="stylesheet" href="css/styles.min.css?v=43" />
+  <link rel="stylesheet" href="css/styles.min.css?v=59" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -202,32 +202,38 @@
       </div>
       <div class="hero-parallax__overlay" aria-hidden="true"></div>
       <div class="hero-parallax__content">
-        <h1 class="hero-parallax__title" id="hero-title">
-          <span class="sr-only">Honbo 漢堡 — Smash burgers in Hong Kong</span>
-          <picture>
-            <source srcset="assets/brand/New_logo.webp" type="image/webp" />
-            <img class="hero-parallax__icon" src="assets/brand/New_logo.png" alt="Honbo 漢堡 smash burger logo" width="1080" height="1350" fetchpriority="high" decoding="async" />
-          </picture>
-        </h1>
+        <div class="hero-parallax__brand">
+          <h1 class="hero-parallax__title" id="hero-title">
+            <span class="sr-only">Honbo 漢堡 — Smash burgers in Hong Kong</span>
+            <span class="hero-parallax__logo-frame">
+              <picture>
+                <source srcset="assets/brand/New_logo.webp" type="image/webp" />
+                <img class="hero-parallax__icon" src="assets/brand/New_logo.png" alt="Honbo 漢堡 smash burger logo" width="474" height="397" fetchpriority="high" decoding="async" />
+              </picture>
+            </span>
+          </h1>
+        </div>
+      </div>
+      <div class="hero-parallax__footer">
         <div class="hero-parallax__copy">
           <p class="hero-parallax__tagline">Hong Kong's best smash burgers</p>
           <p class="hero-parallax__tagline-zh">新鮮牛肉，即叫即壓 · 香港最好食嘅壓扁漢堡</p>
         </div>
-      </div>
-      <div class="hero-parallax__bottom">
-        <p class="hero-parallax__proof">
-          Featured in
-          <a href="https://www.ft.com/content/9daf1b7f-c292-4dbc-a734-1e4007ce5cb5" target="_blank" rel="noopener noreferrer">Financial Times</a>
-          ·
-          <a href="https://www.timeout.com/hong-kong/restaurants/best-burgers-hong-kong" target="_blank" rel="noopener noreferrer">Time Out</a>
-          ·
-          <a href="https://www.bloomberg.com/news/articles/2020-02-15/best-burgers-in-the-world-top-chefs-pick-favorite-hamburgers" target="_blank" rel="noopener noreferrer">Bloomberg</a>
-        </p>
-        <a class="hero-parallax__scroll" href="#locations" aria-label="Scroll to locations">
-          <svg class="hero-parallax__arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
+        <div class="hero-parallax__bottom">
+          <p class="hero-parallax__proof">
+            Featured in
+            <a href="https://www.ft.com/content/9daf1b7f-c292-4dbc-a734-1e4007ce5cb5" target="_blank" rel="noopener noreferrer">Financial Times</a>
+            ·
+            <a href="https://www.timeout.com/hong-kong/restaurants/best-burgers-hong-kong" target="_blank" rel="noopener noreferrer">Time Out</a>
+            ·
+            <a href="https://www.bloomberg.com/news/articles/2020-02-15/best-burgers-in-the-world-top-chefs-pick-favorite-hamburgers" target="_blank" rel="noopener noreferrer">Bloomberg</a>
+          </p>
+          <a class="hero-parallax__scroll" href="#locations" aria-label="Scroll to locations">
+            <svg class="hero-parallax__arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -277,6 +283,7 @@
           <div class="location-panel__actions">
             <a class="btn btn--outline" href="#map-wanchai">Map 地圖</a>
             <a class="btn btn--primary" href="https://www.foodpanda.hk/chain/cz2ww/honbo" target="_blank" rel="noopener noreferrer">FOODPANDA</a>
+            <a class="btn btn--primary" href="https://url.mykeeta.com/SBr5MoLz" target="_blank" rel="noopener noreferrer">KEETA</a>
           </div>
           <div class="location-panel__map" id="map-wanchai">
             <iframe
@@ -311,6 +318,7 @@
           <div class="location-panel__actions">
             <a class="btn btn--outline" href="#map-central">Map 地圖</a>
             <a class="btn btn--primary" href="https://www.foodpanda.hk/chain/cz2ww/honbo" target="_blank" rel="noopener noreferrer">FOODPANDA</a>
+            <a class="btn btn--primary" href="https://url.mykeeta.com/sPOAeMAz" target="_blank" rel="noopener noreferrer">KEETA</a>
           </div>
           <div class="location-panel__map" id="map-central">
             <iframe
@@ -477,6 +485,26 @@
 
       <section class="blog-reviews" aria-label="Honbo reviews and articles">
         <div class="blog-reviews__inner">
+          <article class="review-card">
+            <div class="review-card__top">
+              <span class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__source">Foodie</span>
+            </div>
+            <blockquote class="review-card__quote">“Honbo was founded in 2017 with a focus on home-grown ingredients, from preservative-free potato milk buns made by a local artisanal baker to creative drinks at the shop. We rate the simple, no-frills menu and USDA Double Gold beef used to craft the juicy smash burgers.”</blockquote>
+            <p class="review-card__meta">Best burgers in Hong Kong · 2026 guide</p>
+            <a class="review-card__link" href="https://www.afoodieworld.com/blog/2026/04/30/best-burgers-hong-kong/" target="_blank" rel="noopener noreferrer">Read article →</a>
+          </article>
+
+          <article class="review-card">
+            <div class="review-card__top">
+              <span class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__source">Sassy Hong Kong</span>
+            </div>
+            <blockquote class="review-card__quote">“With several members on Team Sassy as self-proclaimed Honbo lovers… you can expect everything at this grassroots burger restaurant to be sourced from the very best local spots, with juicy beef and perfectly crisped buns. The loaded cheese fries are the best in town!”</blockquote>
+            <p class="review-card__meta">Team Sassy favourite · Central location</p>
+            <a class="review-card__link" href="https://www.sassyhongkong.com/eat-drink-hong-kong-dining-burgers/" target="_blank" rel="noopener noreferrer">Read article →</a>
+          </article>
+
           <article class="review-card">
             <div class="review-card__top">
               <span class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</span>

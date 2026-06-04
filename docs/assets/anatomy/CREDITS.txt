@@ -1,0 +1,13 @@
+Anatomy section imagery
+
+Center (Honbo brand):
+  assets/menu/Honbo.webp / Honbo.PNG — Honbo menu artwork
+
+Ingredient callouts (external, CC-licensed / Unsplash):
+  Bun — Unsplash, tray of buns (photo-1632552544552), https://unsplash.com/photos/9tPTZuqMsVY
+  American cheese — Wikimedia Commons, Wrapped American cheese slices (CC BY-SA)
+  Smashed patty — Wikimedia Commons, Hamburgers grilling outdoors (CC BY-SA 3.0), Capvideo
+  Pickles — Wikimedia Commons, Gherkin (public domain)
+  Onion — Wikimedia Commons, Sliced red onion (CC BY-SA 4.0)
+  House sauce — Wikimedia Commons, Mayonnaise (CC BY-SA 3.0)
+  Ground beef — Wikimedia Commons, Ground beef USDA (public domain)

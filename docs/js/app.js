@@ -36,6 +36,7 @@
     "#view-home .gallery-section .section-block__header",
     "#view-home .bestsellers-section .section-block__header",
     "#view-home .bestsellers-section__footnote",
+    // "#view-home .anatomy",
     "#view-home .origin .section-intro",
     "#view-home .origin__col",
     "#view-home .origin__note",

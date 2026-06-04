@@ -1083,6 +1083,357 @@ body.is-menu-open .site-header.is-scrolled {
   font-weight: 700;
 }
 
+/* Anatomy of a burger */
+.anatomy {
+  padding: var(--space-xl) clamp(1rem, 5vw, 3rem);
+  background: var(--honbo-cream);
+  color: var(--honbo-navy);
+  overflow: hidden;
+}
+
+.anatomy__header {
+  max-width: 40rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.anatomy__stage {
+  position: relative;
+  max-width: 1100px;
+  margin: clamp(2rem, 6vw, 3.5rem) auto 0;
+  min-height: clamp(520px, 72vh, 720px);
+}
+
+.anatomy__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.anatomy__line {
+  stroke: var(--honbo-cheese);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+  opacity: 0.55;
+  transition: stroke-dashoffset 1.1s var(--ease-out);
+}
+
+.anatomy__hero {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: min(52%, 420px);
+  margin: 0;
+  transform: translate(-50%, -50%) scale(0.92);
+  opacity: 0;
+  transition:
+    opacity 0.8s var(--ease-out),
+    transform 0.9s var(--ease-out);
+  filter: drop-shadow(0 20px 48px rgba(26, 54, 68, 0.18));
+}
+
+.anatomy__hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+
+.anatomy__hero--brand {
+  padding: 0.65rem;
+  border-radius: 50%;
+  background: var(--honbo-white);
+}
+
+.anatomy__hero--brand img {
+  object-fit: contain;
+}
+
+.anatomy__callouts {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.anatomy-callout {
+  position: absolute;
+  width: min(11.5rem, 30vw);
+  text-align: center;
+  opacity: 0;
+  transform: translate3d(0, 16px, 0) scale(0.96);
+  transition:
+    opacity 0.65s var(--ease-out),
+    transform 0.65s var(--ease-out);
+}
+
+.anatomy-callout__thumb {
+  width: 5.5rem;
+  height: 5.5rem;
+  margin: 0 auto 0.5rem;
+  border-radius: 50%;
+  background: var(--honbo-white);
+  box-shadow: 0 8px 24px rgba(26, 54, 68, 0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.anatomy-callout__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.anatomy-callout__thumb--duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 0;
+}
+
+.anatomy-callout__thumb--duo img {
+  width: 100%;
+  height: 100%;
+}
+
+.anatomy-callout__title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+.anatomy-callout__text {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  opacity: 0.88;
+}
+
+.anatomy-callout--top {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 16px) scale(0.96);
+}
+
+.anatomy-callout--top-right {
+  top: 8%;
+  right: 0;
+}
+
+.anatomy-callout--right {
+  top: 50%;
+  right: -0.5%;
+  transform: translateY(calc(-50% + 16px)) scale(0.96);
+}
+
+.anatomy-callout--bottom-right {
+  bottom: 4%;
+  right: 6%;
+}
+
+.anatomy-callout--bottom-left {
+  bottom: 4%;
+  left: 6%;
+}
+
+.anatomy-callout--left {
+  top: 50%;
+  left: -0.5%;
+  transform: translateY(calc(-50% + 16px)) scale(0.96);
+}
+
+.anatomy__footer {
+  display: grid;
+  grid-template-columns: 1fr minmax(12rem, 16rem);
+  gap: var(--space-lg);
+  align-items: end;
+  max-width: 1100px;
+  margin: var(--space-lg) auto 0;
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(26, 54, 68, 0.12);
+}
+
+.anatomy__quote {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-style: italic;
+  line-height: 1.55;
+  opacity: 0.9;
+}
+
+.anatomy__quote p {
+  margin: 0;
+}
+
+.anatomy__fact {
+  margin: 0;
+  text-align: right;
+}
+
+.anatomy__fact-num {
+  display: block;
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--honbo-cheese);
+  letter-spacing: -0.04em;
+}
+
+.anatomy__fact-label {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.45;
+  opacity: 0.85;
+}
+
+.anatomy.reveal.is-visible .anatomy__hero {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.anatomy.reveal.is-visible .anatomy__line {
+  stroke-dashoffset: 0;
+}
+
+.anatomy.reveal.is-visible .anatomy__line:nth-child(1) { transition-delay: 0.15s; }
+.anatomy.reveal.is-visible .anatomy__line:nth-child(2) { transition-delay: 0.25s; }
+.anatomy.reveal.is-visible .anatomy__line:nth-child(3) { transition-delay: 0.35s; }
+.anatomy.reveal.is-visible .anatomy__line:nth-child(4) { transition-delay: 0.45s; }
+.anatomy.reveal.is-visible .anatomy__line:nth-child(5) { transition-delay: 0.55s; }
+.anatomy.reveal.is-visible .anatomy__line:nth-child(6) { transition-delay: 0.65s; }
+
+.anatomy.reveal.is-visible .anatomy-callout {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.anatomy.reveal.is-visible .anatomy-callout--top {
+  transform: translate(-50%, 0) scale(1);
+}
+
+.anatomy.reveal.is-visible .anatomy-callout--right,
+.anatomy.reveal.is-visible .anatomy-callout--left {
+  transform: translateY(-50%) scale(1);
+}
+
+.anatomy.reveal.is-visible .anatomy-callout--top { transition-delay: 0.2s; }
+.anatomy.reveal.is-visible .anatomy-callout--top-right { transition-delay: 0.3s; }
+.anatomy.reveal.is-visible .anatomy-callout--right { transition-delay: 0.4s; }
+.anatomy.reveal.is-visible .anatomy-callout--bottom-right { transition-delay: 0.5s; }
+.anatomy.reveal.is-visible .anatomy-callout--bottom-left { transition-delay: 0.6s; }
+.anatomy.reveal.is-visible .anatomy-callout--left { transition-delay: 0.7s; }
+
+.anatomy-callout:hover .anatomy-callout__thumb {
+  transform: scale(1.06);
+  transition: transform 0.35s var(--ease-out);
+}
+
+.anatomy-callout__thumb {
+  transition: transform 0.35s var(--ease-out);
+}
+
+@media (max-width: 900px) {
+  .anatomy__stage {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding-top: 0.5rem;
+  }
+
+  .anatomy__lines {
+    display: none;
+  }
+
+  .anatomy__hero {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: min(100%, 380px);
+    transform: scale(0.96);
+  }
+
+  .anatomy.reveal.is-visible .anatomy__hero {
+    transform: scale(1);
+  }
+
+  .anatomy__callouts {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+    width: 100%;
+  }
+
+  .anatomy-callout {
+    position: static;
+    width: auto;
+    transform: translate3d(0, 16px, 0) scale(0.96);
+  }
+
+  .anatomy.reveal.is-visible .anatomy-callout,
+  .anatomy.reveal.is-visible .anatomy-callout--top,
+  .anatomy.reveal.is-visible .anatomy-callout--right,
+  .anatomy.reveal.is-visible .anatomy-callout--left {
+    transform: scale(1);
+  }
+
+  .anatomy__footer {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .anatomy__fact {
+    text-align: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .anatomy__callouts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anatomy__hero,
+  .anatomy__line,
+  .anatomy-callout {
+    transition: none;
+    opacity: 1;
+    transform: none;
+    stroke-dashoffset: 0;
+  }
+
+  .anatomy__hero {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+  }
+}
+
 /* Origin */
 .origin {
   position: relative;

@@ -24,6 +24,14 @@ def minify_js(text: str) -> str:
 
 
 def main() -> None:
+    import subprocess
+    import sys
+
+    subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "optimize_images.py")],
+        check=True,
+    )
+
     css_src = DOCS / "css" / "styles.css"
     js_src = DOCS / "js" / "app.js"
     css_out = DOCS / "css" / "styles.min.css"

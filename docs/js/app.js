@@ -8,9 +8,49 @@
   var toggle = document.querySelector(".nav__toggle");
   var menu = document.getElementById("nav-menu");
   var heroBg = document.querySelector(".hero-parallax__bg");
+  var viewHome = document.getElementById("view-home");
+  var viewBlog = document.getElementById("view-blog");
+  var pageLoader = document.getElementById("page-loader");
+  var loaderLogo = pageLoader
+    ? pageLoader.querySelector(".page-loader__logo")
+    : null;
+  var loaderBar = pageLoader
+    ? pageLoader.querySelector(".page-loader__bar")
+    : null;
+  var loaderTrack = pageLoader
+    ? pageLoader.querySelector(".page-loader__track")
+    : null;
+  var navClose = document.querySelector(".nav__close");
+  var currentView = "home";
+  var isViewLoading = false;
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var scrollAnimId = null;
   var isScrollAnimating = false;
+  var revealObserver = null;
+
+  var REVEAL_SELECTORS = [
+    "#view-home .marquee-bar",
+    "#view-home .section-intro",
+    "#view-home .location-panel__body",
+    "#view-home .location-panel__media",
+    "#view-home .gallery-section .section-block__header",
+    "#view-home .bestsellers-section .section-block__header",
+    "#view-home .bestsellers-section__footnote",
+    "#view-home .origin .section-intro",
+    "#view-home .origin__col",
+    "#view-home .origin__note",
+    "#view-home .catering__title",
+    "#view-home .catering__subtitle",
+    "#view-home .catering__content > p",
+    "#view-home .catering__list",
+    "#view-home .catering__cta",
+    "#view-blog .blog-awards",
+    "#view-blog .blog-hero__title",
+    "#view-blog .blog-hero__lead",
+    "#view-blog .blog-hero__stats",
+    "#view-blog .review-card",
+    "#view-blog .blog-cta"
+  ];
 
   function getHeaderOffset() {
     if (!header) return 72;
@@ -51,6 +91,85 @@
   function runScrollEffects() {
     updateHeader();
     updateHeroParallax();
+  }
+
+  function onRevealIntersect(entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      if (revealObserver) revealObserver.unobserve(entry.target);
+    });
+  }
+
+  function decorateRevealElement(el, index) {
+    if (el.classList.contains("reveal")) return;
+
+    el.classList.add("reveal");
+    el.style.setProperty("--reveal-delay", (index % 5) * 0.08 + "s");
+
+    if (el.classList.contains("location-panel__body")) {
+      el.classList.add(
+        el.closest(".location-panel--reverse")
+          ? "reveal--from-right"
+          : "reveal--from-left"
+      );
+    }
+
+    if (el.classList.contains("location-panel__media")) {
+      el.classList.add(
+        el.closest(".location-panel--reverse")
+          ? "reveal--from-left"
+          : "reveal--from-right"
+      );
+    }
+
+    if (el.classList.contains("review-card")) {
+      el.classList.add("reveal--scale");
+      el.style.setProperty(
+        "--reveal-delay",
+        Array.prototype.indexOf.call(
+          document.querySelectorAll("#view-blog .review-card"),
+          el
+        ) *
+          0.07 +
+          "s"
+      );
+    }
+  }
+
+  function refreshRevealsInContainer(container) {
+    if (prefersReduced || !container) return;
+
+    container.querySelectorAll(".reveal:not(.is-visible)").forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+        el.classList.add("is-visible");
+        if (revealObserver) revealObserver.unobserve(el);
+      } else if (revealObserver) {
+        revealObserver.observe(el);
+      }
+    });
+  }
+
+  function initRevealAnimations() {
+    if (prefersReduced) return;
+
+    if (!revealObserver) {
+      revealObserver = new IntersectionObserver(onRevealIntersect, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -8% 0px"
+      });
+    }
+
+    REVEAL_SELECTORS.forEach(function (selector) {
+      var nodes = document.querySelectorAll(selector);
+      nodes.forEach(function (el, index) {
+        decorateRevealElement(el, index);
+        if (!el.classList.contains("is-visible")) {
+          revealObserver.observe(el);
+        }
+      });
+    });
   }
 
   function cancelScrollAnimation() {
@@ -238,6 +357,96 @@
       });
   }
 
+  function setLoaderProgress(p) {
+    var value = Math.max(0, Math.min(1, p));
+    if (loaderLogo) {
+      loaderLogo.style.setProperty("--load-p", String(value));
+    }
+    if (loaderBar) {
+      loaderBar.style.width = value * 100 + "%";
+    }
+    if (loaderTrack) {
+      loaderTrack.setAttribute("aria-valuenow", String(Math.round(value * 100)));
+    }
+  }
+
+  function runPageLoader(onDone) {
+    if (!pageLoader || prefersReduced) {
+      if (onDone) onDone();
+      return;
+    }
+
+    pageLoader.hidden = false;
+    pageLoader.setAttribute("aria-hidden", "false");
+    setLoaderProgress(0);
+
+    var duration = 1200;
+    var start = performance.now();
+
+    function frame(now) {
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      setLoaderProgress(easeInOutCubic(progress));
+
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        window.setTimeout(function () {
+          pageLoader.hidden = true;
+          pageLoader.setAttribute("aria-hidden", "true");
+          if (onDone) onDone();
+        }, 120);
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  function applyView(view, skipLoader) {
+    if (!viewHome || !viewBlog) return;
+    if (view !== "home" && view !== "blog") return;
+    if (view === currentView) return;
+
+    function swap() {
+      currentView = view;
+      viewHome.hidden = view !== "home";
+      viewBlog.hidden = view !== "blog";
+      document.body.classList.toggle("is-blog-view", view === "blog");
+
+      if (view === "blog") {
+        document.title =
+          "Press & Reviews | Honbo 漢堡 Smash Burgers Hong Kong";
+        window.scrollTo(0, 0);
+        if (header) header.classList.remove("is-scrolled");
+      } else {
+        document.title =
+          "Honbo 漢堡 | Smash Burgers Hong Kong — Wan Chai & Central";
+        runScrollEffects();
+      }
+
+      if (history.replaceState) {
+        history.replaceState(
+          null,
+          "",
+          view === "blog" ? "#press" : window.location.pathname + window.location.search
+        );
+      } else {
+          window.location.hash = view === "blog" ? "press" : "";
+      }
+
+      isViewLoading = false;
+      refreshRevealsInContainer(view === "blog" ? viewBlog : viewHome);
+    }
+
+    if (skipLoader || prefersReduced) {
+      swap();
+      return;
+    }
+
+    isViewLoading = true;
+    runPageLoader(swap);
+  }
+
   function closeMobileMenu() {
     if (!toggle || !menu) return;
     toggle.setAttribute("aria-expanded", "false");
@@ -258,10 +467,41 @@
         var hash = link.getAttribute("href");
         if (!hash || hash === "#") return;
 
+        var viewTarget = link.getAttribute("data-view");
         var delay =
           menu && menu.classList.contains("is-open") && window.innerWidth <= 768
             ? 260
             : 0;
+
+        if (viewTarget === "blog" || hash === "#press" || hash === "#blog") {
+          e.preventDefault();
+          closeMobileMenu();
+          window.setTimeout(function () {
+            applyView("blog");
+          }, delay);
+          return;
+        }
+
+        if (viewTarget === "home" && currentView === "blog") {
+          e.preventDefault();
+          closeMobileMenu();
+          window.setTimeout(function () {
+            applyView("home", false);
+            window.setTimeout(function () {
+              if (hash === "#top") {
+                animatedScrollTo(
+                  document.getElementById("top") || document.body
+                );
+                return;
+              }
+              var target = document.getElementById(hash.slice(1));
+              if (target) animatedScrollTo(target);
+            }, 1300);
+          }, delay);
+          return;
+        }
+
+        if (currentView !== "home") return;
 
         if (hash === "#top") {
           e.preventDefault();
@@ -283,6 +523,12 @@
         }, delay);
       });
     });
+  }
+
+  function initViewFromHash() {
+    if (window.location.hash === "#press" || window.location.hash === "#blog") {
+      applyView("blog", true);
+    }
   }
 
   function onScroll() {
@@ -307,7 +553,32 @@
     });
   }
 
+  if (navClose) {
+    navClose.addEventListener("click", function (e) {
+      e.stopPropagation();
+      closeMobileMenu();
+    });
+  }
+
+  window.addEventListener("hashchange", function () {
+    if (isViewLoading) return;
+    if (
+      (window.location.hash === "#press" || window.location.hash === "#blog") &&
+      currentView !== "blog"
+    ) {
+      applyView("blog", true);
+    } else if (
+      window.location.hash !== "#press" &&
+      window.location.hash !== "#blog" &&
+      currentView === "blog"
+    ) {
+      applyView("home", true);
+    }
+  });
+
   bindNavScroll();
+  initViewFromHash();
+  initRevealAnimations();
   initAutoLoops();
   initHorizontalCarousels();
   getHeaderOffset();

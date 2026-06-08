@@ -182,14 +182,8 @@
     document.body.classList.remove("is-scroll-animating");
   }
 
-  /**
-   * Animated scroll through the page — you see content pass by with parallax
-   * updating until you land on the target section.
-   */
-  function animatedScrollTo(target) {
-    if (!target) return;
-
-    var targetY = getTargetTop(target);
+  function animatedScrollToY(targetY) {
+    targetY = Math.max(0, targetY);
     var startY = window.pageYOffset;
     var distance = targetY - startY;
 
@@ -230,6 +224,19 @@
     }
 
     scrollAnimId = requestAnimationFrame(step);
+  }
+
+  /**
+   * Animated scroll through the page — you see content pass by with parallax
+   * updating until you land on the target section.
+   */
+  function animatedScrollTo(target) {
+    if (!target) return;
+    animatedScrollToY(getTargetTop(target));
+  }
+
+  function scrollToTop() {
+    animatedScrollToY(0);
   }
 
   function initAutoLoops() {
@@ -490,9 +497,7 @@
             applyView("home", false);
             window.setTimeout(function () {
               if (hash === "#top") {
-                animatedScrollTo(
-                  document.getElementById("top") || document.body
-                );
+                scrollToTop();
                 return;
               }
               var target = document.getElementById(hash.slice(1));
@@ -508,7 +513,7 @@
           e.preventDefault();
           closeMobileMenu();
           window.setTimeout(function () {
-            animatedScrollTo(document.getElementById("top") || document.body);
+            scrollToTop();
           }, delay);
           return;
         }

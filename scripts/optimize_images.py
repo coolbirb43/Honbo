@@ -85,13 +85,16 @@ def main() -> None:
     brand = ASSETS / "brand"
     if brand.exists():
         for p in sorted(brand.glob("*")):
-            if p.suffix.lower() != ".png":
+            ext = p.suffix.lower()
+            if ext not in (".png", ".jpg", ".jpeg"):
                 continue
             if p.name.lower() == "new_logo.png":
                 jobs.append((p, 1080, False))
+            elif p.name.lower().startswith("honbo_"):
+                jobs.append((p, 320, ext in (".jpg", ".jpeg")))
             elif "icon" in p.name.lower():
                 jobs.append((p, 512, False))
-            else:
+            elif ext == ".png":
                 jobs.append((p, 320, False))
 
     total_before = 0

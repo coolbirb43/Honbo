@@ -34,13 +34,13 @@
   <link rel="apple-touch-icon" href="assets/brand/honbo-logo-blue.png" />
   <link rel="preload" href="assets/photos/hero.webp" as="image" type="image/webp" fetchpriority="high" />
   <link rel="preload" href="assets/brand/New_logo.webp" as="image" type="image/webp" />
-  <link rel="preload" href="css/styles.min.css?v=65" as="style" />
+  <link rel="preload" href="css/styles.min.css?v=68" as="style" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="dns-prefetch" href="https://maps.google.com" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;700&display=swap" /></noscript>
-  <link rel="stylesheet" href="css/styles.min.css?v=65" />
+  <link rel="stylesheet" href="css/styles.min.css?v=68" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -196,13 +196,9 @@
   <header class="site-header" id="top">
     <nav class="nav" aria-label="Main">
       <a class="nav__logo" href="#top" data-view="home" aria-label="Honbo 漢堡 home">
-        <picture class="nav__logo-img nav__logo-img--white" aria-hidden="true">
-          <source srcset="assets/brand/honbo_family_white.webp" type="image/webp" />
-          <img src="assets/brand/honbo_family_white.png" alt="" width="56" height="56" decoding="async" />
-        </picture>
-        <picture class="nav__logo-img nav__logo-img--blue">
-          <source srcset="assets/brand/honbo_family_blue.webp" type="image/webp" />
-          <img src="assets/brand/honbo_family_blue.png" alt="Honbo 漢堡" width="56" height="56" decoding="async" />
+        <picture class="nav__logo-img">
+          <source srcset="assets/brand/honbo_1.webp" type="image/webp" />
+          <img src="assets/brand/honbo_1.png" alt="Honbo 漢堡" width="320" height="320" decoding="async" />
         </picture>
       </a>
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
@@ -624,9 +620,22 @@
         <ul class="catering__list">
           <li>Minimum order applies · 設最低訂購量</li>
           <li>48-hour advance booking · 建議提前 48 小時預訂</li>
+          <li>
+            Catering hotline 到會電話：
+            <a class="catering__phone-plain" href="tel:+85266626854">+852 6662 6854</a>
+          </li>
         </ul>
         <div class="catering__cta">
-          <a class="btn btn--light" href="mailto:hello@honbo.com?subject=Honbo%20Inquiry&amp;body=Hello%20Honbo%2C%0A%0AI%20would%20like%20to%20inquire%20about%3A%0A%0A">Inquire 查詢</a>
+          <a class="btn btn--light" href="mailto:hello@honbo.com?subject=Honbo%20Catering%20Inquiry&amp;body=Hello%20Honbo%2C%0A%0AI%20would%20like%20to%20inquire%20about%20catering%3A%0A%0A">Inquire 查詢</a>
+          <button
+            type="button"
+            class="btn btn--light catering__phone-copy"
+            data-copy-text="+852 6662 6854"
+            aria-label="Copy catering phone number +852 6662 6854"
+          >
+            <span class="catering__phone-label">Phone 電話</span>
+            <span class="catering__phone-number" aria-hidden="true">+852 6662 6854</span>
+          </button>
         </div>
       </div>
     </section>
@@ -800,6 +809,8 @@
     <p class="site-footer__legal">Content and design &copy; Honbo. Unauthorised copying is prohibited.</p>
   </footer>
 
-  <script src="js/app.min.js?v=41" defer></script>
+  <div class="copy-toast" id="copy-toast" role="status" aria-live="polite">Phone number copied · 電話號碼已複製</div>
+
+  <script src="js/app.min.js?v=43" defer></script>
 </body>
 </html>

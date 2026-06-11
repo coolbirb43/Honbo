@@ -582,8 +582,88 @@
     }
   });
 
+  function showCopyToast(message) {
+    var toast = document.getElementById("copy-toast");
+    if (!toast) return;
+
+    toast.textContent = message;
+    toast.classList.remove("is-visible");
+    window.clearTimeout(showCopyToast._hideTimer);
+    window.clearTimeout(showCopyToast._resetTimer);
+
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        toast.classList.add("is-visible");
+      });
+    });
+
+    showCopyToast._hideTimer = window.setTimeout(function () {
+      toast.classList.remove("is-visible");
+      showCopyToast._resetTimer = window.setTimeout(function () {
+        toast.textContent = "Phone number copied · 電話號碼已複製";
+      }, 350);
+    }, 2400);
+  }
+
+  function copyTextSync(text) {
+    var area = document.createElement("textarea");
+    area.value = text;
+    area.setAttribute("readonly", "");
+    area.style.position = "fixed";
+    area.style.top = "0";
+    area.style.left = "0";
+    area.style.width = "1px";
+    area.style.height = "1px";
+    area.style.opacity = "0";
+    area.style.pointerEvents = "none";
+    document.body.appendChild(area);
+    area.focus();
+    area.select();
+    area.setSelectionRange(0, text.length);
+
+    var copied = false;
+    try {
+      copied = document.execCommand("copy");
+    } catch (err) {
+      copied = false;
+    }
+
+    document.body.removeChild(area);
+    return copied;
+  }
+
+  function initCateringPhoneCopy() {
+    var button = document.querySelector(".catering__phone-copy");
+    if (!button) return;
+
+    button.addEventListener("click", function () {
+      var text = button.getAttribute("data-copy-text") || "";
+      if (!text) return;
+
+      if (copyTextSync(text)) {
+        showCopyToast("Phone number copied · 電話號碼已複製");
+        return;
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard
+          .writeText(text)
+          .then(function () {
+            showCopyToast("Phone number copied · 電話號碼已複製");
+          })
+          .catch(function () {
+            showCopyToast("Could not copy number · 未能複製電話");
+          });
+        return;
+      }
+
+      showCopyToast("Could not copy number · 未能複製電話");
+    });
+  }
+
   bindNavScroll();
   initViewFromHash();
+  initCateringPhoneCopy();
   initRevealAnimations();
   initAutoLoops();
   initHorizontalCarousels();

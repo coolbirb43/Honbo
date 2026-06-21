@@ -34,13 +34,13 @@
   <link rel="apple-touch-icon" href="assets/brand/honbo-logo-blue.png" />
   <link rel="preload" href="assets/photos/hero.webp" as="image" type="image/webp" fetchpriority="high" />
   <link rel="preload" href="assets/brand/New_logo.webp" as="image" type="image/webp" />
-  <link rel="preload" href="css/styles.min.css?v=68" as="style" />
+  <link rel="preload" href="css/styles.min.css?v=72" as="style" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="dns-prefetch" href="https://maps.google.com" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;700&display=swap" /></noscript>
-  <link rel="stylesheet" href="css/styles.min.css?v=68" />
+  <link rel="stylesheet" href="css/styles.min.css?v=72" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -191,7 +191,8 @@
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main" data-lang="en">Skip to content</a>
+  <a class="skip-link" href="#main" data-lang="zh">跳至內容</a>
 
   <header class="site-header" id="top">
     <nav class="nav" aria-label="Main">
@@ -216,12 +217,19 @@
       <span class="sr-only">Close menu</span>
     </button>
     <ul class="nav__menu">
-      <li><a href="#locations" data-view="home">Locations 分店</a></li>
-      <li><a href="#bestsellers" data-view="home">Best Sellers 招牌</a></li>
-      <!-- <li><a href="#anatomy" data-view="home">Anatomy 漢堡</a></li> -->
-      <li><a href="#origin" data-view="home">Our Story 故事</a></li>
-      <li><a href="#catering" data-view="home">Catering 到會</a></li>
-      <li><a href="#press" data-view="blog">Press &amp; Praise 媒體好評</a></li>
+      <li data-lang="en"><a href="#locations" data-view="home">Locations</a></li>
+      <li data-lang="zh"><a href="#locations" data-view="home">分店</a></li>
+      <li data-lang="en"><a href="#bestsellers" data-view="home">Best Sellers</a></li>
+      <li data-lang="zh"><a href="#bestsellers" data-view="home">招牌</a></li>
+      <li data-lang="en"><a href="#origin" data-view="home">Our Story</a></li>
+      <li data-lang="zh"><a href="#origin" data-view="home">故事</a></li>
+      <li data-lang="en"><a href="#catering" data-view="home">Catering</a></li>
+      <li data-lang="zh"><a href="#catering" data-view="home">到會</a></li>
+      <li data-lang="en"><a href="#press" data-view="blog">Press &amp; Praise</a></li>
+      <li data-lang="zh"><a href="#press" data-view="blog">媒體好評</a></li>
+      <li class="nav__menu-lang">
+        <button type="button" class="nav__menu-lang-btn" id="lang-toggle" aria-label="Switch to Chinese">中文</button>
+      </li>
     </ul>
   </nav>
 
@@ -252,7 +260,8 @@
       <div class="hero-parallax__content">
         <div class="hero-parallax__brand">
           <h1 class="hero-parallax__title" id="hero-title">
-            <span class="sr-only">Honbo 漢堡 — Smash Burgers in Hong Kong</span>
+            <span class="sr-only" data-lang="en">Honbo — Smash Burgers in Hong Kong</span>
+            <span class="sr-only" data-lang="zh">Honbo 漢堡 — 香港壓扁漢堡</span>
             <span class="hero-parallax__logo-frame">
               <picture>
                 <source srcset="assets/brand/New_logo.webp" type="image/webp" />
@@ -264,11 +273,11 @@
       </div>
       <div class="hero-parallax__footer">
         <div class="hero-parallax__copy">
-          <p class="hero-parallax__tagline">Hong Kong's Best Smash Burgers</p>
-          <p class="hero-parallax__tagline-zh">新鮮牛肉，即叫即壓 · 香港最好食嘅壓扁漢堡</p>
+          <p class="hero-parallax__tagline" data-lang="en">Hong Kong's Best Smash Burgers</p>
+          <p class="hero-parallax__tagline hero-parallax__tagline-zh" data-lang="zh">新鮮牛肉，即叫即壓 · 香港最好食嘅壓扁漢堡</p>
         </div>
         <div class="hero-parallax__bottom">
-          <p class="hero-parallax__proof">
+          <p class="hero-parallax__proof" data-lang="en">
             Featured in
             <a href="https://www.ft.com/content/9daf1b7f-c292-4dbc-a734-1e4007ce5cb5" target="_blank" rel="noopener noreferrer">Financial Times</a>
             ·
@@ -276,7 +285,20 @@
             ·
             <a href="https://www.bloomberg.com/news/articles/2020-02-15/best-burgers-in-the-world-top-chefs-pick-favorite-hamburgers" target="_blank" rel="noopener noreferrer">Bloomberg</a>
           </p>
-          <a class="hero-parallax__scroll" href="#locations" aria-label="Scroll to locations">
+          <p class="hero-parallax__proof" data-lang="zh">
+            媒體報導
+            <a href="https://www.ft.com/content/9daf1b7f-c292-4dbc-a734-1e4007ce5cb5" target="_blank" rel="noopener noreferrer">Financial Times</a>
+            ·
+            <a href="https://www.timeout.com/hong-kong/restaurants/best-burgers-hong-kong" target="_blank" rel="noopener noreferrer">Time Out</a>
+            ·
+            <a href="https://www.bloomberg.com/news/articles/2020-02-15/best-burgers-in-the-world-top-chefs-pick-favorite-hamburgers" target="_blank" rel="noopener noreferrer">Bloomberg</a>
+          </p>
+          <a class="hero-parallax__scroll" href="#locations" data-lang="en" aria-label="Scroll to locations">
+            <svg class="hero-parallax__arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a class="hero-parallax__scroll" href="#locations" data-lang="zh" aria-label="瀏覽分店">
             <svg class="hero-parallax__arrow" width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -286,19 +308,35 @@
     </section>
 
     <div class="marquee-bar" id="intro" aria-hidden="true">
-      <div class="loop-track loop-track--marquee" data-loop-speed="22">
+      <div class="loop-track loop-track--marquee" data-loop-speed="22" data-lang="en">
         <div class="loop-track__inner">
           <div class="loop-track__set">
-            <span>Fresh beef · Smashed daily · 新鮮牛肉即壓 ·</span>
-            <span>Potato milk bun · 薯仔包 ·</span>
-            <span>Hand-ground daily · 即日手打 ·</span>
-            <span>Wan Chai · Central · 灣仔 · 中環 ·</span>
+            <span>Fresh beef · Smashed daily ·</span>
+            <span>Potato milk bun ·</span>
+            <span>Hand-ground daily ·</span>
+            <span>Wan Chai · Central ·</span>
           </div>
           <div class="loop-track__set" aria-hidden="true">
-            <span>Fresh beef · Smashed daily · 新鮮牛肉即壓 ·</span>
-            <span>Potato milk bun · 薯仔包 ·</span>
-            <span>Hand-ground daily · 即日手打 ·</span>
-            <span>Wan Chai · Central · 灣仔 · 中環 ·</span>
+            <span>Fresh beef · Smashed daily ·</span>
+            <span>Potato milk bun ·</span>
+            <span>Hand-ground daily ·</span>
+            <span>Wan Chai · Central ·</span>
+          </div>
+        </div>
+      </div>
+      <div class="loop-track loop-track--marquee" data-loop-speed="22" data-lang="zh">
+        <div class="loop-track__inner">
+          <div class="loop-track__set">
+            <span>新鮮牛肉即壓 ·</span>
+            <span>薯仔包 ·</span>
+            <span>即日手打 ·</span>
+            <span>灣仔 · 中環 ·</span>
+          </div>
+          <div class="loop-track__set" aria-hidden="true">
+            <span>新鮮牛肉即壓 ·</span>
+            <span>薯仔包 ·</span>
+            <span>即日手打 ·</span>
+            <span>灣仔 · 中環 ·</span>
           </div>
         </div>
       </div>
@@ -306,8 +344,10 @@
 
     <section class="locations" id="locations" aria-labelledby="locations-heading">
       <div class="section-intro">
-        <h2 class="section-intro__title" id="locations-heading">Where to find Honbo in Hong Kong</h2>
-        <p class="section-intro__subtitle">Smash burgers · Wan Chai &amp; Central · 灣仔及中環 · Eat in &amp; takeaway</p>
+        <h2 class="section-intro__title" id="locations-heading" data-lang="en">Where to find Honbo in Hong Kong</h2>
+        <h2 class="section-intro__title" id="locations-heading-zh" data-lang="zh">香港邊度食到 Honbo</h2>
+        <p class="section-intro__subtitle" data-lang="en">Smash burgers · Wan Chai &amp; Central · Eat in &amp; takeaway</p>
+        <p class="section-intro__subtitle" data-lang="zh">壓扁漢堡 · 灣仔及中環 · 堂食及外賣</p>
       </div>
 
       <article class="location-panel">
@@ -320,16 +360,22 @@
           </div>
         </div>
         <div class="location-panel__body">
-          <p class="location-panel__label">Flagship 總店</p>
-          <h3 class="location-panel__name">Wan Chai<span>灣仔</span></h3>
-          <address>
-            G/F, Shop C, 1-3 Moon street, Wan Chai<br />
+          <p class="location-panel__label" data-lang="en">Flagship</p>
+          <p class="location-panel__label" data-lang="zh">總店</p>
+          <h3 class="location-panel__name" data-lang="en">Wan Chai</h3>
+          <h3 class="location-panel__name location-panel__name--zh" data-lang="zh">灣仔</h3>
+          <address data-lang="en">
+            G/F, Shop C, 1-3 Moon street, Wan Chai
+          </address>
+          <address data-lang="zh">
             G/F, Shop C, 1-3 月街, 灣仔
           </address>
           <p class="location-panel__hours">Mon–Sun · 12:00 – 22:00</p>
-          <p class="location-panel__service">EAT IN &amp; TAKEAWAY · 堂食及外賣</p>
+          <p class="location-panel__service" data-lang="en">EAT IN &amp; TAKEAWAY</p>
+          <p class="location-panel__service" data-lang="zh">堂食及外賣</p>
           <div class="location-panel__actions">
-            <a class="btn btn--outline" href="#map-wanchai">Map 地圖</a>
+            <a class="btn btn--outline" href="#map-wanchai" data-lang="en">Map</a>
+            <a class="btn btn--outline" href="#map-wanchai" data-lang="zh">地圖</a>
             <a class="btn btn--primary" href="https://www.foodpanda.hk/chain/cz2ww/honbo" target="_blank" rel="noopener noreferrer">FOODPANDA</a>
             <a class="btn btn--primary" href="https://url.mykeeta.com/SBr5MoLz" target="_blank" rel="noopener noreferrer">KEETA</a>
           </div>
@@ -355,16 +401,22 @@
           </div>
         </div>
         <div class="location-panel__body">
-          <p class="location-panel__label">Central 中環</p>
-          <h3 class="location-panel__name">Central<span>中環</span></h3>
-          <address>
-            G/F, Shop 2, 8 Lyndhurst Terrace, Central<br />
+          <p class="location-panel__label" data-lang="en">Central</p>
+          <p class="location-panel__label" data-lang="zh">中環</p>
+          <h3 class="location-panel__name" data-lang="en">Central</h3>
+          <h3 class="location-panel__name location-panel__name--zh" data-lang="zh">中環</h3>
+          <address data-lang="en">
+            G/F, Shop 2, 8 Lyndhurst Terrace, Central
+          </address>
+          <address data-lang="zh">
             G/F, Shop 2, 8 擺花街, 中環
           </address>
           <p class="location-panel__hours">Mon–Sun · 12:00 – 22:00</p>
-          <p class="location-panel__service">EAT IN &amp; TAKEAWAY · 堂食及外賣</p>
+          <p class="location-panel__service" data-lang="en">EAT IN &amp; TAKEAWAY</p>
+          <p class="location-panel__service" data-lang="zh">堂食及外賣</p>
           <div class="location-panel__actions">
-            <a class="btn btn--outline" href="#map-central">Map 地圖</a>
+            <a class="btn btn--outline" href="#map-central" data-lang="en">Map</a>
+            <a class="btn btn--outline" href="#map-central" data-lang="zh">地圖</a>
             <a class="btn btn--primary" href="https://www.foodpanda.hk/chain/cz2ww/honbo" target="_blank" rel="noopener noreferrer">FOODPANDA</a>
             <a class="btn btn--primary" href="https://url.mykeeta.com/sPOAeMAz" target="_blank" rel="noopener noreferrer">KEETA</a>
           </div>
@@ -383,8 +435,10 @@
 
     <section class="gallery-section" id="gallery" aria-label="Food gallery">
       <div class="section-block__header">
-        <p class="section-block__label">In the kitchen · 廚房日常</p>
-        <p class="carousel-hint">Swipe or scroll sideways · 左右滑動瀏覽</p>
+        <p class="section-block__label" data-lang="en">In the kitchen</p>
+        <p class="section-block__label" data-lang="zh">廚房日常</p>
+        <p class="carousel-hint" data-lang="en">Swipe or scroll sideways</p>
+        <p class="carousel-hint" data-lang="zh">左右滑動瀏覽</p>
       </div>
       <div class="horizontal-carousel loop-track--gallery horizontal-carousel--infinite" tabindex="0">
         <div class="horizontal-carousel__track">
@@ -399,48 +453,93 @@
       </div>
     </section>
 
-    <section class="bestsellers-section" id="bestsellers" aria-labelledby="bestsellers-heading">
+    <div id="bestsellers">
+    <section class="bestsellers-section" data-lang="en" aria-labelledby="bestsellers-heading">
       <div class="section-block__header">
         <h2 class="section-block__title" id="bestsellers-heading">Best Seller Smash Burgers</h2>
-        <p class="section-block__subtitle">招牌漢堡 · Honbo menu favourites in Hong Kong</p>
-        <p class="carousel-hint">Swipe or scroll sideways · 左右滑動瀏覽</p>
+        <p class="section-block__subtitle">Honbo menu favourites in Hong Kong</p>
+        <p class="carousel-hint">Swipe or scroll sideways</p>
       </div>
       <div class="horizontal-carousel loop-track--bestsellers horizontal-carousel--infinite" tabindex="0" aria-label="Best sellers menu carousel">
         <div class="horizontal-carousel__track">
           <div class="loop-track__set">
             <article class="menu-card">
               <div class="menu-card__art"><picture><source srcset="assets/menu/Honbo.webp" type="image/webp" /><img src="assets/menu/Honbo.PNG" alt="Honbo signature burger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Honbo <span>漢堡</span></h3><p>Our signature smash — thin patties, house sauce, American cheese.</p><span class="price-badge">98</span></div>
+              <div class="menu-card__info"><h3>Honbo</h3><p>Our signature smash — thin patties, house sauce, American cheese.</p><span class="price-badge">98</span></div>
             </article>
             <article class="menu-card">
               <div class="menu-card__art"><picture><source srcset="assets/menu/Honbo15.webp" type="image/webp" /><img src="assets/menu/Honbo15.PNG" alt="Honbo 1.5" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Honbo 1.5 <span>漢堡 1.5</span></h3><p>Extra patty, same signature style — the crowd favourite.</p><span class="price-badge">118</span></div>
+              <div class="menu-card__info"><h3>Honbo 1.5</h3><p>Extra patty, same signature style — the crowd favourite.</p><span class="price-badge">118</span></div>
             </article>
             <article class="menu-card">
               <div class="menu-card__art"><picture><source srcset="assets/menu/Honbo20.webp" type="image/webp" /><img src="assets/menu/Honbo20.PNG" alt="Honbo 2.0" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Honbo 2.0 <span>漢堡 2.0</span></h3><p>Four crispy-edged patties, cheese, pickles, onion, house sauce.</p><span class="price-badge">158</span></div>
+              <div class="menu-card__info"><h3>Honbo 2.0</h3><p>Four crispy-edged patties, cheese, pickles, onion, house sauce.</p><span class="price-badge">158</span></div>
             </article>
             <article class="menu-card">
               <div class="menu-card__art"><picture><source srcset="assets/menu/Gold Standard.webp" type="image/webp" /><img src="assets/menu/Gold Standard.PNG" alt="Double cheeseburger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Double Cheeseburger <span>雙層芝士堡</span></h3><p>Thick patties, classic style — 4 oz &amp; 6 oz options.</p><span class="price-badge">158</span></div>
+              <div class="menu-card__info"><h3>Double Cheeseburger</h3><p>Thick patties, classic style — 4 oz &amp; 6 oz options.</p><span class="price-badge">158</span></div>
             </article>
             <article class="menu-card">
               <div class="menu-card__art"><picture><source srcset="assets/menu/Cheeseburger.webp" type="image/webp" /><img src="assets/menu/Cheeseburger.PNG" alt="Cheeseburger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Cheeseburger <span>芝士堡</span></h3><p>Traditional thick patty, American cheese, done right.</p><span class="price-badge">108</span></div>
+              <div class="menu-card__info"><h3>Cheeseburger</h3><p>Traditional thick patty, American cheese, done right.</p><span class="price-badge">108</span></div>
             </article>
             <article class="menu-card">
               <div class="menu-card__art"><picture><source srcset="assets/menu/TeriyakiChickenBurger.webp" type="image/webp" /><img src="assets/menu/TeriyakiChickenBurger.PNG" alt="Teriyaki burger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Teriyaki Burger <span>照燒漢堡</span></h3><p>Sweet, savoury, smashed to order — local twist.</p><span class="price-badge">118</span></div>
+              <div class="menu-card__info"><h3>Teriyaki Burger</h3><p>Sweet, savoury, smashed to order — local twist.</p><span class="price-badge">118</span></div>
             </article>
             <article class="menu-card">
               <div class="menu-card__art"><picture><source srcset="assets/menu/Hamburger.webp" type="image/webp" /><img src="assets/menu/Hamburger.PNG" alt="Hamburger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Hamburger <span>純肉漢堡</span></h3><p>No cheese, all beef — for the purist.</p><span class="price-badge">98</span></div>
+              <div class="menu-card__info"><h3>Hamburger</h3><p>No cheese, all beef — for the purist.</p><span class="price-badge">98</span></div>
             </article>
           </div>
         </div>
       </div>
-      <p class="bestsellers-section__footnote">Prices in HKD · 價錢以港元為準 · Full menu in-store</p>
+      <p class="bestsellers-section__footnote">Prices in HKD · Full menu in-store</p>
     </section>
+
+    <section class="bestsellers-section" data-lang="zh" aria-labelledby="bestsellers-heading-zh">
+      <div class="section-block__header">
+        <h2 class="section-block__title" id="bestsellers-heading-zh">招牌壓扁漢堡</h2>
+        <p class="section-block__subtitle">Honbo 人氣之選</p>
+        <p class="carousel-hint">左右滑動瀏覽</p>
+      </div>
+      <div class="horizontal-carousel loop-track--bestsellers horizontal-carousel--infinite" tabindex="0" aria-label="招牌漢堡餐牌">
+        <div class="horizontal-carousel__track">
+          <div class="loop-track__set">
+            <article class="menu-card">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/Honbo.webp" type="image/webp" /><img src="assets/menu/Honbo.PNG" alt="Honbo 漢堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>漢堡</h3><p>招牌壓扁漢堡 — 薄肉餅、自家醬汁、美式芝士。</p><span class="price-badge">98</span></div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/Honbo15.webp" type="image/webp" /><img src="assets/menu/Honbo15.PNG" alt="漢堡 1.5" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>漢堡 1.5</h3><p>加多層肉餅，同樣招牌風味 — 人氣之選。</p><span class="price-badge">118</span></div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/Honbo20.webp" type="image/webp" /><img src="assets/menu/Honbo20.PNG" alt="漢堡 2.0" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>漢堡 2.0</h3><p>四層脆邊肉餅、芝士、酸黃瓜、洋蔥、自家醬汁。</p><span class="price-badge">158</span></div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/Gold Standard.webp" type="image/webp" /><img src="assets/menu/Gold Standard.PNG" alt="雙層芝士堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>雙層芝士堡</h3><p>厚肉餅經典做法 — 4 oz 及 6 oz 選擇。</p><span class="price-badge">158</span></div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/Cheeseburger.webp" type="image/webp" /><img src="assets/menu/Cheeseburger.PNG" alt="芝士堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>芝士堡</h3><p>傳統厚肉餅配美式芝士，簡單到位。</p><span class="price-badge">108</span></div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/TeriyakiChickenBurger.webp" type="image/webp" /><img src="assets/menu/TeriyakiChickenBurger.PNG" alt="照燒漢堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>照燒漢堡</h3><p>甜鹹照燒風味，即叫即壓 — 本地特色。</p><span class="price-badge">118</span></div>
+            </article>
+            <article class="menu-card">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/Hamburger.webp" type="image/webp" /><img src="assets/menu/Hamburger.PNG" alt="純肉漢堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>純肉漢堡</h3><p>無芝士，純牛肉 — 留俾原味派。</p><span class="price-badge">98</span></div>
+            </article>
+          </div>
+        </div>
+      </div>
+      <p class="bestsellers-section__footnote">價錢以港元為準 · 完整餐牌請到店查詢</p>
+    </section>
+    </div>
 
     <!-- Anatomy section: commented out until custom images are provided
     <section class="anatomy reveal" id="anatomy" aria-labelledby="anatomy-heading">
@@ -586,21 +685,21 @@
       <div class="origin__parallax-bg" aria-hidden="true"></div>
       <div class="origin__inner">
         <div class="section-intro section-intro--light">
-          <h2 class="section-intro__title" id="origin-heading">About Us</h2>
-          <p class="section-intro__subtitle">我哋嘅故事 · Our Origin</p>
+          <h2 class="section-intro__title" id="origin-heading" data-lang="en">About Us</h2>
+          <h2 class="section-intro__title" id="origin-heading-zh" data-lang="zh">我哋嘅故事</h2>
+          <p class="section-intro__subtitle" data-lang="en">Our Origin</p>
+          <p class="section-intro__subtitle" data-lang="zh">Honbo 的起源</p>
         </div>
-        <div class="origin__grid">
-          <article class="origin__col">
-            <p>Born in 2017 on Sun Street, Wan Chai, Honbo is a home-grown Hong Kong burger joint that celebrates the simple things done right. We are a community-driven restaurant that focuses on honest, high-quality ingredients.</p>
-          </article>
-          <article class="origin__col origin__col--zh">
-            <p>2017 年喺灣仔太陽街開業，Honbo（漢堡）係土生土長嘅香港漢堡店，專注把簡單嘅嘢做好。我哋重視社區同誠實食材，唔玩花巧，只係做好一個經典漢堡。</p>
-          </article>
-          <article class="origin__col">
-            <p>From our signature potato milk buns to our custom blend of double-gold medal winning beef — everything is handmade, smashed fresh, and served with pride.</p>
-          </article>
+        <div class="origin__body" data-lang="en">
+          <p>Born in 2017 on Sun Street, Wan Chai, Honbo is a home-grown Hong Kong burger joint that celebrates the simple things done right. We are a community-driven restaurant that focuses on honest, high-quality ingredients.</p>
+          <p>From our signature potato milk buns to our custom blend of double-gold medal winning beef — everything is handmade, smashed fresh, and served with pride.</p>
         </div>
-        <p class="origin__note">「Honbo」即係廣東話「漢堡」—— 一個好本地、好直接嘅名字。</p>
+        <div class="origin__body origin__body--zh" data-lang="zh">
+          <p>2017 年喺灣仔太陽街開業，Honbo（漢堡）係土生土長嘅香港漢堡店，專注把簡單嘅嘢做好。我哋重視社區同誠實食材，唔玩花巧，只係做好一個經典漢堡。</p>
+          <p>由招牌薯仔包到雙金獎牛肉配方，所有嘢都係手製、即叫即壓，用心奉上。</p>
+        </div>
+        <p class="origin__note" data-lang="en">「Honbo」means “hamburger” in Cantonese — local, direct, and unmistakably Hong Kong.</p>
+        <p class="origin__note origin__note--zh" data-lang="zh">「Honbo」即係廣東話「漢堡」—— 一個好本地、好直接嘅名字。</p>
       </div>
     </section>
 
@@ -613,27 +712,41 @@
       </div>
       <div class="catering__overlay"></div>
       <div class="catering__content">
-        <h2 class="catering__title" id="catering-heading">Catering</h2>
-        <p class="catering__subtitle">到會 · 派對 · 公司活動</p>
-        <p>Bring Honbo to your next gathering — smash burgers, hand-cut fries, onion rings, and classic shakes, packed fresh across Hong Kong.</p>
-        <p class="catering__zh">想喺公司、生日會或者私人活動食到我哋嘅漢堡？Honbo 提供到會服務，即日製作，送到你指定地點。</p>
+        <h2 class="catering__title" id="catering-heading" data-lang="en">Catering</h2>
+        <h2 class="catering__title" id="catering-heading-zh" data-lang="zh">到會</h2>
+        <p class="catering__subtitle" data-lang="en">Parties · Corporate events · Private gatherings</p>
+        <p class="catering__subtitle" data-lang="zh">派對 · 公司活動 · 私人聚會</p>
+        <p data-lang="en">Bring Honbo to your next gathering — smash burgers, hand-cut fries, onion rings, and classic shakes, packed fresh across Hong Kong.</p>
+        <p data-lang="zh">想喺公司、生日會或者私人活動食到我哋嘅漢堡？Honbo 提供到會服務，即日製作，送到你指定地點。</p>
         <ul class="catering__list">
-          <li>Minimum order applies · 設最低訂購量</li>
-          <li>48-hour advance booking · 建議提前 48 小時預訂</li>
-          <li>
-            Catering hotline 到會電話：
+          <li data-lang="en">Minimum order applies</li>
+          <li data-lang="zh">設最低訂購量</li>
+          <li data-lang="en">48-hour advance booking recommended</li>
+          <li data-lang="zh">建議提前 48 小時預訂</li>
+          <li data-lang="en">
+            Catering hotline:
+            <a class="catering__phone-plain" href="tel:+85266626854">+852 6662 6854</a>
+          </li>
+          <li data-lang="zh">
+            到會電話：
             <a class="catering__phone-plain" href="tel:+85266626854">+852 6662 6854</a>
           </li>
         </ul>
         <div class="catering__cta">
-          <a class="btn btn--light" href="mailto:hello@honbo.com?subject=Honbo%20Catering%20Inquiry&amp;body=Hello%20Honbo%2C%0A%0AI%20would%20like%20to%20inquire%20about%20catering%3A%0A%0A">Inquire 查詢</a>
+          <a class="btn btn--light" href="mailto:hello@honbo.com?subject=Honbo%20Catering%20Inquiry&amp;body=Hello%20Honbo%2C%0A%0AI%20would%20like%20to%20inquire%20about%20catering%3A%0A%0A" data-lang="en">Inquire</a>
+          <a class="btn btn--light" href="mailto:hello@honbo.com?subject=Honbo%20%E5%88%B0%E6%9C%83%E6%9F%A5%E8%A9%A2&amp;body=Hello%20Honbo%2C%0A%0A%E6%88%91%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%88%B0%E6%9C%83%E6%9C%8D%E5%8B%99%EF%BC%9A%0A%0A" data-lang="zh">查詢</a>
           <button
             type="button"
             class="btn btn--light catering__phone-copy"
             data-copy-text="+852 6662 6854"
+            data-copy-toast-en="Phone number copied"
+            data-copy-toast-zh="電話號碼已複製"
+            data-copy-fail-en="Could not copy number"
+            data-copy-fail-zh="未能複製電話"
             aria-label="Copy catering phone number +852 6662 6854"
           >
-            <span class="catering__phone-label">Phone 電話</span>
+            <span class="catering__phone-label" data-lang="en">Phone</span>
+            <span class="catering__phone-label" data-lang="zh">電話</span>
             <span class="catering__phone-number" aria-hidden="true">+852 6662 6854</span>
           </button>
         </div>
@@ -651,8 +764,9 @@
         </div>
         <div class="blog-hero__overlay" aria-hidden="true"></div>
         <div class="blog-hero__inner">
-          <div class="blog-awards" aria-label="Awards and features">
-            <p class="blog-awards__label">Awarded &amp; featured in · 獲獎及媒體報導</p>
+          <div class="blog-awards" aria-label="Awards and features · 獲獎及媒體報導">
+            <p class="blog-awards__label" data-lang="en">Awarded &amp; featured in</p>
+            <p class="blog-awards__label" data-lang="zh">獲獎及媒體報導</p>
             <ul class="blog-awards__list">
               <li>
                 <a class="blog-award" href="https://www.bloomberg.com/news/articles/2020-02-15/best-burgers-in-the-world-top-chefs-pick-favorite-hamburgers" target="_blank" rel="noopener noreferrer" title="Bloomberg: The World’s Best Burgers as Picked by Stars of Gastronomy (2020)">Bloomberg</a>
@@ -665,9 +779,11 @@
               </li>
             </ul>
           </div>
-          <h2 class="blog-hero__title" id="blog-heading">Press &amp; Praise</h2>
-          <p class="blog-hero__lead">Honbo Smash Burgers in Hong Kong — reviews and features from food writers worldwide, plus Bloomberg, Financial Times and Time Out recognition.</p>
-          <div class="blog-hero__stats" aria-label="Review highlights">
+          <h2 class="blog-hero__title" id="blog-heading" data-lang="en">Press &amp; Praise</h2>
+          <h2 class="blog-hero__title" id="blog-heading-zh" data-lang="zh">媒體好評</h2>
+          <p class="blog-hero__lead" data-lang="en">Honbo Smash Burgers in Hong Kong — reviews and features from food writers worldwide, plus Bloomberg, Financial Times and Time Out recognition.</p>
+          <p class="blog-hero__lead" data-lang="zh">香港 Honbo 壓扁漢堡 — 來自世界各地美食作家的評論及專題報道，以及 Bloomberg、Financial Times 和 Time Out 的認可。</p>
+          <div class="blog-hero__stats" aria-label="Review highlights" data-lang="en">
             <div class="blog-stat">
               <span class="blog-stat__value">4.9</span>
               <span class="blog-stat__label">foodpanda rating</span>
@@ -681,96 +797,137 @@
               <span class="blog-stat__label">HK locations</span>
             </div>
           </div>
+          <div class="blog-hero__stats" aria-label="評價亮點" data-lang="zh">
+            <div class="blog-stat">
+              <span class="blog-stat__value">4.9</span>
+              <span class="blog-stat__label">foodpanda 評分</span>
+            </div>
+            <div class="blog-stat">
+              <span class="blog-stat__value">2017</span>
+              <span class="blog-stat__label">灣仔開業</span>
+            </div>
+            <div class="blog-stat">
+              <span class="blog-stat__value">2</span>
+              <span class="blog-stat__label">香港分店</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="blog-reviews" aria-label="Honbo reviews and articles">
+      <section class="blog-reviews" aria-label="Honbo reviews and articles · Honbo 評論及媒體文章">
         <div class="blog-reviews__inner">
           <article class="review-card">
             <div class="review-card__top">
-              <span class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="en" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="zh" aria-label="5 顆星（滿分）">★★★★★</span>
               <span class="review-card__source">Foodie</span>
             </div>
             <blockquote class="review-card__quote">“Honbo was founded in 2017 with a focus on home-grown ingredients, from preservative-free potato milk buns made by a local artisanal baker to creative drinks at the shop. We rate the simple, no-frills menu and USDA Double Gold beef used to craft the juicy smash burgers.”</blockquote>
-            <p class="review-card__meta">Best burgers in Hong Kong · 2026 guide</p>
-            <a class="review-card__link" href="https://www.afoodieworld.com/blog/2026/04/30/best-burgers-hong-kong/" target="_blank" rel="noopener noreferrer">Read article →</a>
+            <p class="review-card__meta" data-lang="en">Best burgers in Hong Kong · 2026 guide</p>
+            <p class="review-card__meta" data-lang="zh">香港最佳漢堡 · 2026 指南</p>
+            <a class="review-card__link" href="https://www.afoodieworld.com/blog/2026/04/30/best-burgers-hong-kong/" target="_blank" rel="noopener noreferrer" data-lang="en">Read article →</a>
+            <a class="review-card__link" href="https://www.afoodieworld.com/blog/2026/04/30/best-burgers-hong-kong/" target="_blank" rel="noopener noreferrer" data-lang="zh">閱讀文章 →</a>
           </article>
 
           <article class="review-card">
             <div class="review-card__top">
-              <span class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="en" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="zh" aria-label="5 顆星（滿分）">★★★★★</span>
               <span class="review-card__source">Sassy Hong Kong</span>
             </div>
             <blockquote class="review-card__quote">“With several members on Team Sassy as self-proclaimed Honbo lovers… you can expect everything at this grassroots burger restaurant to be sourced from the very best local spots, with juicy beef and perfectly crisped buns. The loaded cheese fries are the best in town!”</blockquote>
-            <p class="review-card__meta">Team Sassy favourite · Central location</p>
-            <a class="review-card__link" href="https://www.sassyhongkong.com/eat-drink-hong-kong-dining-burgers/" target="_blank" rel="noopener noreferrer">Read article →</a>
+            <p class="review-card__meta" data-lang="en">Team Sassy favourite · Central location</p>
+            <p class="review-card__meta" data-lang="zh">Sassy 團隊最愛 · 中環分店</p>
+            <a class="review-card__link" href="https://www.sassyhongkong.com/eat-drink-hong-kong-dining-burgers/" target="_blank" rel="noopener noreferrer" data-lang="en">Read article →</a>
+            <a class="review-card__link" href="https://www.sassyhongkong.com/eat-drink-hong-kong-dining-burgers/" target="_blank" rel="noopener noreferrer" data-lang="zh">閱讀文章 →</a>
           </article>
 
           <article class="review-card">
             <div class="review-card__top">
-              <span class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="en" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="zh" aria-label="5 顆星（滿分）">★★★★★</span>
               <span class="review-card__source">Honeycombers Hong Kong</span>
             </div>
             <blockquote class="review-card__quote">“Unlike a lot of beef burgers — which are overly salty and greasy — Honbo has taken another approach… a soft potato milk bun complementing the fillings and the beef patty, the Honbo burger has achieved a nice balance of meat and smoky flavours.”</blockquote>
-            <p class="review-card__meta">Wan Chai · American-style burgers with vegan options</p>
-            <a class="review-card__link" href="https://thehoneycombers.com/hong-kong/honbo-wan-chai-burger-restaurant/" target="_blank" rel="noopener noreferrer">Read article →</a>
+            <p class="review-card__meta" data-lang="en">Wan Chai · American-style burgers with vegan options</p>
+            <p class="review-card__meta" data-lang="zh">灣仔 · 美式漢堡（設素食選擇）</p>
+            <a class="review-card__link" href="https://thehoneycombers.com/hong-kong/honbo-wan-chai-burger-restaurant/" target="_blank" rel="noopener noreferrer" data-lang="en">Read article →</a>
+            <a class="review-card__link" href="https://thehoneycombers.com/hong-kong/honbo-wan-chai-burger-restaurant/" target="_blank" rel="noopener noreferrer" data-lang="zh">閱讀文章 →</a>
           </article>
 
           <article class="review-card">
             <div class="review-card__top">
-              <span class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="en" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="zh" aria-label="5 顆星（滿分）">★★★★★</span>
               <span class="review-card__source">Eatbook.sg</span>
             </div>
             <blockquote class="review-card__quote">“Honbo serves excellently executed good ol’ burgers that are made with quality ingredients… buttery, meaty and crusty burger patties, fluffy potato milk buns, no preservatives and MSG.”</blockquote>
-            <p class="review-card__meta">Popular HK Smash Burger chain</p>
-            <a class="review-card__link" href="https://eatbook.sg/honbo-burger-singapore/" target="_blank" rel="noopener noreferrer">Read article →</a>
+            <p class="review-card__meta" data-lang="en">Popular HK Smash Burger chain</p>
+            <p class="review-card__meta" data-lang="zh">香港人氣壓扁漢堡連鎖</p>
+            <a class="review-card__link" href="https://eatbook.sg/honbo-burger-singapore/" target="_blank" rel="noopener noreferrer" data-lang="en">Read article →</a>
+            <a class="review-card__link" href="https://eatbook.sg/honbo-burger-singapore/" target="_blank" rel="noopener noreferrer" data-lang="zh">閱讀文章 →</a>
           </article>
 
           <article class="review-card">
             <div class="review-card__top">
-              <span class="review-card__stars" aria-label="4 out of 5 stars">★★★★☆</span>
+              <span class="review-card__stars" data-lang="en" aria-label="4 out of 5 stars">★★★★☆</span>
+              <span class="review-card__stars" data-lang="zh" aria-label="4 顆星（滿分 5 顆）">★★★★☆</span>
               <span class="review-card__source">The Ranting Panda</span>
             </div>
             <blockquote class="review-card__quote">“Quite an impressive burger… juicy beef patty which is made even better with the crispy bacon and cheese. Sandwiching its patties are house-made potato milk buns… from an exclusive recipe developed with renowned artisanal baker Eric Kayser.”</blockquote>
-            <p class="review-card__meta">Taste bud: 4/5 · Beef patty stands out</p>
-            <a class="review-card__link" href="https://therantingpanda.com/2023/07/26/food-review-honbo-at-chijmes-hong-kong-burger-restaurant-opens-first-overseas-outpost-in-singapore/" target="_blank" rel="noopener noreferrer">Read article →</a>
+            <p class="review-card__meta" data-lang="en">Taste bud: 4/5 · Beef patty stands out</p>
+            <p class="review-card__meta" data-lang="zh">味道評分：4/5 · 牛肉扒出色</p>
+            <a class="review-card__link" href="https://therantingpanda.com/2023/07/26/food-review-honbo-at-chijmes-hong-kong-burger-restaurant-opens-first-overseas-outpost-in-singapore/" target="_blank" rel="noopener noreferrer" data-lang="en">Read article →</a>
+            <a class="review-card__link" href="https://therantingpanda.com/2023/07/26/food-review-honbo-at-chijmes-hong-kong-burger-restaurant-opens-first-overseas-outpost-in-singapore/" target="_blank" rel="noopener noreferrer" data-lang="zh">閱讀文章 →</a>
           </article>
 
           <article class="review-card">
             <div class="review-card__top">
-              <span class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="en" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="zh" aria-label="5 顆星（滿分）">★★★★★</span>
               <span class="review-card__source">The Straits Times</span>
             </div>
             <blockquote class="review-card__quote">“Honbo gets many things right… six seared surfaces, alternating with cheese… stuffed between potato milk buns. That is very close to burger nirvana for me.”</blockquote>
-            <p class="review-card__meta">Food Picks · Smash burgers done right</p>
-            <a class="review-card__link" href="https://www.straitstimes.com/life/food/food-picks-honbo-banh-mi-29-and-hao-you-ji-charcoal-roasted" target="_blank" rel="noopener noreferrer">Read article →</a>
+            <p class="review-card__meta" data-lang="en">Food Picks · Smash burgers done right</p>
+            <p class="review-card__meta" data-lang="zh">美食精選 · 壓扁漢堡做得好</p>
+            <a class="review-card__link" href="https://www.straitstimes.com/life/food/food-picks-honbo-banh-mi-29-and-hao-you-ji-charcoal-roasted" target="_blank" rel="noopener noreferrer" data-lang="en">Read article →</a>
+            <a class="review-card__link" href="https://www.straitstimes.com/life/food/food-picks-honbo-banh-mi-29-and-hao-you-ji-charcoal-roasted" target="_blank" rel="noopener noreferrer" data-lang="zh">閱讀文章 →</a>
           </article>
 
           <article class="review-card">
             <div class="review-card__top">
-              <span class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="en" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="zh" aria-label="5 顆星（滿分）">★★★★★</span>
               <span class="review-card__source">Time Out</span>
             </div>
             <blockquote class="review-card__quote">“Each juicy stack is made from high-quality ingredients: freshly ground Wisconsin beef; pillowy housemade potato milk bun from a recipe by the renowned Eric Kayser; house-cured Japanese pickles; and specialty sauces.”</blockquote>
-            <p class="review-card__meta">Craft burger chain from Hong Kong</p>
-            <a class="review-card__link" href="https://www.timeout.com/hong-kong/restaurants/best-burgers-hong-kong" target="_blank" rel="noopener noreferrer">Read article →</a>
+            <p class="review-card__meta" data-lang="en">Craft burger chain from Hong Kong</p>
+            <p class="review-card__meta" data-lang="zh">來自香港的精品漢堡連鎖</p>
+            <a class="review-card__link" href="https://www.timeout.com/hong-kong/restaurants/best-burgers-hong-kong" target="_blank" rel="noopener noreferrer" data-lang="en">Read article →</a>
+            <a class="review-card__link" href="https://www.timeout.com/hong-kong/restaurants/best-burgers-hong-kong" target="_blank" rel="noopener noreferrer" data-lang="zh">閱讀文章 →</a>
           </article>
 
           <article class="review-card review-card--featured">
             <div class="review-card__top">
-              <span class="review-card__stars" aria-label="5 out of 5 stars">★★★★★</span>
-              <span class="review-card__source">Customer reviews · foodpanda</span>
+              <span class="review-card__stars" data-lang="en" aria-label="5 out of 5 stars">★★★★★</span>
+              <span class="review-card__stars" data-lang="zh" aria-label="5 顆星（滿分）">★★★★★</span>
+              <span class="review-card__source" data-lang="en">Customer reviews · foodpanda</span>
+              <span class="review-card__source" data-lang="zh">顧客評價 · foodpanda</span>
             </div>
             <blockquote class="review-card__quote">“Honbo is one of the best burgers in HK!” · “Surprised by how good the cheeseburger was even after delivery.” · “Really love Honbo for their lettuce bun!”</blockquote>
-            <p class="review-card__meta">4.9/5 from 100+ orders · Central &amp; Wan Chai</p>
-            <a class="review-card__link" href="https://www.foodpanda.hk/chain/cz2ww/honbo" target="_blank" rel="noopener noreferrer">Order on foodpanda →</a>
+            <p class="review-card__meta" data-lang="en">4.9/5 from 100+ orders · Central &amp; Wan Chai</p>
+            <p class="review-card__meta" data-lang="zh">逾 100 單評價 4.9/5 · 中環及灣仔</p>
+            <a class="review-card__link" href="https://www.foodpanda.hk/chain/cz2ww/honbo" target="_blank" rel="noopener noreferrer" data-lang="en">Order on foodpanda →</a>
+            <a class="review-card__link" href="https://www.foodpanda.hk/chain/cz2ww/honbo" target="_blank" rel="noopener noreferrer" data-lang="zh">在 foodpanda 訂購 →</a>
           </article>
         </div>
       </section>
 
       <section class="blog-cta">
-        <p>Ready for the real thing?</p>
-        <a class="btn btn--primary" href="#locations" data-view="home">Find us 搵我哋</a>
+        <p data-lang="en">Ready for the real thing?</p>
+        <p data-lang="zh">準備好親自試下？</p>
+        <a class="btn btn--primary" href="#locations" data-view="home" data-lang="en">Find us</a>
+        <a class="btn btn--primary" href="#locations" data-view="home" data-lang="zh">搵我哋</a>
       </section>
     </div>
   </main>
@@ -805,12 +962,14 @@
         hello@honbo.com
       </a>
     </nav>
-    <p class="site-footer__copy">&copy; <span id="year"></span> Honbo Hong Kong. All rights reserved.</p>
-    <p class="site-footer__legal">Content and design &copy; Honbo. Unauthorised copying is prohibited.</p>
+    <p class="site-footer__copy" data-lang="en">&copy; <span id="year"></span> Honbo Hong Kong. All rights reserved.</p>
+    <p class="site-footer__copy" data-lang="zh">&copy; <span class="year-zh"></span> Honbo Hong Kong. 版權所有。</p>
+    <p class="site-footer__legal" data-lang="en">Content and design &copy; Honbo. Unauthorised copying is prohibited.</p>
+    <p class="site-footer__legal" data-lang="zh">內容及設計 &copy; Honbo。未經授權不得複製。</p>
   </footer>
 
   <div class="copy-toast" id="copy-toast" role="status" aria-live="polite">Phone number copied · 電話號碼已複製</div>
 
-  <script src="js/app.min.js?v=43" defer></script>
+  <script src="js/app.min.js?v=45" defer></script>
 </body>
 </html>

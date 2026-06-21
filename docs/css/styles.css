@@ -161,6 +161,96 @@ body.is-menu-open .site-header.is-scrolled {
   object-fit: contain;
 }
 
+.nav__menu a,
+.nav__menu-lang-btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--honbo-white);
+  line-height: 1.2;
+  transition: color var(--transition), opacity var(--transition);
+}
+
+.nav__menu-lang-btn {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.nav__menu-lang {
+  display: flex;
+  align-items: center;
+}
+
+.site-header.is-scrolled ~ .site-nav .nav__menu a,
+.site-header.is-scrolled ~ .site-nav .nav__menu-lang-btn {
+  color: var(--honbo-navy);
+}
+
+.nav__menu a:hover,
+.nav__menu a:focus-visible,
+.nav__menu-lang-btn:hover,
+.nav__menu-lang-btn:focus-visible {
+  opacity: 0.78;
+}
+
+body:not(.is-lang-zh) [data-lang="zh"] {
+  display: none !important;
+}
+
+body.is-lang-zh [data-lang="en"] {
+  display: none !important;
+}
+
+body.is-lang-switching #view-home,
+body.is-lang-switching .site-footer {
+  opacity: 0.72;
+  transition: opacity 0.2s var(--ease-out);
+}
+
+.origin__body {
+  max-width: 40rem;
+  margin: 0 auto var(--space-lg);
+  font-size: 1.08rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.origin__body p {
+  margin: 0;
+}
+
+.origin__body p + p {
+  margin-top: 1.15rem;
+}
+
+.origin__body--zh {
+  font-family: var(--font-zh);
+  line-height: 1.85;
+  max-width: 36rem;
+}
+
+.bestsellers-section[data-lang="zh"] .menu-card__info h3 {
+  font-family: var(--font-zh);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.bestsellers-section[data-lang="zh"] .menu-card__info p {
+  font-family: var(--font-zh);
+}
+
+.location-panel__name--zh {
+  font-family: var(--font-zh);
+}
+
 /* Desktop nav — sits above page, outside header (avoids backdrop-filter trap) */
 .site-nav {
   position: fixed;
@@ -185,20 +275,6 @@ body.is-menu-open .site-header.is-scrolled {
   margin: 0;
   padding: 0;
   pointer-events: auto;
-}
-
-.nav__menu a {
-  font-weight: 600;
-  font-size: clamp(0.75rem, 1.8vw, 0.9rem);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--honbo-white);
-  transition: color var(--transition), opacity var(--transition);
-}
-
-.site-header.is-scrolled ~ .site-nav .nav__menu a {
-  color: var(--honbo-navy);
 }
 
 .nav__toggle {
@@ -1434,21 +1510,8 @@ body.is-menu-open .site-header.is-scrolled {
   margin: 0 auto;
 }
 
-.origin__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
-  margin-bottom: var(--space-md);
-}
-
-.origin__col {
-  font-size: 1.05rem;
-  line-height: 1.65;
-}
-
-.origin__col--zh {
+.origin__note--zh {
   font-family: var(--font-zh);
-  line-height: 1.8;
 }
 
 .origin__note {
@@ -1943,7 +2006,9 @@ body.is-menu-open .site-header.is-scrolled {
   }
 
   .site-nav .nav__menu a,
-  .site-header.is-scrolled ~ .site-nav .nav__menu a {
+  .site-header.is-scrolled ~ .site-nav .nav__menu a,
+  .site-nav .nav__menu-lang-btn,
+  .site-header.is-scrolled ~ .site-nav .nav__menu-lang-btn {
     font-size: 1.2rem;
     color: var(--honbo-white) !important;
   }
@@ -1997,11 +2062,6 @@ body.is-menu-open .site-header.is-scrolled {
     gap: 0;
     padding-right: 0;
   }
-
-  .origin__grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
 }
 
 /* Mobile menu close */
@@ -2053,12 +2113,14 @@ body.is-blog-view .site-header.is-scrolled {
 }
 
 body.is-blog-view .site-header:not(.is-scrolled) .nav__menu a,
-body.is-blog-view .site-header:not(.is-scrolled) ~ .site-nav .nav__menu a {
+body.is-blog-view .site-header:not(.is-scrolled) ~ .site-nav .nav__menu a,
+body.is-blog-view .site-header:not(.is-scrolled) ~ .site-nav .nav__menu-lang-btn {
   color: var(--honbo-white);
 }
 
 body.is-blog-view .site-header.is-scrolled .nav__menu a,
-body.is-blog-view .site-header.is-scrolled ~ .site-nav .nav__menu a {
+body.is-blog-view .site-header.is-scrolled ~ .site-nav .nav__menu a,
+body.is-blog-view .site-header.is-scrolled ~ .site-nav .nav__menu-lang-btn {
   color: var(--honbo-navy);
 }
 
@@ -2353,6 +2415,10 @@ body.is-blog-view .site-header.is-scrolled ~ .site-nav .nav__menu a {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--honbo-navy);
+}
+
+.blog-cta .btn + .btn {
+  margin-left: 0;
 }
 
 @media (max-width: 768px) {

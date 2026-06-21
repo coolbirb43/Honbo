@@ -2,7 +2,11 @@
   "use strict";
 
   var yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  var yearText = String(new Date().getFullYear());
+  if (yearEl) yearEl.textContent = yearText;
+  document.querySelectorAll(".year-zh").forEach(function (el) {
+    el.textContent = yearText;
+  });
 
   var header = document.querySelector(".site-header");
   var toggle = document.querySelector(".nav__toggle");
@@ -21,7 +25,10 @@
     ? pageLoader.querySelector(".page-loader__track")
     : null;
   var navClose = document.querySelector(".nav__close");
+  var langToggle = document.getElementById("lang-toggle");
   var currentView = "home";
+  var currentLang = "en";
+  var LANG_STORAGE_KEY = "honbo-lang";
   var isViewLoading = false;
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var scrollAnimId = null;
@@ -38,7 +45,7 @@
     "#view-home .bestsellers-section__footnote",
     // "#view-home .anatomy",
     "#view-home .origin .section-intro",
-    "#view-home .origin__col",
+    "#view-home .origin__body",
     "#view-home .origin__note",
     "#view-home .catering__title",
     "#view-home .catering__subtitle",
@@ -378,6 +385,81 @@
     }
   }
 
+  function updateDocumentTitle() {
+    if (currentView === "blog") {
+      document.title =
+        currentLang === "zh"
+          ? "媒體好評 | Honbo 漢堡"
+          : "Press & Reviews | Honbo 漢堡 Smash Burgers Hong Kong";
+      return;
+    }
+
+    document.title =
+      currentLang === "zh"
+        ? "Honbo 漢堡 | 香港壓扁漢堡 — 灣仔及中環"
+        : "Honbo 漢堡 | Smash Burgers Hong Kong — Wan Chai & Central";
+  }
+
+  function updateLangToggle() {
+    if (!langToggle) return;
+    langToggle.textContent = currentLang === "en" ? "中文" : "EN";
+    langToggle.setAttribute(
+      "aria-label",
+      currentLang === "en" ? "Switch to Chinese" : "Switch to English"
+    );
+  }
+
+  function applyLanguage(lang, skipTransition) {
+    if (lang !== "en" && lang !== "zh") return;
+    if (lang === currentLang) return;
+
+    function swap() {
+      currentLang = lang;
+      document.documentElement.lang = lang === "zh" ? "zh-HK" : "en-HK";
+      document.body.classList.remove("is-lang-en", "is-lang-zh");
+      if (lang === "zh") {
+        document.body.classList.add("is-lang-zh");
+      }
+      updateLangToggle();
+      updateDocumentTitle();
+      closeMobileMenu();
+
+      try {
+        localStorage.setItem(LANG_STORAGE_KEY, lang);
+      } catch (err) {
+        /* ignore */
+      }
+
+      document.body.classList.remove("is-lang-switching");
+    }
+
+    if (skipTransition || prefersReduced) {
+      swap();
+      return;
+    }
+
+    document.body.classList.add("is-lang-switching");
+    window.setTimeout(swap, 160);
+  }
+
+  function initLanguage() {
+    var stored = null;
+    try {
+      stored = localStorage.getItem(LANG_STORAGE_KEY);
+    } catch (err) {
+      stored = null;
+    }
+
+    if (stored === "zh" || stored === "en") {
+      applyLanguage(stored, true);
+      return;
+    }
+
+    document.body.classList.remove("is-lang-zh");
+    updateLangToggle();
+    updateDocumentTitle();
+  }
+
   function runPageLoader(onDone) {
     if (!pageLoader || prefersReduced) {
       if (onDone) onDone();
@@ -422,15 +504,13 @@
       document.body.classList.toggle("is-blog-view", view === "blog");
 
       if (view === "blog") {
-        document.title =
-          "Press & Reviews | Honbo 漢堡 Smash Burgers Hong Kong";
         window.scrollTo(0, 0);
         if (header) header.classList.remove("is-scrolled");
       } else {
-        document.title =
-          "Honbo 漢堡 | Smash Burgers Hong Kong — Wan Chai & Central";
         runScrollEffects();
       }
+
+      updateDocumentTitle();
 
       if (history.replaceState) {
         history.replaceState(
@@ -640,8 +720,17 @@
       var text = button.getAttribute("data-copy-text") || "";
       if (!text) return;
 
+      var successMsg =
+        currentLang === "zh"
+          ? button.getAttribute("data-copy-toast-zh") || "電話號碼已複製"
+          : button.getAttribute("data-copy-toast-en") || "Phone number copied";
+      var failMsg =
+        currentLang === "zh"
+          ? button.getAttribute("data-copy-fail-zh") || "未能複製電話"
+          : button.getAttribute("data-copy-fail-en") || "Could not copy number";
+
       if (copyTextSync(text)) {
-        showCopyToast("Phone number copied · 電話號碼已複製");
+        showCopyToast(successMsg);
         return;
       }
 
@@ -649,18 +738,25 @@
         navigator.clipboard
           .writeText(text)
           .then(function () {
-            showCopyToast("Phone number copied · 電話號碼已複製");
+            showCopyToast(successMsg);
           })
           .catch(function () {
-            showCopyToast("Could not copy number · 未能複製電話");
+            showCopyToast(failMsg);
           });
         return;
       }
 
-      showCopyToast("Could not copy number · 未能複製電話");
+      showCopyToast(failMsg);
     });
   }
 
+  if (langToggle) {
+    langToggle.addEventListener("click", function () {
+      applyLanguage(currentLang === "en" ? "zh" : "en");
+    });
+  }
+
+  initLanguage();
   bindNavScroll();
   initViewFromHash();
   initCateringPhoneCopy();

@@ -34,13 +34,13 @@
   <link rel="apple-touch-icon" href="assets/brand/honbo-logo-blue.png" />
   <link rel="preload" href="assets/photos/hero.webp" as="image" type="image/webp" fetchpriority="high" />
   <link rel="preload" href="assets/brand/New_logo.webp" as="image" type="image/webp" />
-  <link rel="preload" href="css/styles.min.css?v=72" as="style" />
+  <link rel="preload" href="css/styles.min.css?v=84" as="style" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="dns-prefetch" href="https://maps.google.com" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;700&display=swap" /></noscript>
-  <link rel="stylesheet" href="css/styles.min.css?v=72" />
+  <link rel="stylesheet" href="css/styles.min.css?v=84" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -225,6 +225,10 @@
       <li data-lang="zh"><a href="#origin" data-view="home">故事</a></li>
       <li data-lang="en"><a href="#catering" data-view="home">Catering</a></li>
       <li data-lang="zh"><a href="#catering" data-view="home">到會</a></li>
+      <li data-lang="en"><a href="#menu" data-view="menu">Food Menu</a></li>
+      <li data-lang="zh"><a href="#menu" data-view="menu">餐牌</a></li>
+      <li data-lang="en"><a href="#patty-club" data-view="patty-club">The Patty Club</a></li>
+      <li data-lang="zh"><a href="#patty-club" data-view="patty-club">肉餅會</a></li>
       <li data-lang="en"><a href="#press" data-view="blog">Press &amp; Praise</a></li>
       <li data-lang="zh"><a href="#press" data-view="blog">媒體好評</a></li>
       <li class="nav__menu-lang">
@@ -346,7 +350,7 @@
       <div class="section-intro">
         <h2 class="section-intro__title" id="locations-heading" data-lang="en">Where to find Honbo in Hong Kong</h2>
         <h2 class="section-intro__title" id="locations-heading-zh" data-lang="zh">香港邊度食到 Honbo</h2>
-        <p class="section-intro__subtitle" data-lang="en">Smash burgers · Wan Chai &amp; Central · Eat in &amp; takeaway</p>
+        <p class="section-intro__subtitle" data-lang="en">Smash burgers · Wan Chai &amp; Central · Eat in &amp; Takeaway</p>
         <p class="section-intro__subtitle" data-lang="zh">壓扁漢堡 · 灣仔及中環 · 堂食及外賣</p>
       </div>
 
@@ -494,6 +498,9 @@
           </div>
         </div>
       </div>
+      <p class="bestsellers-section__menu-link">
+        <a href="#menu" data-view="menu">Hungry for more? <span>Check out the full menu here</span></a>
+      </p>
       <p class="bestsellers-section__footnote">Prices in HKD · Full menu in-store</p>
     </section>
 
@@ -537,149 +544,129 @@
           </div>
         </div>
       </div>
+      <p class="bestsellers-section__menu-link">
+        <a href="#menu" data-view="menu">想食多啲？<span>睇完整餐牌</span></a>
+      </p>
       <p class="bestsellers-section__footnote">價錢以港元為準 · 完整餐牌請到店查詢</p>
     </section>
     </div>
 
-    <!-- Anatomy section: commented out until custom images are provided
-    <section class="anatomy reveal" id="anatomy" aria-labelledby="anatomy-heading">
-      <div class="anatomy__header section-block__header">
-        <p class="section-block__label">Built layer by layer · 逐層組成</p>
-        <h2 class="section-block__title" id="anatomy-heading">Anatomy of a Burger</h2>
-        <p class="section-block__subtitle">The Honbo smash stack · 漢堡解剖</p>
+    <section class="anatomy-block" id="anatomy-block" aria-labelledby="anatomy-teaser-heading">
+      <div class="anatomy-block__bg" aria-hidden="true"></div>
+
+      <div class="anatomy-block__top">
+        <div class="anatomy-block__intro" id="anatomy-intro">
+          <p class="anatomy-block__label" data-lang="en">Behind the Smash</p>
+          <p class="anatomy-block__label" data-lang="zh">壓扁秘技</p>
+          <h2 class="anatomy-block__title" id="anatomy-teaser-heading" data-lang="en">Curious On How It's Made?</h2>
+          <h2 class="anatomy-block__title" data-lang="zh">想知道點樣整？</h2>
+          <p class="anatomy-block__hint" data-lang="en">Click the burger to find out</p>
+          <p class="anatomy-block__hint" data-lang="zh">撳個漢堡嚟了解</p>
+        </div>
+        <div class="anatomy-block__header section-block__header" id="anatomy-header" aria-hidden="true">
+          <p class="section-block__label" data-lang="en">Built Layer by Layer</p>
+          <p class="section-block__label" data-lang="zh">逐層組成</p>
+          <h2 class="section-block__title" id="anatomy-heading" data-lang="en">Anatomy of a Honbo</h2>
+          <h2 class="section-block__title" data-lang="zh">Honbo 漢堡解剖</h2>
+          <p class="section-block__subtitle" data-lang="en">The Honbo Smash Stack</p>
+          <p class="section-block__subtitle" data-lang="zh">Honbo 壓扁漢堡結構</p>
+        </div>
       </div>
 
-      <div class="anatomy__stage">
-        <svg class="anatomy__lines" viewBox="0 0 1000 720" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <line class="anatomy__line" x1="500" y1="360" x2="500" y2="95" />
-          <line class="anatomy__line" x1="500" y1="360" x2="820" y2="150" />
-          <line class="anatomy__line" x1="500" y1="360" x2="880" y2="360" />
-          <line class="anatomy__line" x1="500" y1="360" x2="780" y2="580" />
-          <line class="anatomy__line" x1="500" y1="360" x2="220" y2="580" />
-          <line class="anatomy__line" x1="500" y1="360" x2="120" y2="360" />
-        </svg>
+      <div class="anatomy-block__stage" id="anatomy-stage">
+        <div class="anatomy-block__glow" aria-hidden="true"></div>
 
-        <figure class="anatomy__hero anatomy__hero--brand">
-          <picture>
-            <source srcset="assets/menu/Honbo.webp" type="image/webp" />
-            <img
-              src="assets/menu/Honbo.PNG"
-              alt="Honbo signature Smash Burger"
-              width="900"
-              height="900"
-              loading="lazy"
-              decoding="async"
-            />
-          </picture>
-        </figure>
+        <div class="anatomy-block__diagram" id="anatomy-diagram" aria-hidden="true">
+          <svg class="anatomy__lines" viewBox="0 0 1000 720" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <line class="anatomy__line" x1="500" y1="360" x2="500" y2="110" />
+            <line class="anatomy__line" x1="500" y1="360" x2="717" y2="235" />
+            <line class="anatomy__line" x1="500" y1="360" x2="717" y2="485" />
+            <line class="anatomy__line" x1="500" y1="360" x2="500" y2="610" />
+            <line class="anatomy__line" x1="500" y1="360" x2="283" y2="485" />
+            <line class="anatomy__line" x1="500" y1="360" x2="283" y2="235" />
+          </svg>
+          <ul class="anatomy__callouts">
+            <li class="anatomy-callout anatomy-callout--top">
+              <div class="anatomy-callout__card">
+                <div class="anatomy-callout__thumb">
+                  <img src="assets/anatomy/lettuce.jpg" alt="Lettuce" width="120" height="120" loading="lazy" decoding="async" />
+                </div>
+                <h3 class="anatomy-callout__title" data-lang="en">Lettuce</h3>
+                <h3 class="anatomy-callout__title" data-lang="zh">生菜</h3>
+              </div>
+            </li>
+            <li class="anatomy-callout anatomy-callout--top-right">
+              <div class="anatomy-callout__card">
+                <div class="anatomy-callout__thumb">
+                  <img src="https://png.pngtree.com/png-vector/20251017/ourmid/pngtree-stack-of-delicious-american-cheese-slices-png-image_17758950.webp" alt="American cheese" width="120" height="120" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+                </div>
+                <h3 class="anatomy-callout__title" data-lang="en">American Cheese</h3>
+                <h3 class="anatomy-callout__title" data-lang="zh">美式芝士</h3>
+              </div>
+            </li>
+            <li class="anatomy-callout anatomy-callout--right">
+              <div class="anatomy-callout__card">
+                <div class="anatomy-callout__thumb">
+                  <img src="assets/anatomy/beef.png" alt="American beef patty" width="120" height="120" loading="lazy" decoding="async" />
+                </div>
+                <h3 class="anatomy-callout__title" data-lang="en">American Beef</h3>
+                <h3 class="anatomy-callout__title" data-lang="zh">美式牛肉</h3>
+              </div>
+            </li>
+            <li class="anatomy-callout anatomy-callout--bottom">
+              <div class="anatomy-callout__card">
+                <div class="anatomy-callout__thumb">
+                  <img src="assets/anatomy/pickles.png" alt="Pickles" width="120" height="120" loading="lazy" decoding="async" />
+                </div>
+                <h3 class="anatomy-callout__title" data-lang="en">Pickles</h3>
+                <h3 class="anatomy-callout__title" data-lang="zh">酸黃瓜</h3>
+              </div>
+            </li>
+            <li class="anatomy-callout anatomy-callout--bottom-left">
+              <div class="anatomy-callout__card">
+                <div class="anatomy-callout__thumb">
+                  <img src="assets/anatomy/onion.jpg" alt="White onions" width="120" height="120" loading="lazy" decoding="async" />
+                </div>
+                <h3 class="anatomy-callout__title" data-lang="en">White Onions</h3>
+                <h3 class="anatomy-callout__title" data-lang="zh">白洋蔥</h3>
+              </div>
+            </li>
+            <li class="anatomy-callout anatomy-callout--top-left">
+              <div class="anatomy-callout__card">
+                <div class="anatomy-callout__thumb anatomy-callout__thumb--mystery" aria-hidden="true">
+                  <span class="anatomy-callout__mystery">?</span>
+                </div>
+                <h3 class="anatomy-callout__title" data-lang="en">Secret House Sauce</h3>
+                <h3 class="anatomy-callout__title" data-lang="zh">秘製家醬</h3>
+              </div>
+            </li>
+          </ul>
+        </div>
 
-        <ul class="anatomy__callouts">
-          <li class="anatomy-callout anatomy-callout--top">
-            <div class="anatomy-callout__thumb">
-              <img
-                src="https://images.unsplash.com/photo-1632552544552-3ca612a328ac?auto=format&amp;fit=crop&amp;w=240&amp;h=240&amp;q=80"
-                alt="Tray of burger buns"
-                width="120"
-                height="120"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <h3 class="anatomy-callout__title">Potato milk bun</h3>
-            <p class="anatomy-callout__text">House recipe with a local artisanal baker — soft, slightly sweet, no preservatives.</p>
-          </li>
-          <li class="anatomy-callout anatomy-callout--top-right">
-            <div class="anatomy-callout__thumb">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Wrapped_American_cheese_slices.jpg/250px-Wrapped_American_cheese_slices.jpg"
-                alt="American cheese slices"
-                width="120"
-                height="120"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <h3 class="anatomy-callout__title">American cheese</h3>
-            <p class="anatomy-callout__text">Melted over the patty edges so every bite gets that salty, creamy pull.</p>
-          </li>
-          <li class="anatomy-callout anatomy-callout--right">
-            <div class="anatomy-callout__thumb">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Hamburgers_grilling_outdoors_over_propane.jpg/250px-Hamburgers_grilling_outdoors_over_propane.jpg"
-                alt="Beef burger patties on a grill"
-                width="120"
-                height="120"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <h3 class="anatomy-callout__title">Smashed patty</h3>
-            <p class="anatomy-callout__text">Fresh-ground beef pressed on the plancha when you order — maximum crust, maximum juice.</p>
-          </li>
-          <li class="anatomy-callout anatomy-callout--bottom-right">
-            <div class="anatomy-callout__thumb anatomy-callout__thumb--duo">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Gherkin.jpg/250px-Gherkin.jpg"
-                alt="Pickled gherkins"
-                width="60"
-                height="120"
-                loading="lazy"
-                decoding="async"
-              />
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Sliced_red_onion.jpg/250px-Sliced_red_onion.jpg"
-                alt="Sliced red onion"
-                width="60"
-                height="120"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <h3 class="anatomy-callout__title">Pickles &amp; onion</h3>
-            <p class="anatomy-callout__text">House-cured Japanese pickles and sweet onion for crunch and balance.</p>
-          </li>
-          <li class="anatomy-callout anatomy-callout--bottom-left">
-            <div class="anatomy-callout__thumb">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Mayonnaise_%281%29.jpg/250px-Mayonnaise_%281%29.jpg"
-                alt="Mayonnaise in a bowl"
-                width="120"
-                height="120"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <h3 class="anatomy-callout__title">House sauce</h3>
-            <p class="anatomy-callout__text">Signature Honbo sauce on the bun — tangy, savoury, built to match the smash.</p>
-          </li>
-          <li class="anatomy-callout anatomy-callout--left">
-            <div class="anatomy-callout__thumb">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Ground_beef_USDA.jpg/250px-Ground_beef_USDA.jpg"
-                alt="Fresh ground beef"
-                width="120"
-                height="120"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <h3 class="anatomy-callout__title">Smashed beef</h3>
-            <p class="anatomy-callout__text">USDA double-gold blend, pressed on the plancha — crispy edges, juicy centre.</p>
-          </li>
-        </ul>
+        <div class="anatomy-block__burger-wrap">
+          <div class="anatomy-block__rings" aria-hidden="true">
+            <span class="anatomy-block__ring anatomy-block__ring--1"></span>
+            <span class="anatomy-block__ring anatomy-block__ring--2"></span>
+            <span class="anatomy-block__ring anatomy-block__ring--3"></span>
+          </div>
+          <button type="button" class="anatomy-block__trigger" id="anatomy-trigger" aria-expanded="false" aria-controls="anatomy-diagram">
+            <picture>
+              <source srcset="assets/menu/Honbo.webp" type="image/webp" />
+              <img src="assets/menu/Honbo.PNG" alt="Honbo classic smash burger" width="500" height="500" decoding="async" />
+            </picture>
+            <span class="sr-only" data-lang="en">Reveal anatomy of a Honbo smash burger</span>
+            <span class="sr-only" data-lang="zh">顯示 Honbo 壓扁漢堡組成</span>
+          </button>
+        </div>
       </div>
 
-      <div class="anatomy__footer">
-        <blockquote class="anatomy__quote">
-          <p>A great burger is memory, crunch, and steam in one bite — smashed fresh, never sitting under a heat lamp.</p>
-        </blockquote>
-        <p class="anatomy__fact">
-          <span class="anatomy__fact-num">0</span>
-          <span class="anatomy__fact-label">Pre-made patties — every smash is pressed to order when you order.</span>
-        </p>
+      <div class="anatomy-block__footer anatomy__copy" id="anatomy-footer" aria-hidden="true">
+        <p data-lang="en">A smash burger is pressed onto a hot griddle the moment you order — not pre-formed, not sitting under a lamp. That violent contact creates a crispy, lacy crust while keeping the centre juicy.</p>
+        <p data-lang="en">At Honbo we grind beef fresh daily, smash thin on the plancha, and stack it with American cheese, pickles, onion, and lettuce on our house potato milk bun. Simple layers, smashed with intent.</p>
+        <p data-lang="zh">壓扁漢堡係你落單嗰刻先壓上熱板 — 唔係預製肉餅，唔會擺喺保溫燈下。高溫一壓，外層脆邊，中心仍然多汁。</p>
+        <p data-lang="zh">Honbo 每日新鮮打牛肉，即叫即壓，配美式芝士、酸黃瓜、洋蔥同生菜，夾住自家薯仔包。層次簡單，每一口都係用心壓出嚟。</p>
       </div>
     </section>
-    -->
 
     <section class="origin" id="origin" aria-labelledby="origin-heading">
       <div class="origin__parallax-bg" aria-hidden="true"></div>
@@ -752,6 +739,92 @@
         </div>
       </div>
     </section>
+    </div>
+
+    <div id="view-menu" class="app-view" hidden>
+      <section class="menu-pages" aria-label="Honbo full menu · Honbo 完整餐牌">
+        <div class="menu-pages__inner">
+          <figure class="menu-page reveal">
+            <picture>
+              <source srcset="assets/menu/full-menu-1.webp" type="image/webp" />
+              <img src="assets/menu/full-menu-1.jpg" alt="Honbo menu — our story and ingredients · Honbo 餐牌 — 品牌故事及食材" width="850" height="1700" loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+          <figure class="menu-page reveal">
+            <picture>
+              <source srcset="assets/menu/full-menu-2.webp" type="image/webp" />
+              <img src="assets/menu/full-menu-2.jpg" alt="Honbo smash burgers and add-ons · Honbo 壓扁漢堡及加配" width="850" height="1700" loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+          <figure class="menu-page reveal">
+            <picture>
+              <source srcset="assets/menu/full-menu-3.webp" type="image/webp" />
+              <img src="assets/menu/full-menu-3.jpg" alt="Honbo sides, drinks and sauces · Honbo 小食、飲品及醬汁" width="850" height="1700" loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+          <figure class="menu-page reveal">
+            <picture>
+              <source srcset="assets/menu/full-menu-4.webp" type="image/webp" />
+              <img src="assets/menu/full-menu-4.jpg" alt="Honbo menu · Honbo 餐牌" width="850" height="1700" loading="lazy" decoding="async" />
+            </picture>
+          </figure>
+          <p class="menu-pages__note" data-lang="en">Prices in HKD · Subject to 10% service charge · Menu items shown in English &amp; Chinese</p>
+          <p class="menu-pages__note" data-lang="zh">價錢以港元為準 · 另收加一服務費 · 餐牌中英對照</p>
+          <p class="menu-pages__download">
+            <a class="menu-pages__pdf" href="assets/menu/honbo-full-menu.pdf" target="_blank" rel="noopener noreferrer" data-lang="en">Download menu PDF</a>
+            <a class="menu-pages__pdf" href="assets/menu/honbo-full-menu.pdf" target="_blank" rel="noopener noreferrer" data-lang="zh">下載餐牌 PDF</a>
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <div id="view-patty-club" class="app-view" hidden>
+      <section class="patty-club" aria-labelledby="patty-club-heading">
+        <div class="patty-club__card reveal">
+          <header class="patty-club__header">
+            <p class="patty-club__eyebrow" data-lang="en">Loyalty rewards</p>
+            <p class="patty-club__eyebrow" data-lang="zh">會員獎賞計劃</p>
+            <h2 class="patty-club__title" id="patty-club-heading" data-lang="en">The Patty Club</h2>
+            <h2 class="patty-club__title" id="patty-club-heading-zh" data-lang="zh">肉餅會</h2>
+            <p class="patty-club__tagline" data-lang="en">Smash more. Earn more.</p>
+            <p class="patty-club__tagline" data-lang="zh">食多啲，賺多啲。</p>
+          </header>
+
+          <div class="patty-club__body">
+            <div class="patty-club__copy">
+              <p class="patty-club__lead" data-lang="en">Join Honbo's loyalty club and earn rewards every time you smash. Sign up once, collect points on every visit, and unlock exclusive perks at Wan Chai &amp; Central.</p>
+              <p class="patty-club__lead" data-lang="zh">加入 Honbo 肉餅會，每次光臨都可賺取獎賞。一次登記，每次消費集分，於灣仔及中環分店解鎖專屬禮遇。</p>
+
+              <ul class="patty-club__perks" data-lang="en">
+                <li><span class="patty-club__perk-label">Earn</span> <span class="patty-club__perk-text">Points On Every Order</span></li>
+                <li><span class="patty-club__perk-label">Redeem</span> <span class="patty-club__perk-text">Rewards For Free Food &amp; Drinks</span></li>
+                <li><span class="patty-club__perk-label">Unlock</span> <span class="patty-club__perk-text">Member-Only Offers &amp; Surprises</span></li>
+                <li><span class="patty-club__perk-label">Works</span> <span class="patty-club__perk-text">At Wan Chai &amp; Central</span></li>
+              </ul>
+              <ul class="patty-club__perks" data-lang="zh">
+                <li><span class="patty-club__perk-label">賺分</span> 每次消費賺取積分</li>
+                <li><span class="patty-club__perk-label">換領</span> 積分換免費美食及飲品</li>
+                <li><span class="patty-club__perk-label">專享</span> 會員優惠及驚喜</li>
+                <li><span class="patty-club__perk-label">適用</span> 灣仔及中環分店</li>
+              </ul>
+            </div>
+
+            <aside class="patty-club__signup reveal">
+              <p class="patty-club__signup-label" data-lang="en">Sign up in seconds</p>
+              <p class="patty-club__signup-label" data-lang="zh">幾秒完成登記</p>
+              <figure class="patty-club__qr">
+                <img src="assets/brand/patty-club-qr.png?v=2" alt="QR code to join The Patty Club · 掃描加入肉餅會" width="280" height="280" loading="lazy" decoding="async" />
+                <figcaption data-lang="en">Scan with your phone</figcaption>
+                <figcaption data-lang="zh">用手機掃描</figcaption>
+              </figure>
+              <a class="btn btn--primary patty-club__join" href="https://www.gomeed.io/odt7r" target="_blank" rel="noopener noreferrer" data-lang="en">Join now</a>
+              <a class="btn btn--primary patty-club__join" href="https://www.gomeed.io/odt7r" target="_blank" rel="noopener noreferrer" data-lang="zh">立即加入</a>
+              <p class="patty-club__note" data-lang="en">Free to join · Works on mobile</p>
+              <p class="patty-club__note" data-lang="zh">免費加入 · 支援手機登記</p>
+            </aside>
+          </div>
+        </div>
+      </section>
     </div>
 
     <div id="view-blog" class="app-view" hidden>
@@ -970,6 +1043,6 @@
 
   <div class="copy-toast" id="copy-toast" role="status" aria-live="polite">Phone number copied · 電話號碼已複製</div>
 
-  <script src="js/app.min.js?v=45" defer></script>
+  <script src="js/app.min.js?v=53" defer></script>
 </body>
 </html>

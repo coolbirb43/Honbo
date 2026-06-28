@@ -14,6 +14,8 @@
   var heroBg = document.querySelector(".hero-parallax__bg");
   var viewHome = document.getElementById("view-home");
   var viewBlog = document.getElementById("view-blog");
+  var viewMenu = document.getElementById("view-menu");
+  var viewPattyClub = document.getElementById("view-patty-club");
   var pageLoader = document.getElementById("page-loader");
   var loaderLogo = pageLoader
     ? pageLoader.querySelector(".page-loader__logo")
@@ -42,8 +44,9 @@
     "#view-home .location-panel__media",
     "#view-home .gallery-section .section-block__header",
     "#view-home .bestsellers-section .section-block__header",
+    "#view-home .bestsellers-section__menu-link",
     "#view-home .bestsellers-section__footnote",
-    // "#view-home .anatomy",
+    "#view-home .anatomy-block",
     "#view-home .origin .section-intro",
     "#view-home .origin__body",
     "#view-home .origin__note",
@@ -57,7 +60,12 @@
     "#view-blog .blog-hero__lead",
     "#view-blog .blog-hero__stats",
     "#view-blog .review-card",
-    "#view-blog .blog-cta"
+    "#view-blog .blog-cta",
+    "#view-menu .menu-page",
+    "#view-menu .menu-pages__note",
+    "#view-menu .menu-pages__download",
+    "#view-patty-club .patty-club__card",
+    "#view-patty-club .patty-club__signup",
   ];
 
   function getHeaderOffset() {
@@ -80,9 +88,14 @@
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   }
 
+  function isSubpageView(view) {
+    return view === "menu" || view === "patty-club";
+  }
+
   function updateHeader() {
     if (header) {
-      header.classList.toggle("is-scrolled", window.scrollY > 60);
+      var scrolled = window.scrollY > 60 || isSubpageView(currentView);
+      header.classList.toggle("is-scrolled", scrolled);
     }
   }
 
@@ -140,6 +153,19 @@
           el
         ) *
           0.07 +
+          "s"
+      );
+    }
+
+    if (el.classList.contains("menu-page")) {
+      el.classList.add("reveal--scale");
+      el.style.setProperty(
+        "--reveal-delay",
+        Array.prototype.indexOf.call(
+          document.querySelectorAll("#view-menu .menu-page"),
+          el
+        ) *
+          0.08 +
           "s"
       );
     }
@@ -394,6 +420,22 @@
       return;
     }
 
+    if (currentView === "menu") {
+      document.title =
+        currentLang === "zh"
+          ? "完整餐牌 | Honbo 漢堡"
+          : "Food Menu | Honbo 漢堡 Smash Burgers Hong Kong";
+      return;
+    }
+
+    if (currentView === "patty-club") {
+      document.title =
+        currentLang === "zh"
+          ? "肉餅會 | Honbo 漢堡"
+          : "The Patty Club | Honbo 漢堡 Loyalty Rewards";
+      return;
+    }
+
     document.title =
       currentLang === "zh"
         ? "Honbo 漢堡 | 香港壓扁漢堡 — 灣仔及中環"
@@ -492,20 +534,59 @@
     requestAnimationFrame(frame);
   }
 
+  function getViewHash(view) {
+    if (view === "blog") return "#press";
+    if (view === "menu") return "#menu";
+    if (view === "patty-club") return "#patty-club";
+    return window.location.pathname + window.location.search;
+  }
+
+  function isAlternateViewHash(hash) {
+    return (
+      hash === "#press" ||
+      hash === "#blog" ||
+      hash === "#menu" ||
+      hash === "#patty-club"
+    );
+  }
+
+  function viewFromHash(hash) {
+    if (hash === "#press" || hash === "#blog") return "blog";
+    if (hash === "#menu") return "menu";
+    if (hash === "#patty-club") return "patty-club";
+    return "home";
+  }
+
+  function getActiveViewElement(view) {
+    if (view === "blog") return viewBlog;
+    if (view === "menu") return viewMenu;
+    if (view === "patty-club") return viewPattyClub;
+    return viewHome;
+  }
+
   function applyView(view, skipLoader) {
-    if (!viewHome || !viewBlog) return;
-    if (view !== "home" && view !== "blog") return;
+    if (!viewHome || !viewBlog || !viewMenu || !viewPattyClub) return;
+    if (view !== "home" && view !== "blog" && view !== "menu" && view !== "patty-club") {
+      return;
+    }
     if (view === currentView) return;
 
     function swap() {
       currentView = view;
       viewHome.hidden = view !== "home";
       viewBlog.hidden = view !== "blog";
+      viewMenu.hidden = view !== "menu";
+      viewPattyClub.hidden = view !== "patty-club";
       document.body.classList.toggle("is-blog-view", view === "blog");
+      document.body.classList.toggle("is-menu-view", view === "menu");
+      document.body.classList.toggle("is-patty-club-view", view === "patty-club");
 
       if (view === "blog") {
         window.scrollTo(0, 0);
         if (header) header.classList.remove("is-scrolled");
+      } else if (isSubpageView(view)) {
+        window.scrollTo(0, 0);
+        updateHeader();
       } else {
         runScrollEffects();
       }
@@ -513,17 +594,15 @@
       updateDocumentTitle();
 
       if (history.replaceState) {
-        history.replaceState(
-          null,
-          "",
-          view === "blog" ? "#press" : window.location.pathname + window.location.search
-        );
+        history.replaceState(null, "", getViewHash(view));
+      } else if (view !== "home") {
+        window.location.hash = view === "blog" ? "press" : view;
       } else {
-          window.location.hash = view === "blog" ? "press" : "";
+        window.location.hash = "";
       }
 
       isViewLoading = false;
-      refreshRevealsInContainer(view === "blog" ? viewBlog : viewHome);
+      refreshRevealsInContainer(getActiveViewElement(view));
     }
 
     if (skipLoader || prefersReduced) {
@@ -570,7 +649,25 @@
           return;
         }
 
-        if (viewTarget === "home" && currentView === "blog") {
+        if (viewTarget === "menu" || hash === "#menu") {
+          e.preventDefault();
+          closeMobileMenu();
+          window.setTimeout(function () {
+            applyView("menu");
+          }, delay);
+          return;
+        }
+
+        if (viewTarget === "patty-club" || hash === "#patty-club") {
+          e.preventDefault();
+          closeMobileMenu();
+          window.setTimeout(function () {
+            applyView("patty-club");
+          }, delay);
+          return;
+        }
+
+        if (viewTarget === "home" && currentView !== "home") {
           e.preventDefault();
           closeMobileMenu();
           window.setTimeout(function () {
@@ -612,8 +709,13 @@
   }
 
   function initViewFromHash() {
-    if (window.location.hash === "#press" || window.location.hash === "#blog") {
+    var hash = window.location.hash;
+    if (hash === "#press" || hash === "#blog") {
       applyView("blog", true);
+    } else if (hash === "#menu") {
+      applyView("menu", true);
+    } else if (hash === "#patty-club") {
+      applyView("patty-club", true);
     }
   }
 
@@ -648,15 +750,14 @@
 
   window.addEventListener("hashchange", function () {
     if (isViewLoading) return;
-    if (
-      (window.location.hash === "#press" || window.location.hash === "#blog") &&
-      currentView !== "blog"
-    ) {
-      applyView("blog", true);
+    var hash = window.location.hash;
+    var targetView = viewFromHash(hash);
+
+    if (targetView !== "home" && currentView !== targetView) {
+      applyView(targetView, true);
     } else if (
-      window.location.hash !== "#press" &&
-      window.location.hash !== "#blog" &&
-      currentView === "blog"
+      !isAlternateViewHash(hash) &&
+      currentView !== "home"
     ) {
       applyView("home", true);
     }
@@ -712,6 +813,33 @@
     return copied;
   }
 
+  function initAnatomyTeaser() {
+    var trigger = document.getElementById("anatomy-trigger");
+    var block = document.getElementById("anatomy-block");
+    var diagram = document.getElementById("anatomy-diagram");
+    var header = document.getElementById("anatomy-header");
+    var footer = document.getElementById("anatomy-footer");
+    if (!trigger || !block || !diagram) return;
+
+    trigger.addEventListener("click", function () {
+      if (block.classList.contains("is-expanded")) return;
+
+      block.classList.add("is-expanded");
+      trigger.setAttribute("aria-expanded", "true");
+      diagram.setAttribute("aria-hidden", "false");
+      if (header) header.setAttribute("aria-hidden", "false");
+      if (footer) footer.setAttribute("aria-hidden", "false");
+
+      window.requestAnimationFrame(function () {
+        diagram.classList.add("is-visible");
+
+        window.setTimeout(function () {
+          block.classList.add("is-settled");
+        }, 1400);
+      });
+    });
+  }
+
   function initCateringPhoneCopy() {
     var button = document.querySelector(".catering__phone-copy");
     if (!button) return;
@@ -760,6 +888,7 @@
   bindNavScroll();
   initViewFromHash();
   initCateringPhoneCopy();
+  initAnatomyTeaser();
   initRevealAnimations();
   initAutoLoops();
   initHorizontalCarousels();

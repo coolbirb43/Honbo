@@ -34,13 +34,13 @@
   <link rel="apple-touch-icon" href="assets/brand/honbo-logo-blue.png" />
   <link rel="preload" href="assets/photos/hero.webp" as="image" type="image/webp" fetchpriority="high" />
   <link rel="preload" href="assets/brand/New_logo.webp" as="image" type="image/webp" />
-  <link rel="preload" href="css/styles.min.css?v=84" as="style" />
+  <link rel="preload" href="css/styles.min.css?v=88" as="style" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="dns-prefetch" href="https://maps.google.com" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;700&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Lobster&family=Pacifico&family=Noto+Sans+TC:wght@400;700&display=swap" /></noscript>
-  <link rel="stylesheet" href="css/styles.min.css?v=84" />
+  <link rel="stylesheet" href="css/styles.min.css?v=88" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -462,92 +462,98 @@
       <div class="section-block__header">
         <h2 class="section-block__title" id="bestsellers-heading">Best Seller Smash Burgers</h2>
         <p class="section-block__subtitle">Honbo menu favourites in Hong Kong</p>
-        <p class="carousel-hint">Swipe or scroll sideways</p>
+        <p class="carousel-hint">Swipe for more</p>
       </div>
-      <div class="horizontal-carousel loop-track--bestsellers horizontal-carousel--infinite" tabindex="0" aria-label="Best sellers menu carousel">
-        <div class="horizontal-carousel__track">
-          <div class="loop-track__set">
-            <article class="menu-card">
+      <div class="burger-pager" tabindex="0" aria-roledescription="carousel" aria-label="Best sellers menu">
+        <div class="burger-pager__stage">
+          <div class="burger-pager__page is-active" data-page="0">
+            <article class="menu-card" role="button" tabindex="0" aria-haspopup="dialog" data-burger-name="Honbo" data-burger-desc="Our signature smash — thin patties, house sauce, American cheese." data-burger-ingredients="Potato Milk Bun|American Beef|American Cheese|Secret House Sauce|Pickles|White Onions|Lettuce">
               <div class="menu-card__art"><picture><source srcset="assets/menu/Honbo.webp" type="image/webp" /><img src="assets/menu/Honbo.PNG" alt="Honbo signature burger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Honbo</h3><p>Our signature smash — thin patties, house sauce, American cheese.</p><span class="price-badge">98</span></div>
+              <div class="menu-card__info"><h3>Honbo</h3><p>Our signature smash — thin patties, house sauce, American cheese.</p></div>
             </article>
-            <article class="menu-card">
+            <article class="menu-card" role="button" tabindex="0" aria-haspopup="dialog" data-burger-name="Honbo 1.5" data-burger-desc="Extra patty, same signature style — the crowd favourite." data-burger-ingredients="Potato Milk Bun|x3 American Beef|American Cheese|Secret House Sauce|Pickles|White Onions|Lettuce">
               <div class="menu-card__art"><picture><source srcset="assets/menu/Honbo15.webp" type="image/webp" /><img src="assets/menu/Honbo15.PNG" alt="Honbo 1.5" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Honbo 1.5</h3><p>Extra patty, same signature style — the crowd favourite.</p><span class="price-badge">118</span></div>
+              <div class="menu-card__info"><h3>Honbo 1.5</h3><p>Extra patty, same signature style — the crowd favourite.</p></div>
             </article>
-            <article class="menu-card">
+            <article class="menu-card" role="button" tabindex="0" aria-haspopup="dialog" data-burger-name="Honbo 2.0" data-burger-desc="Four crispy-edged patties, cheese, pickles, onion, house sauce." data-burger-ingredients="Potato Milk Bun|x4 American Beef|American Cheese|Secret House Sauce|Pickles|White Onions">
               <div class="menu-card__art"><picture><source srcset="assets/menu/Honbo20.webp" type="image/webp" /><img src="assets/menu/Honbo20.PNG" alt="Honbo 2.0" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Honbo 2.0</h3><p>Four crispy-edged patties, cheese, pickles, onion, house sauce.</p><span class="price-badge">158</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><picture><source srcset="assets/menu/Gold Standard.webp" type="image/webp" /><img src="assets/menu/Gold Standard.PNG" alt="Double cheeseburger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Double Cheeseburger</h3><p>Thick patties, classic style — 4 oz &amp; 6 oz options.</p><span class="price-badge">158</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><picture><source srcset="assets/menu/Cheeseburger.webp" type="image/webp" /><img src="assets/menu/Cheeseburger.PNG" alt="Cheeseburger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Cheeseburger</h3><p>Traditional thick patty, American cheese, done right.</p><span class="price-badge">108</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><picture><source srcset="assets/menu/TeriyakiChickenBurger.webp" type="image/webp" /><img src="assets/menu/TeriyakiChickenBurger.PNG" alt="Teriyaki burger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Teriyaki Burger</h3><p>Sweet, savoury, smashed to order — local twist.</p><span class="price-badge">118</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><picture><source srcset="assets/menu/Hamburger.webp" type="image/webp" /><img src="assets/menu/Hamburger.PNG" alt="Hamburger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>Hamburger</h3><p>No cheese, all beef — for the purist.</p><span class="price-badge">98</span></div>
+              <div class="menu-card__info"><h3>Honbo 2.0</h3><p>Four crispy-edged patties, cheese, pickles, onion, house sauce.</p></div>
             </article>
           </div>
+          <div class="burger-pager__page" data-page="1" aria-hidden="true">
+            <article class="menu-card" role="button" tabindex="-1" aria-haspopup="dialog" data-burger-name="Hamburger" data-burger-desc="No cheese, all beef — for the purist." data-burger-ingredients="Potato Milk Bun|American Beef|Pickles|White Onions|Lettuce|Secret House Sauce">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/Hamburger.webp" type="image/webp" /><img src="assets/menu/Hamburger.PNG" alt="Hamburger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>Hamburger</h3><p>No cheese, all beef — for the purist.</p></div>
+            </article>
+            <article class="menu-card" role="button" tabindex="-1" aria-haspopup="dialog" data-burger-name="Cheeseburger" data-burger-desc="Traditional thick patty, American cheese, done right." data-burger-ingredients="Potato Milk Bun|Thick American Beef|American Cheese|Pickles|White Onions|Lettuce">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/Cheeseburger.webp" type="image/webp" /><img src="assets/menu/Cheeseburger.PNG" alt="Cheeseburger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>Cheeseburger</h3><p>Traditional thick patty, American cheese, done right.</p></div>
+            </article>
+            <article class="menu-card" role="button" tabindex="-1" aria-haspopup="dialog" data-burger-name="Double Cheeseburger" data-burger-desc="Thick patties, classic style — 4 oz &amp; 6 oz options." data-burger-ingredients="Potato Milk Bun|2x Thick American Beef|American Cheese|Pickles|White Onions|Lettuce">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/Gold Standard.webp" type="image/webp" /><img src="assets/menu/Gold Standard.PNG" alt="Double cheeseburger" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>Double Cheeseburger</h3><p>Thick patties, classic style — 4 oz &amp; 6 oz options.</p></div>
+            </article>
+          </div>
+        </div>
+        <div class="burger-pager__nav" aria-hidden="false">
+          <button type="button" class="burger-pager__btn burger-pager__btn--prev" aria-label="Previous burgers">‹</button>
+          <div class="burger-pager__dots" role="tablist" aria-label="Burger pages"></div>
+          <button type="button" class="burger-pager__btn burger-pager__btn--next" aria-label="Next burgers">›</button>
         </div>
       </div>
       <p class="bestsellers-section__menu-link">
         <a href="#menu" data-view="menu">Hungry for more? <span>Check out the full menu here</span></a>
       </p>
-      <p class="bestsellers-section__footnote">Prices in HKD · Full menu in-store</p>
+      <p class="bestsellers-section__footnote">Tap a burger for ingredients · Full menu in-store</p>
     </section>
 
     <section class="bestsellers-section" data-lang="zh" aria-labelledby="bestsellers-heading-zh">
       <div class="section-block__header">
         <h2 class="section-block__title" id="bestsellers-heading-zh">招牌壓扁漢堡</h2>
         <p class="section-block__subtitle">Honbo 人氣之選</p>
-        <p class="carousel-hint">左右滑動瀏覽</p>
+        <p class="carousel-hint">左右滑動睇多啲</p>
       </div>
-      <div class="horizontal-carousel loop-track--bestsellers horizontal-carousel--infinite" tabindex="0" aria-label="招牌漢堡餐牌">
-        <div class="horizontal-carousel__track">
-          <div class="loop-track__set">
-            <article class="menu-card">
+      <div class="burger-pager" tabindex="0" aria-roledescription="carousel" aria-label="招牌漢堡餐牌">
+        <div class="burger-pager__stage">
+          <div class="burger-pager__page is-active" data-page="0">
+            <article class="menu-card" role="button" tabindex="0" aria-haspopup="dialog" data-burger-name="漢堡" data-burger-desc="招牌壓扁漢堡 — 薄肉餅、自家醬汁、美式芝士。" data-burger-ingredients="薯仔包|美式牛肉|美式芝士|秘製家醬|酸黃瓜|白洋蔥|生菜" data-ingredients-label="配料">
               <div class="menu-card__art"><picture><source srcset="assets/menu/Honbo.webp" type="image/webp" /><img src="assets/menu/Honbo.PNG" alt="Honbo 漢堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>漢堡</h3><p>招牌壓扁漢堡 — 薄肉餅、自家醬汁、美式芝士。</p><span class="price-badge">98</span></div>
+              <div class="menu-card__info"><h3>漢堡</h3><p>招牌壓扁漢堡 — 薄肉餅、自家醬汁、美式芝士。</p></div>
             </article>
-            <article class="menu-card">
+            <article class="menu-card" role="button" tabindex="0" aria-haspopup="dialog" data-burger-name="漢堡 1.5" data-burger-desc="加多層肉餅，同樣招牌風味 — 人氣之選。" data-burger-ingredients="薯仔包|美式牛肉 x3|美式芝士|秘製家醬|酸黃瓜|白洋蔥|生菜" data-ingredients-label="配料">
               <div class="menu-card__art"><picture><source srcset="assets/menu/Honbo15.webp" type="image/webp" /><img src="assets/menu/Honbo15.PNG" alt="漢堡 1.5" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>漢堡 1.5</h3><p>加多層肉餅，同樣招牌風味 — 人氣之選。</p><span class="price-badge">118</span></div>
+              <div class="menu-card__info"><h3>漢堡 1.5</h3><p>加多層肉餅，同樣招牌風味 — 人氣之選。</p></div>
             </article>
-            <article class="menu-card">
+            <article class="menu-card" role="button" tabindex="0" aria-haspopup="dialog" data-burger-name="漢堡 2.0" data-burger-desc="四層脆邊肉餅、芝士、酸黃瓜、洋蔥、自家醬汁。" data-burger-ingredients="薯仔包|美式牛肉 x4|美式芝士|秘製家醬|酸黃瓜|白洋蔥" data-ingredients-label="配料">
               <div class="menu-card__art"><picture><source srcset="assets/menu/Honbo20.webp" type="image/webp" /><img src="assets/menu/Honbo20.PNG" alt="漢堡 2.0" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>漢堡 2.0</h3><p>四層脆邊肉餅、芝士、酸黃瓜、洋蔥、自家醬汁。</p><span class="price-badge">158</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><picture><source srcset="assets/menu/Gold Standard.webp" type="image/webp" /><img src="assets/menu/Gold Standard.PNG" alt="雙層芝士堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>雙層芝士堡</h3><p>厚肉餅經典做法 — 4 oz 及 6 oz 選擇。</p><span class="price-badge">158</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><picture><source srcset="assets/menu/Cheeseburger.webp" type="image/webp" /><img src="assets/menu/Cheeseburger.PNG" alt="芝士堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>芝士堡</h3><p>傳統厚肉餅配美式芝士，簡單到位。</p><span class="price-badge">108</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><picture><source srcset="assets/menu/TeriyakiChickenBurger.webp" type="image/webp" /><img src="assets/menu/TeriyakiChickenBurger.PNG" alt="照燒漢堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>照燒漢堡</h3><p>甜鹹照燒風味，即叫即壓 — 本地特色。</p><span class="price-badge">118</span></div>
-            </article>
-            <article class="menu-card">
-              <div class="menu-card__art"><picture><source srcset="assets/menu/Hamburger.webp" type="image/webp" /><img src="assets/menu/Hamburger.PNG" alt="純肉漢堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
-              <div class="menu-card__info"><h3>純肉漢堡</h3><p>無芝士，純牛肉 — 留俾原味派。</p><span class="price-badge">98</span></div>
+              <div class="menu-card__info"><h3>漢堡 2.0</h3><p>四層脆邊肉餅、芝士、酸黃瓜、洋蔥、自家醬汁。</p></div>
             </article>
           </div>
+          <div class="burger-pager__page" data-page="1" aria-hidden="true">
+            <article class="menu-card" role="button" tabindex="-1" aria-haspopup="dialog" data-burger-name="純肉漢堡" data-burger-desc="無芝士，純牛肉 — 留俾原味派。" data-burger-ingredients="薯仔包|美式牛肉|酸黃瓜|白洋蔥|生菜|秘製家醬" data-ingredients-label="配料">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/Hamburger.webp" type="image/webp" /><img src="assets/menu/Hamburger.PNG" alt="純肉漢堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>純肉漢堡</h3><p>無芝士，純牛肉 — 留俾原味派。</p></div>
+            </article>
+            <article class="menu-card" role="button" tabindex="-1" aria-haspopup="dialog" data-burger-name="芝士堡" data-burger-desc="傳統厚肉餅配美式芝士，簡單到位。" data-burger-ingredients="薯仔包|厚美式牛肉|美式芝士|酸黃瓜|白洋蔥|生菜" data-ingredients-label="配料">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/Cheeseburger.webp" type="image/webp" /><img src="assets/menu/Cheeseburger.PNG" alt="芝士堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>芝士堡</h3><p>傳統厚肉餅配美式芝士，簡單到位。</p></div>
+            </article>
+            <article class="menu-card" role="button" tabindex="-1" aria-haspopup="dialog" data-burger-name="雙層芝士堡" data-burger-desc="厚肉餅經典做法 — 4 oz 及 6 oz 選擇。" data-burger-ingredients="薯仔包|厚美式牛肉 x2|美式芝士|酸黃瓜|白洋蔥|生菜" data-ingredients-label="配料">
+              <div class="menu-card__art"><picture><source srcset="assets/menu/Gold Standard.webp" type="image/webp" /><img src="assets/menu/Gold Standard.PNG" alt="雙層芝士堡" width="400" height="400" loading="lazy" decoding="async" /></picture></div>
+              <div class="menu-card__info"><h3>雙層芝士堡</h3><p>厚肉餅經典做法 — 4 oz 及 6 oz 選擇。</p></div>
+            </article>
+          </div>
+        </div>
+        <div class="burger-pager__nav" aria-hidden="false">
+          <button type="button" class="burger-pager__btn burger-pager__btn--prev" aria-label="上一頁">‹</button>
+          <div class="burger-pager__dots" role="tablist" aria-label="漢堡頁面"></div>
+          <button type="button" class="burger-pager__btn burger-pager__btn--next" aria-label="下一頁">›</button>
         </div>
       </div>
       <p class="bestsellers-section__menu-link">
         <a href="#menu" data-view="menu">想食多啲？<span>睇完整餐牌</span></a>
       </p>
-      <p class="bestsellers-section__footnote">價錢以港元為準 · 完整餐牌請到店查詢</p>
+      <p class="bestsellers-section__footnote">撳個漢堡睇配料 · 完整餐牌請到店查詢</p>
     </section>
     </div>
 
@@ -1043,6 +1049,22 @@
 
   <div class="copy-toast" id="copy-toast" role="status" aria-live="polite">Phone number copied · 電話號碼已複製</div>
 
-  <script src="js/app.min.js?v=53" defer></script>
+  <div class="burger-modal" id="burger-modal" hidden aria-hidden="true">
+    <div class="burger-modal__backdrop" data-burger-close tabindex="-1"></div>
+    <div class="burger-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="burger-modal-title">
+      <button type="button" class="burger-modal__close" data-burger-close aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="burger-modal__media">
+        <img id="burger-modal-img" src="" alt="" width="400" height="400" decoding="async" />
+      </div>
+      <h3 class="burger-modal__title" id="burger-modal-title"></h3>
+      <p class="burger-modal__desc" id="burger-modal-desc"></p>
+      <p class="burger-modal__label" id="burger-modal-label">Ingredients</p>
+      <ul class="burger-modal__ingredients" id="burger-modal-ingredients"></ul>
+    </div>
+  </div>
+
+  <script src="js/app.min.js?v=56" defer></script>
 </body>
 </html>

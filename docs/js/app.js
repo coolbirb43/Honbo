@@ -281,6 +281,194 @@
     });
   }
 
+  function initBurgerPagers() {
+    document.querySelectorAll(".burger-pager").forEach(function (pager) {
+      var pages = Array.prototype.slice.call(
+        pager.querySelectorAll(".burger-pager__page")
+      );
+      if (pages.length < 2) return;
+
+      var dotsWrap = pager.querySelector(".burger-pager__dots");
+      var prevBtn = pager.querySelector(".burger-pager__btn--prev");
+      var nextBtn = pager.querySelector(".burger-pager__btn--next");
+      var index = 0;
+      var animating = false;
+      var touch = { x: 0, y: 0, active: false, locked: false };
+
+      pages.forEach(function (page, i) {
+        var dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "burger-pager__dot" + (i === 0 ? " is-active" : "");
+        dot.setAttribute("role", "tab");
+        dot.setAttribute("aria-label", "Page " + (i + 1));
+        dot.setAttribute("aria-selected", i === 0 ? "true" : "false");
+        dot.addEventListener("click", function () {
+          goTo(i);
+        });
+        dotsWrap.appendChild(dot);
+      });
+
+      var dots = Array.prototype.slice.call(
+        dotsWrap.querySelectorAll(".burger-pager__dot")
+      );
+
+      function setCardFocusable(page, enabled) {
+        page.querySelectorAll(".menu-card").forEach(function (card) {
+          card.setAttribute("tabindex", enabled ? "0" : "-1");
+        });
+      }
+
+      function syncUi() {
+        pages.forEach(function (page, i) {
+          var active = i === index;
+          page.classList.toggle("is-active", active);
+          page.setAttribute("aria-hidden", active ? "false" : "true");
+          setCardFocusable(page, active);
+        });
+        dots.forEach(function (dot, i) {
+          var active = i === index;
+          dot.classList.toggle("is-active", active);
+          dot.setAttribute("aria-selected", active ? "true" : "false");
+        });
+        if (prevBtn) prevBtn.disabled = index === 0;
+        if (nextBtn) nextBtn.disabled = index === pages.length - 1;
+      }
+
+      function goTo(nextIndex, direction) {
+        if (animating || nextIndex === index) return;
+        if (nextIndex < 0 || nextIndex >= pages.length) return;
+
+        var from = pages[index];
+        var to = pages[nextIndex];
+        var dir = direction || (nextIndex > index ? 1 : -1);
+
+        animating = true;
+        index = nextIndex;
+
+        from.classList.remove("is-active");
+        from.classList.add(dir > 0 ? "is-exit-left" : "is-exit-right");
+        from.setAttribute("aria-hidden", "true");
+        setCardFocusable(from, false);
+
+        to.classList.remove("is-exit-left", "is-exit-right");
+        to.classList.add(dir > 0 ? "is-enter-right" : "is-enter-left");
+        to.setAttribute("aria-hidden", "false");
+
+        // Force reflow so enter transform applies before activating.
+        void to.offsetWidth;
+
+        requestAnimationFrame(function () {
+          to.classList.remove("is-enter-right", "is-enter-left");
+          to.classList.add("is-active");
+          setCardFocusable(to, true);
+          dots.forEach(function (dot, i) {
+            var active = i === index;
+            dot.classList.toggle("is-active", active);
+            dot.setAttribute("aria-selected", active ? "true" : "false");
+          });
+          if (prevBtn) prevBtn.disabled = index === 0;
+          if (nextBtn) nextBtn.disabled = index === pages.length - 1;
+        });
+
+        window.setTimeout(
+          function () {
+            from.classList.remove("is-exit-left", "is-exit-right");
+            animating = false;
+          },
+          prefersReduced ? 50 : 480
+        );
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener("click", function () {
+          goTo(index - 1, -1);
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener("click", function () {
+          goTo(index + 1, 1);
+        });
+      }
+
+      pager.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          goTo(index + 1, 1);
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          goTo(index - 1, -1);
+        }
+      });
+
+      pager.addEventListener(
+        "touchstart",
+        function (e) {
+          if (!e.touches || !e.touches[0]) return;
+          touch.active = true;
+          touch.locked = false;
+          touch.x = e.touches[0].clientX;
+          touch.y = e.touches[0].clientY;
+        },
+        { passive: true }
+      );
+
+      pager.addEventListener(
+        "touchmove",
+        function (e) {
+          if (!touch.active || !e.touches || !e.touches[0]) return;
+          var dx = e.touches[0].clientX - touch.x;
+          var dy = e.touches[0].clientY - touch.y;
+          if (!touch.locked && Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy)) {
+            touch.locked = true;
+          }
+        },
+        { passive: true }
+      );
+
+      pager.addEventListener(
+        "touchend",
+        function (e) {
+          if (!touch.active) return;
+          touch.active = false;
+          var endX =
+            e.changedTouches && e.changedTouches[0]
+              ? e.changedTouches[0].clientX
+              : touch.x;
+          var dx = endX - touch.x;
+          if (Math.abs(dx) < 48) return;
+          if (dx < 0) goTo(index + 1, 1);
+          else goTo(index - 1, -1);
+        },
+        { passive: true }
+      );
+
+      // Mouse drag swipe (desktop)
+      var mouse = { active: false, x: 0, moved: false };
+      pager.addEventListener("mousedown", function (e) {
+        if (e.button !== 0) return;
+        if (e.target.closest(".burger-pager__btn, .burger-pager__dot")) return;
+        mouse.active = true;
+        mouse.moved = false;
+        mouse.x = e.clientX;
+      });
+      window.addEventListener("mousemove", function (e) {
+        if (!mouse.active) return;
+        if (Math.abs(e.clientX - mouse.x) > 10) mouse.moved = true;
+      });
+      window.addEventListener("mouseup", function (e) {
+        if (!mouse.active) return;
+        mouse.active = false;
+        if (!mouse.moved) return;
+        var dx = e.clientX - mouse.x;
+        if (Math.abs(dx) < 60) return;
+        if (dx < 0) goTo(index + 1, 1);
+        else goTo(index - 1, -1);
+      });
+
+      syncUi();
+    });
+  }
+
   function initHorizontalCarousels() {
     document.querySelectorAll(".horizontal-carousel").forEach(function (viewport) {
       var maxScroll = function () {
@@ -878,6 +1066,123 @@
     });
   }
 
+  function initBurgerModal() {
+    var modal = document.getElementById("burger-modal");
+    if (!modal) return;
+
+    var imgEl = document.getElementById("burger-modal-img");
+    var titleEl = document.getElementById("burger-modal-title");
+    var descEl = document.getElementById("burger-modal-desc");
+    var labelEl = document.getElementById("burger-modal-label");
+    var listEl = document.getElementById("burger-modal-ingredients");
+    var lastFocus = null;
+    var pointer = { x: 0, y: 0, moved: false };
+
+    function closeModal() {
+      if (!modal.classList.contains("is-open")) return;
+      modal.classList.remove("is-open");
+      document.body.classList.remove("is-modal-open");
+      window.setTimeout(function () {
+        if (!modal.classList.contains("is-open")) {
+          modal.hidden = true;
+          modal.setAttribute("aria-hidden", "true");
+        }
+      }, prefersReduced ? 0 : 380);
+      if (lastFocus && typeof lastFocus.focus === "function") {
+        lastFocus.focus();
+      }
+    }
+
+    function openModal(card) {
+      if (!card) return;
+      var name = card.getAttribute("data-burger-name") || "";
+      var desc = card.getAttribute("data-burger-desc") || "";
+      var ingredients = (card.getAttribute("data-burger-ingredients") || "")
+        .split("|")
+        .map(function (item) {
+          return item.trim();
+        })
+        .filter(Boolean);
+      var label =
+        card.getAttribute("data-ingredients-label") ||
+        (currentLang === "zh" ? "配料" : "Ingredients");
+      var img = card.querySelector("img");
+
+      lastFocus = document.activeElement;
+      titleEl.textContent = name;
+      descEl.textContent = desc;
+      labelEl.textContent = label;
+      listEl.innerHTML = "";
+      ingredients.forEach(function (item) {
+        var li = document.createElement("li");
+        li.textContent = item;
+        listEl.appendChild(li);
+      });
+
+      if (img) {
+        imgEl.src = img.currentSrc || img.src;
+        imgEl.alt = img.alt || name;
+      } else {
+        imgEl.removeAttribute("src");
+        imgEl.alt = "";
+      }
+
+      modal.hidden = false;
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("is-modal-open");
+      window.requestAnimationFrame(function () {
+        modal.classList.add("is-open");
+        var closeBtn = modal.querySelector(".burger-modal__close");
+        if (closeBtn) closeBtn.focus();
+      });
+    }
+
+    document.addEventListener("pointerdown", function (e) {
+      var card = e.target.closest(".bestsellers-section .menu-card");
+      if (!card) return;
+      pointer.x = e.clientX;
+      pointer.y = e.clientY;
+      pointer.moved = false;
+    });
+
+    document.addEventListener("pointermove", function (e) {
+      if (pointer.moved) return;
+      if (
+        Math.abs(e.clientX - pointer.x) > 8 ||
+        Math.abs(e.clientY - pointer.y) > 8
+      ) {
+        pointer.moved = true;
+      }
+    });
+
+    document.addEventListener("click", function (e) {
+      var closeTarget = e.target.closest("[data-burger-close]");
+      if (closeTarget) {
+        closeModal();
+        return;
+      }
+
+      var card = e.target.closest(".bestsellers-section .menu-card");
+      if (!card) return;
+      if (pointer.moved) return;
+      e.preventDefault();
+      openModal(card);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) {
+        closeModal();
+        return;
+      }
+
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var card = e.target.closest(".bestsellers-section .menu-card");
+      if (!card) return;
+      e.preventDefault();
+      openModal(card);
+    });
+  }
+
   if (langToggle) {
     langToggle.addEventListener("click", function () {
       applyLanguage(currentLang === "en" ? "zh" : "en");
@@ -889,7 +1194,9 @@
   initViewFromHash();
   initCateringPhoneCopy();
   initAnatomyTeaser();
+  initBurgerModal();
   initRevealAnimations();
+  initBurgerPagers();
   initAutoLoops();
   initHorizontalCarousels();
   getHeaderOffset();
